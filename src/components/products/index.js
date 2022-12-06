@@ -21,11 +21,11 @@ export default function Products() {
               <div
                 key={index}
                 className="group relative"
-                onClick={() => productNavigate(product.productName)}
+                onClick={() => productNavigate(product.Product_Name)}
               >
                 <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                   <img
-                    src={product.thumbnailImg}
+                    src={product.Product_Thumbnail_Image}
                     alt={""}
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                   />
@@ -39,16 +39,16 @@ export default function Products() {
                     </h3>
                   </div>
                   <p className="text-sm font-medium text-gray-900">
-                    {product.price}
+                    {product.Product_Price}
                   </p>
                 </div>
                 <p className="text-sm font-medium text-gray-900">
-                  {product.description}
+                  {product.Product_Description}
                 </p>
               </div>
               <button
                 className="mt-5 inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
-                onClick={() => productNavigate(product.productName)}
+                onClick={() => productNavigate(product.Product_Name)}
               >
                 View
               </button>

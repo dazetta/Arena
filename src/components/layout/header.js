@@ -25,40 +25,40 @@ export default function Header() {
             </svg>
           </button>
 
-          <a href="#" class="font-bold text-gray-700 text-2xl">
-            Shop.
+          <a href="#" class="font-bold text-[#0351aa] text-2xl">
+            DaZetta - Arena
           </a>
 
           <div class="hidden md:flex space-x-3 flex-1 lg:ml-8">
             <a
               href="#"
-              class="px-2 py-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600"
+              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
             >
-              Electronics
+              Brands
             </a>
             <a
               href="#"
-              class="px-2 py-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600"
+              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
             >
-              Fashion
+              Men's
             </a>
             <a
               href="#"
-              class="px-2 py-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600"
+              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
             >
-              Tools
+              Women's
             </a>
             <a
               href="#"
-              class="px-2 py-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600"
+              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
             >
-              Books
+              Shoes
             </a>
             <a
               href="#"
-              class="px-2 py-2 hover:bg-gray-100 rounded-lg text-gray-400 hover:text-gray-600"
+              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
             >
-              More
+              Clothing
             </a>
           </div>
 
