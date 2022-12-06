@@ -1,4 +1,5 @@
 import React from "react";
+import navigation from "../../data/navigation";
 
 export default function Header() {
   return (
@@ -30,39 +31,21 @@ export default function Header() {
           </a>
 
           <div class="hidden md:flex space-x-3 flex-1 lg:ml-8">
-            <a
-              href="#"
-              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
-            >
-              Brands
-            </a>
-            <a
-              href="#"
-              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
-            >
-              Men's
-            </a>
-            <a
-              href="#"
-              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
-            >
-              Women's
-            </a>
-            <a
-              href="#"
-              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
-            >
-              Shoes
-            </a>
-            <a
-              href="#"
-              class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
-            >
-              Clothing
-            </a>
+            {navigation.map((e) => (
+              <a
+                href={e.Nav_Link}
+                class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
+              >
+                {e.Nav_Text}
+              </a>
+            ))}
           </div>
 
-          <div class="flex items-center space-x-4"></div>
+          <div class="flex items-center space-x-4">
+            <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer">
+              Login
+            </span>
+          </div>
         </div>
       </div>
     </div>
