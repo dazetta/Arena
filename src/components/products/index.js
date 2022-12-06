@@ -5,12 +5,12 @@ import { convertToSlug } from "../../utils";
 export default function Products() {
   const navigate = useNavigate();
   const productNavigate = (name) => {
-    return navigate( `product/${convertToSlug(name)}`)
-  }
+    return navigate(`product/${convertToSlug(name)}`);
+  };
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl py-16 px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl text-center font-bold tracking-tight text-[#0351aa]">
           Products
         </h2>
@@ -33,25 +33,19 @@ export default function Products() {
 
                 <div className="mt-4 flex justify-between">
                   <div>
-                    <h3 className="text-sm text-gray-700">
+                    <h3 className="text-sm font-medium text-gray-900">
                       <span aria-hidden="true" className="absolute inset-0" />
-                      {product.productName}
+                      {product.Product_Name}
                     </h3>
                   </div>
                   <p className="text-sm font-medium text-gray-900">
-                    {product.Product_Price}
+                    ${product.Product_Price}
                   </p>
                 </div>
-                <p className="text-sm font-medium text-gray-900">
-                  {product.Product_Description}
-                </p>
               </div>
-              <button
-                className="mt-5 inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
-                onClick={() => productNavigate(product.Product_Name)}
-              >
+              <h3 className="mt-4 text-center text-sm text-[#0351aa] font-semibold underline" onClick={() => productNavigate(product.Product_Name)}>
                 View
-              </button>
+              </h3>
             </div>
           ))}
         </div>
