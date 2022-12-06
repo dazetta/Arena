@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import navigation from "../../data/navigation";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 export default function Header() {
+  const navigate = useNavigate();
   return (
     <div class="bg-white shadow-sm sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 md:py-4">
@@ -26,9 +29,12 @@ export default function Header() {
             </svg>
           </button>
 
-          <a href="#" class="font-bold text-[#0351aa] text-2xl">
+          <span
+            class="font-bold text-[#0351aa] text-2xl cursor-pointer"
+            onClick={() => navigate('/')}
+          >
             DaZetta - Arena
-          </a>
+          </span>
 
           <div class="hidden md:flex space-x-3 flex-1 lg:ml-8">
             {navigation.map((e) => (
@@ -45,6 +51,7 @@ export default function Header() {
             <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer">
               Login
             </span>
+            <ShoppingCartIcon className="mt-4 text-[#0351aa] h-6 w-6 cursor-pointer" />
           </div>
         </div>
       </div>

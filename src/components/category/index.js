@@ -13,8 +13,8 @@ export default function Categories() {
             {categories.map((category, index) => (
               <div
                 key={index}
-                className="group relative"
-                onClick={() => navigate(convertToSlug(category.Category_Name))}
+                className="group relative cursor-pointer"
+                onClick={() => navigate(`category/${convertToSlug(category.Category_Name)}`)}
               >
                 <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
                   <img
@@ -23,7 +23,7 @@ export default function Categories() {
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
-                <h3 className="mt-4 text-center text-sm text-[#0351aa] font-semibold underline">
+                <h3 className="mt-4 text-center text-sm text-[#0351aa] font-semibold underline cursor-pointer">
                   {category.Category_Name}
                 </h3>
                 
