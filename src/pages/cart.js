@@ -55,7 +55,24 @@ export default function Cart() {
             <div className="flex flex-col items-start mt-6">
               <label className=" font-semibold">Code</label>
               <input className="border border-gray-400 mt-2 w-full p-2" />
-              <button className="text-[#0351aa] border-2 px-3 py-2 mt-4 border-[#0351aa]">Confirm Code</button>
+              <button className="text-[#0351aa] border-2 px-3 py-2 mt-4 border-[#0351aa]">
+                Confirm Code
+              </button>
+            </div>
+            <div className="mt-12">
+              <div className="flex items-end justify-between">
+                <span>Sub Total</span>
+                <span className="font-bold">${cartItem.Product_Price}</span>
+              </div>
+              <div className="flex items-end justify-between mt-3">
+                <span>Delivery</span>
+                <span className=" text-green-800">Free</span>
+              </div>
+              <hr className="my-5"/>
+              <div className="flex items-end justify-between mt-3">
+                <span className="font-bold">Total</span>
+                <span className="font-bold">${cartItem.Product_Price}</span>
+              </div>
             </div>
           </div>
         </div>
