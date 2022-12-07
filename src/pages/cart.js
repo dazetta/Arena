@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { GiftIcon } from "@heroicons/react/24/solid";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const cartItem = JSON.parse(localStorage.getItem("cart"));
 
   return (
@@ -11,7 +13,7 @@ export default function Cart() {
           <h2 className="text-2xl text-center font-medium tracking-tight text-white">
             Your Shopping Cart
           </h2>
-          <button className="inline-block rounded-full text-[#0351aa] px-10 py-2 bg-white shadow-sm">
+          <button className="inline-block rounded-full text-[#0351aa] px-10 py-2 bg-white shadow-sm" onClick={() => navigate('/checkout')}>
             Checkout
           </button>
         </div>
@@ -68,11 +70,14 @@ export default function Cart() {
                 <span>Delivery</span>
                 <span className=" text-green-800">Free</span>
               </div>
-              <hr className="my-5"/>
+              <hr className="my-5" />
               <div className="flex items-end justify-between mt-3">
                 <span className="font-bold">Total</span>
                 <span className="font-bold">${cartItem.Product_Price}</span>
               </div>
+              <button className="inline-block mt-6 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm w-full" onClick={() => navigate('/checkout')}>
+                Checkout
+              </button>
             </div>
           </div>
         </div>
