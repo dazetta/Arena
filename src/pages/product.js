@@ -12,6 +12,10 @@ export default function Product() {
     (e) => convertToSlug(e.Product_Name) === slug
   )?.[0];
 
+  const handleAddToCart = () => {
+    localStorage.setItem('cart', JSON.stringify(selectedProduct))
+  }
+
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">
@@ -51,7 +55,7 @@ export default function Product() {
             </div>
             <div className="mt-4">{selectedProduct.Product_Description}</div>
             <div className="mt-4">
-              <button className="flex items-center gap-3 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm">
+              <button className="flex items-center gap-3 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm" onClick={handleAddToCart}>
                 Add to Cart
                 <ShoppingCartIcon className="w-5 h-5" />
               </button>

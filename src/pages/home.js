@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Hero from "../components/hero";
 import Categories from "../components/category";
 import Promotion from "../components/promotion";
