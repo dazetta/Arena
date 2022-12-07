@@ -36,7 +36,6 @@ const Footer = () => {
           padding: "10px 20px",
           "text-align": "center",
           "border-top": "4px solid white",
-          position: "fixed",
           bottom: "0px",
           "z-index": "999999",
         }}

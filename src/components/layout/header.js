@@ -51,7 +51,7 @@ export default function Header() {
             <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer">
               Login
             </span>
-            <ShoppingCartIcon className="mt-4 text-[#0351aa] h-6 w-6 cursor-pointer" />
+            <ShoppingCartIcon className="mt-4 text-[#0351aa] h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
           </div>
         </div>
       </div>

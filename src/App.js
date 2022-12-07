@@ -3,6 +3,8 @@ import Layout from "./components/layout";
 import Category from "./pages/category";
 import Home from "./pages/home";
 import Product from "./pages/product";
+import Cart from "./pages/cart";
+import Checkout from "./pages/cart";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path="category">
             <Route path=":slug" element={<Category />} />
           </Route>
+          <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout />} />
         </Routes>
       </Layout>
     </BrowserRouter>
