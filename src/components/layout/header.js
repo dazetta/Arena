@@ -48,7 +48,7 @@ export default function Header() {
           </div>
 
           <div class="flex items-center space-x-4">
-            <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer">
+            <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => navigate('/login')}>
               Login
             </span>
             <ShoppingCartIcon className="mt-4 text-[#0351aa] h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />

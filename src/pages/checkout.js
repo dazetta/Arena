@@ -67,6 +67,7 @@ export default function Checkout() {
               <input
                 className="border border-gray-400 mt-2 w-full p-2"
                 name="email"
+                type="email"
                 onChange={inputHandler}
               />
             </div>
