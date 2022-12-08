@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CONFIG } from "../config";
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -11,8 +12,7 @@ export default function Checkout() {
     cvv: "",
   });
 
-  const url =
-    "https://script.google.com/macros/s/AKfycbwCWCScUL7hm20c1w0E3v5-FO6YvLZziBjD8moj9awvxl7fK2x7No-ckbUMeo5xD4Cu/exec?action=post&type=order";
+  const url = CONFIG.BASE_URL + CONFIG.CREATE_ORDER;
 
   const handleCheckout = () => {
     const payload = {
@@ -26,6 +26,8 @@ export default function Checkout() {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
+      mode: "no-cors",
+      redirect: "follow",
     }).then((res) => navigate("/thank-you"));
     navigate("/thank-you");
   };

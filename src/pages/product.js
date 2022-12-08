@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/solid";
 
 import products from "../data/products";
@@ -7,6 +7,7 @@ import { convertToSlug } from "../utils";
 
 export default function Product() {
   let { slug } = useParams();
+  const navigate = useNavigate();
 
   const selectedProduct = products?.filter(
     (e) => convertToSlug(e.Product_Name) === slug
@@ -14,6 +15,7 @@ export default function Product() {
 
   const handleAddToCart = () => {
     localStorage.setItem('cart', JSON.stringify(selectedProduct))
+    navigate('/cart')
   }
 
   return (
