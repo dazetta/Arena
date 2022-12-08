@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import products from "../data/products";
 import { convertToSlug } from "../utils";
 import { CONFIG } from "../config";
 
 export default function MyOrders() {
   const navigate = useNavigate();
-  const cartItem = JSON.parse(localStorage.getItem("cart"));
-  const order = JSON.parse(localStorage.getItem("order"));
   const userData = JSON.parse(localStorage.getItem("user"));
+
+  const [orders, setOrders] = useState([]);
 
   const productNavigate = (name) => {
     return navigate(`/product/${convertToSlug(name)}`);
@@ -16,12 +17,13 @@ export default function MyOrders() {
   const url = CONFIG.BASE_URL + CONFIG.GET_USER_ORDER + userData?.user_id;
 
   const fetchOrders = () => {
-    fetch(url, {
-      method: "get",
-      headers: { "Content-Type": "application/json" },
-      mode: "no-cors",
-      redirect: "follow",
-    }).then((res) => console.log(res));
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setOrders(data));
+  };
+
+  const getProduct = (id) => {
+    return products?.filter((e) => e.Product_Id === id)?.[0];
   };
 
   useEffect(() => {
@@ -37,38 +39,53 @@ export default function MyOrders() {
           </h2>
         </div>
       </div>
+      {/* {
+    "Order_Id": 1670536409298,
+    "Order_Date": "2022-12-08T21:53:30.006Z",
+    "User_Id": "test@test.com",
+    "Product_Id": "prod2",
+    "Product_Price": 120 */}
+
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="grid grid-cols-1 gap-4 py-10">
-          <div class="flex gap-4 border p-5">
-            <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
-              <img
-                src={cartItem.Product_Thumbnail_Image}
-                alt={""}
-                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-              />
-            </div>
-            <div className="w-full">
-              <p className="text-lg text-left font-bold text-gray-900">
-                Order Id: {order?.order_id}
-              </p>
-              <div className="flex items-center justify-between">
-                <p
-                  className="text-lg font-medium text-[#0351aa]"
-                  onClick={() => productNavigate(cartItem.Product_Name)}
-                >
-                  {cartItem.Product_Name}
-                </p>
-                <p className="text-xl font-medium text-gray-900">
-                  ${cartItem.Product_Price}
-                </p>
+          {orders?.map((order, index) => (
+            <div class="flex gap-4 border p-5" key={index}>
+              <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
+                <img
+                  src={getProduct(order.Product_Id)?.Product_Thumbnail_Image}
+                  alt={""}
+                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                />
               </div>
-              <div className="mt-2">
-                <h4 className="text-sm text-gray-900 font-bold text-left">
-                  Size: 12
-                </h4>
+              <div className="w-full">
+                <div className="flex justify-between">
+                  <p className="text-lg text-left font-bold text-gray-900">
+                    Order Id: {order?.Order_Id}
+                  </p>
+                  <p className="text-lg text-left font-bold text-gray-900">
+                    Order Date:{" "}
+                    {new Date(order?.Order_Date).toLocaleDateString()}
+                  </p>
+                </div>
+                <div className="flex items-center justify-between">
+                  <p
+                    className="text-lg font-medium text-[#0351aa]"
+                    onClick={() => productNavigate(getProduct(order.Product_Id)?.Product_Name)}
+                  >
+                    {getProduct(order.Product_Id)?.Product_Name}
+                  </p>
+                  <p className="text-xl font-medium text-gray-900">
+                    ${order?.Product_Price}
+                  </p>
+                </div>
+                <div className="mt-2">
+                  <h4 className="text-sm text-gray-900 font-bold text-left">
+                    Size: 12
+                  </h4>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
