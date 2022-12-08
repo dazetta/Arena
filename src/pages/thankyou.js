@@ -2,6 +2,7 @@ import React from "react";
 
 export default function Thankyou() {
   const cartItem = JSON.parse(localStorage.getItem("cart"));
+  const order = JSON.parse(localStorage.getItem("order"));
 
   return (
     <div className="bg-white py-20">
@@ -16,6 +17,9 @@ export default function Thankyou() {
               />
             </div>
             <div className="w-full">
+              <p className="text-lg text-left font-bold text-gray-900">
+                Order Id: {order?.order_id}
+              </p>
               <div className="flex items-center justify-between">
                 <p className="text-lg font-medium text-gray-900">
                   {cartItem.Product_Name}

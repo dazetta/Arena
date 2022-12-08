@@ -21,12 +21,13 @@ export default function Checkout() {
       product_id: cartItem?.Product_Id,
       product_price: cartItem?.Product_Price,
     };
-
+    localStorage.setItem("order", JSON.stringify(payload));
     fetch(url, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     }).then((res) => navigate("/thank-you"));
+    navigate("/thank-you");
   };
 
   const inputHandler = (e) => {
