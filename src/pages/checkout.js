@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const navigate = useNavigate();
   const cartItem = JSON.parse(localStorage.getItem("cart"));
+  const [input, setInput] = useState({
+    name: "",
+    email: "",
+    card: "",
+    cvv: "",
+  });
 
   const url =
     "https://script.google.com/macros/s/AKfycbwCWCScUL7hm20c1w0E3v5-FO6YvLZziBjD8moj9awvxl7fK2x7No-ckbUMeo5xD4Cu/exec?action=post&type=order";
 
   const handleCheckout = () => {
-    navigate("/thank-you");
+    const payload = {
+      order_id: new Date().getTime(),
+      user_id: input.email,
+      product_id: cartItem?.Product_Id,
+      product_price: cartItem?.Product_Price,
+    };
 
-    //   {
-    //     "order_id":"sknn",
-    //     "user_id": "b",
-    //     "product_id": 1,
-    //     "product_price": 300
-    // }
+    fetch(url, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).then((res) => navigate("/thank-you"));
+  };
+
+  const inputHandler = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    setInput({ ...input, [name]: value });
   };
 
   return (
@@ -36,11 +53,19 @@ export default function Checkout() {
             </h3>
             <div className="flex flex-col items-start mt-6">
               <label className=" font-semibold">Your Name</label>
-              <input className="border border-gray-400 mt-2 w-full p-2" />
+              <input
+                className="border border-gray-400 mt-2 w-full p-2"
+                name="name"
+                onChange={inputHandler}
+              />
             </div>
             <div className="flex flex-col items-start mt-6">
               <label className=" font-semibold">Your Email</label>
-              <input className="border border-gray-400 mt-2 w-full p-2" />
+              <input
+                className="border border-gray-400 mt-2 w-full p-2"
+                name="email"
+                onChange={inputHandler}
+              />
             </div>
           </div>
           <div class="border px-5 py-10">
@@ -50,18 +75,29 @@ export default function Checkout() {
 
             <div className="flex flex-col items-start mt-6">
               <label className=" font-semibold">Card Number</label>
-              <input className="border border-gray-400 mt-2 w-full p-2" />
+              <input
+                className="border border-gray-400 mt-2 w-full p-2"
+                name="card"
+                onChange={inputHandler}
+              />
             </div>
             <div className="flex flex-col items-start mt-6">
               <label className=" font-semibold">CVV</label>
-              <input className="border border-gray-400 mt-2 w-full p-2" />
+              <input
+                className="border border-gray-400 mt-2 w-full p-2"
+                name="cvv"
+                onChange={inputHandler}
+              />
             </div>
           </div>
         </div>
         <div>
           <button
-            className="inline-block mt-5 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm w-60"
+            className={`inline-block mt-5 rounded-full bg-[#0351aa] px-10 py-2 text-white opac shadow-sm w-60 ${
+              input.email === "" ? "opacity-30" : ""
+            }`}
             onClick={handleCheckout}
+            disabled={input.email === ""}
           >
             Checkout
           </button>
