@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { GiftIcon } from "@heroicons/react/24/solid";
 import { convertToSlug } from "../utils";
+import { CONFIG } from "../config";
 
 export default function MyOrders() {
   const navigate = useNavigate();
   const cartItem = JSON.parse(localStorage.getItem("cart"));
   const order = JSON.parse(localStorage.getItem("order"));
+  const userData = JSON.parse(localStorage.getItem("user"));
 
   const productNavigate = (name) => {
     return navigate(`/product/${convertToSlug(name)}`);
   };
+
+  const url = CONFIG.BASE_URL + CONFIG.GET_USER_ORDER + userData?.user_id;
+
+  const fetchOrders = () => {
+    fetch(url, {
+      method: "get",
+      headers: { "Content-Type": "application/json" },
+      mode: "no-cors",
+      redirect: "follow",
+    }).then((res) => console.log(res));
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
   return (
     <div className="bg-white">

@@ -1,15 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { convertToSlug } from "../utils";
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const cartItem = JSON.parse(localStorage.getItem("cart"));
-  const order = JSON.parse(localStorage.getItem("order"));
-
-  const productNavigate = (name) => {
-    return navigate(`/product/${convertToSlug(name)}`);
-  };
+  const userData = JSON.parse(localStorage.getItem("user"));
 
   return (
     <div className="bg-white">
@@ -43,7 +37,7 @@ export default function MyAccount() {
 
               <div className="flex items-center justify-between">
                 <p className="text-lg font-medium text-[#0351aa]">
-                  User Id: user@email.com
+                  User Id: {userData?.user_id}
                 </p>
               </div>
             </div>
