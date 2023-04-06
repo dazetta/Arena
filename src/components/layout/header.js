@@ -37,12 +37,16 @@ export default function Header() {
           </span>
 
           <div class="hidden md:flex space-x-3 flex-1 lg:ml-8">
-            {navigation.map((e) => (
+            {navigation.map((item) => (
               <a
-                href={e.Nav_Link}
+                href={item.Nav_Link}
                 class="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(item.Nav_Link);
+                }}
               >
-                {e.Nav_Text}
+                {item.Nav_Text}
               </a>
             ))}
           </div>
