@@ -47,9 +47,9 @@ export default function MyOrders() {
     "Product_Price": 120 */}
 
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="grid grid-cols-1 gap-4 py-10">
+        <div className="grid grid-cols-1 gap-4 py-10">
           {orders?.map((order, index) => (
-            <div class="flex gap-4 border p-5" key={index}>
+            <div className="flex gap-4 border p-5" key={index}>
               <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
                 <img
                   src={getProduct(order.Product_Id)?.Product_Thumbnail_Image}

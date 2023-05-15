@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Thankyou() {
   const cartItem = JSON.parse(localStorage.getItem("cart"));
   const order = JSON.parse(localStorage.getItem("order"));
 
+  useEffect(() => {
+    if(window.utag) {
+      window.utag.view({
+        "page_name" : "Thank You",
+        "page_type" : "order_success",
+        "site_region": "en_us",
+        "site_currency": "usd",
+        "order_id": order?.order_id,
+        "tealium_event": "order_success_view"
+      })
+    }
+  }, []);
+
   return (
     <div className="bg-white py-20">
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="grid grid-cols-3 gap-4 py-10">
-          <div class="col-span-2 flex gap-4 border p-5">
+        <div className="grid grid-cols-3 gap-4 py-10">
+          <div className="col-span-2 flex gap-4 border p-5">
             <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
               <img
                 src={cartItem.Product_Thumbnail_Image}

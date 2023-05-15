@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CONFIG } from "../config";
 
@@ -11,6 +11,18 @@ export default function Checkout() {
     card: "",
     cvv: "",
   });
+
+  useEffect(() => {
+    if(window.utag) {
+      window.utag.view({
+        "page_name" : "Checkout",
+        "page_type" : "checkout",
+        "site_region": "en_us",
+        "site_currency": "usd",
+        "tealium_event": "checkout_view"
+      })
+    }
+  }, []);
 
   const url = CONFIG.BASE_URL + CONFIG.CREATE_ORDER;
 
@@ -49,8 +61,8 @@ export default function Checkout() {
         </div>
       </div>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-4xl lg:px-8">
-        <div class="grid grid-cols-2 gap-4 py-10">
-          <div class="border px-5 py-10">
+        <div className="grid grid-cols-2 gap-4 py-10">
+          <div className="border px-5 py-10">
             <h3 className="text-xl text-gray-900 font-bold text-left">
               Your Details
             </h3>
@@ -72,7 +84,7 @@ export default function Checkout() {
               />
             </div>
           </div>
-          <div class="border px-5 py-10">
+          <div className="border px-5 py-10">
             <h3 className="text-xl text-gray-900 font-bold text-left">
               Payment Details
             </h3>

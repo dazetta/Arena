@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 
@@ -8,6 +8,18 @@ export default function Login() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if(window.utag) {
+      window.utag.view({
+        "page_name" : "Customer Login",
+        "page_type" : "login",
+        "site_region": "en_us",
+        "site_currency": "usd",
+        "tealium_event": "login_view"
+      })
+    }
+  }, []);
 
   const inputHandler = (e) => {
     const value = e.target.value;
@@ -30,7 +42,7 @@ export default function Login() {
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
-            <div class="font-bold text-center text-[#0351aa] text-2xl cursor-pointer">
+            <div className="font-bold text-center text-[#0351aa] text-2xl cursor-pointer">
               DaZetta - Arena
             </div>
           </div>

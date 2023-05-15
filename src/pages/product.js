@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/solid";
 
@@ -8,6 +8,21 @@ import { convertToSlug } from "../utils";
 export default function Product() {
   let { slug } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(window.utag) {
+      window.utag.view({
+        "page_name" : selectedProduct.Product_Name,
+        "page_type" : "product",
+        "site_region": "en_us",
+        "site_currency": "usd",
+        "product_price": selectedProduct.Product_Price,
+        "product_id": selectedProduct.Product_Id,
+        "product_category_id": selectedProduct.Category_Id,
+        "tealium_event": "product_view"
+      })
+    }
+  }, []);
 
   const selectedProduct = products?.filter(
     (e) => convertToSlug(e.Product_Name) === slug
@@ -57,7 +72,7 @@ export default function Product() {
             </div>
             <div className="mt-4">{selectedProduct.Product_Description}</div>
             <div className="mt-4">
-              <button className="flex items-center gap-3 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm" onClick={handleAddToCart}>
+              <button className="flex items-center gap-3 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm atc-btn" onClick={handleAddToCart}>
                 Add to Cart
                 <ShoppingCartIcon className="w-5 h-5" />
               </button>

@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GiftIcon } from "@heroicons/react/24/solid";
 
 export default function Cart() {
   const navigate = useNavigate();
   const cartItem = JSON.parse(localStorage.getItem("cart"));
+
+  useEffect(() => {
+    if(window.utag) {
+      window.utag.view({
+        "page_name" : "Shopping Cart",
+        "page_type" : "cart",
+        "site_region": "en_us",
+        "site_currency": "usd",
+        "product_id": cartItem.Product_Id,
+        "product_price": cartItem.Product_Price,
+        "product_name": cartItem.Product_Name,
+        "product_category_id": cartItem.Category_Id,
+        "tealium_event": "cart_view"
+      })
+    }
+  }, []);
 
   return (
     <div className="bg-white">
@@ -19,8 +35,8 @@ export default function Cart() {
         </div>
       </div>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="grid grid-cols-3 gap-4 py-10">
-          <div class="col-span-2 flex gap-4 border p-5">
+        <div className="grid grid-cols-3 gap-4 py-10">
+          <div className="col-span-2 flex gap-4 border p-5">
             <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
               <img
                 src={cartItem.Product_Thumbnail_Image}
@@ -44,7 +60,7 @@ export default function Cart() {
               </div>
             </div>
           </div>
-          <div class="border p-5">
+          <div className="border p-5">
             <h3 className="text-xl text-gray-900 font-bold text-left">
               Order Now
             </h3>

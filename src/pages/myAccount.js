@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function MyAccount() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("user"));
+
+  useEffect(() => {
+    if(window.utag) {
+      window.utag.view({
+        "page_name" : "Customer Account",
+        "page_type" : "account",
+        "site_region": "en_us",
+        "site_currency": "usd",
+        "tealium_event": "account_view"
+      })
+    }
+  }, []);
 
   return (
     <div className="bg-white">
@@ -15,14 +27,14 @@ export default function MyAccount() {
         </div>
       </div>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="grid grid-cols-4 gap-4 py-10">
+        <div className="grid grid-cols-4 gap-4 py-10">
           <div className="bg-[#0351aa] p-5 text-left">
             <h3 className="text-white font-semibold text-md">Links:</h3>
             <ul className="list list-disc pl-5">
               <li className="text-white cursor-pointer" onClick={() => navigate('/my-orders')}>My Orders</li>
             </ul>
           </div>
-          <div class="col-span-3 flex flex-col gap-4 border p-5">
+          <div className="col-span-3 flex flex-col gap-4 border p-5">
             <div className="aspect-w-1 aspect-h-1 w-28 overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none">
               <img
                 src="https://i.pravatar.cc/100"
