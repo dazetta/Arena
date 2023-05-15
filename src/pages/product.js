@@ -10,6 +10,14 @@ export default function Product() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.productDetail = {
+      "product_id": selectedProduct.Product_Id,
+      "product_price": selectedProduct.Product_Price,
+      "product_category_id": selectedProduct.Category_Id,
+      "product_name": selectedProduct.Product_Name,
+      "product_image": selectedProduct.Product_Thumbnail_Image,
+      "product_url": window.location.href
+    };
     if(window.utag) {
       window.utag.view({
         "page_name" : selectedProduct.Product_Name,
