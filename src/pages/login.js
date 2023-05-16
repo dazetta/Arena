@@ -10,14 +10,15 @@ export default function Login() {
   });
 
   useEffect(() => {
+    var dataObj = {
+      "page_name" : "Customer Login",
+      "page_type" : "login",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "tealium_event": "login_view"
+    }
     if(window.utag) {
-      window.utag.view({
-        "page_name" : "Customer Login",
-        "page_type" : "login",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "login_view"
-      })
+      window.utag.view(dataObj);
     }
   }, []);
 

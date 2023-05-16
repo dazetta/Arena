@@ -22,14 +22,15 @@ export default function Category() {
   );
 
   useEffect(() => {
+    var dataObj = {
+      "page_name" : selectedCategory.Category_Name,
+      "page_type" : "category",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "tealium_event": "category_view"
+    };
     if(window.utag) {
-      window.utag.view({
-        "page_name" : selectedCategory.Category_Name,
-        "page_type" : "category",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "category_view"
-      })
+      window.utag.view(dataObj)
     }
   }, [slug]);
 

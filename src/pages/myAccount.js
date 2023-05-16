@@ -6,14 +6,15 @@ export default function MyAccount() {
   const userData = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
+    var dataObj = {
+      "page_name" : "Customer Account",
+      "page_type" : "account",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "tealium_event": "account_view"
+    };
     if(window.utag) {
-      window.utag.view({
-        "page_name" : "Customer Account",
-        "page_type" : "account",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "account_view"
-      })
+      window.utag.view(dataObj);
     }
   }, []);
 

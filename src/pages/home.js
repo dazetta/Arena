@@ -6,14 +6,15 @@ import Products from "../components/products";
 
 export default function Home() {
   useEffect(() => {
+    var dataObj = {
+      "page_name" : "Arena Demo App",
+      "page_type" : "home",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "tealium_event": "home_view"
+    }
     if(window.utag) {
-      window.utag.view({
-        "page_name" : "Arena Demo App",
-        "page_type" : "home",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "home_view"
-      })
+      window.utag.view(dataObj)
     }
   }, []);
   return (

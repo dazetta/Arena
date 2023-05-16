@@ -18,17 +18,22 @@ export default function Product() {
       "product_image": selectedProduct.Product_Thumbnail_Image,
       "product_url": window.location.href
     };
+
+    var dataObj = {
+      "page_name": selectedProduct.Product_Name,
+      "page_type": "product",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "tealium_event": "product_view",
+      "product_id": selectedProduct.Product_Id,
+      "product_price": selectedProduct.Product_Price,
+      "product_category_id": selectedProduct.Category_Id,
+      "product_name": selectedProduct.Product_Name,
+      "product_image": selectedProduct.Product_Thumbnail_Image,
+      "product_url": window.location.href
+    }
     if(window.utag) {
-      window.utag.view({
-        "page_name" : selectedProduct.Product_Name,
-        "page_type" : "product",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "product_price": selectedProduct.Product_Price,
-        "product_id": selectedProduct.Product_Id,
-        "product_category_id": selectedProduct.Category_Id,
-        "tealium_event": "product_view"
-      })
+      window.utag.view(dataObj)
     }
   }, []);
 

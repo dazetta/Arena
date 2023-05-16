@@ -7,18 +7,19 @@ export default function Cart() {
   const cartItem = JSON.parse(localStorage.getItem("cart"));
 
   useEffect(() => {
+    var dataObj = {
+      "page_name" : "Shopping Cart",
+      "page_type" : "cart",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "product_id": cartItem.Product_Id,
+      "product_price": cartItem.Product_Price,
+      "product_name": cartItem.Product_Name,
+      "product_category_id": cartItem.Category_Id,
+      "tealium_event": "cart_view"
+    };
     if(window.utag) {
-      window.utag.view({
-        "page_name" : "Shopping Cart",
-        "page_type" : "cart",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "product_id": cartItem.Product_Id,
-        "product_price": cartItem.Product_Price,
-        "product_name": cartItem.Product_Name,
-        "product_category_id": cartItem.Category_Id,
-        "tealium_event": "cart_view"
-      })
+      window.utag.view(dataObj)
     }
   }, []);
 

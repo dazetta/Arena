@@ -13,14 +13,15 @@ export default function Checkout() {
   });
 
   useEffect(() => {
+    var dataObj = {
+      "page_name" : "Checkout",
+      "page_type" : "checkout",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "tealium_event": "checkout_view"
+    }
     if(window.utag) {
-      window.utag.view({
-        "page_name" : "Checkout",
-        "page_type" : "checkout",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "checkout_view"
-      })
+      window.utag.view(dataObj)
     }
   }, []);
 

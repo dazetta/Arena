@@ -5,15 +5,16 @@ export default function Thankyou() {
   const order = JSON.parse(localStorage.getItem("order"));
 
   useEffect(() => {
+    var dataObj = {
+      "page_name" : "Thank You",
+      "page_type" : "order_success",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "order_id": order?.order_id,
+      "tealium_event": "order_success_view"
+    };
     if(window.utag) {
-      window.utag.view({
-        "page_name" : "Thank You",
-        "page_type" : "order_success",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "order_id": order?.order_id,
-        "tealium_event": "order_success_view"
-      })
+      window.utag.view(dataObj);
     }
   }, []);
 
