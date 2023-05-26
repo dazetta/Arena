@@ -4,19 +4,6 @@ export default function Thankyou() {
   // const cartItems = JSON.parse(localStorage.getItem("cart"));
   const order = JSON.parse(sessionStorage.getItem("order"));
 
-  useEffect(() => {
-    if(window.utag) {
-      window.utag.view({
-        "page_name" : "Thank You",
-        "page_type" : "order_success",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "order_id": order?.order_id,
-        "tealium_event": "order_success_view"
-      })
-    }
-  }, []);
-
   return (
     <div className="bg-white py-20">
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">

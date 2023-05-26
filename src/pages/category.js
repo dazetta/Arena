@@ -21,18 +21,6 @@ export default function Category() {
     (e) => e.Category_Id === selectedCategory?.Category_Id
   );
 
-  useEffect(() => {
-    if(window.utag) {
-      window.utag.view({
-        "page_name" : selectedCategory.Category_Name,
-        "page_type" : "category",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "category_view"
-      })
-    }
-  }, [slug]);
-
   return (
     <div className="bg-white">
       <img

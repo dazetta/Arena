@@ -9,18 +9,6 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    if(window.utag) {
-      window.utag.view({
-        "page_name" : "Customer Login",
-        "page_type" : "login",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "login_view"
-      })
-    }
-  }, []);
-
   const loginSubmitHandler = (e) => {
     e.preventDefault();
     const payload = {

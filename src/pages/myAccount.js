@@ -5,18 +5,6 @@ export default function MyAccount() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {
-    if(window.utag) {
-      window.utag.view({
-        "page_name" : "Customer Account",
-        "page_type" : "account",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "account_view"
-      })
-    }
-  }, []);
-
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">

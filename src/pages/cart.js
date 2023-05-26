@@ -7,21 +7,6 @@ export default function Cart() {
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")));
 
   const totalPrice = cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0);
-  useEffect(() => {
-    if(window.utag) {
-      // window.utag.view({
-      //   "page_name" : "Shopping Cart",
-      //   "page_type" : "cart",
-      //   "site_region": "en_us",
-      //   "site_currency": "usd",
-      //   "product_id": cartItem.Product_Id,
-      //   "product_price": cartItem.Product_Price,
-      //   "product_name": cartItem.Product_Name,
-      //   "product_category_id": cartItem.Category_Id,
-      //   "tealium_event": "cart_view"
-      // })
-    }
-  }, []);
 
   const removeCartItem = (id) => {
     const newCartItems = cartItems.filter((item) => item.Product_Id !== id);

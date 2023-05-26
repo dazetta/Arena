@@ -12,18 +12,6 @@ export default function Checkout() {
     cvv: "",
   });
 
-  useEffect(() => {
-    if(window.utag) {
-      window.utag.view({
-        "page_name" : "Checkout",
-        "page_type" : "checkout",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "checkout_view"
-      })
-    }
-  }, []);
-
   const url = CONFIG.BASE_URL + CONFIG.CREATE_ORDER;
 
   const handleCheckout = () => {
