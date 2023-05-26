@@ -30,22 +30,22 @@ const Footer = () => {
       <div
         id="notice-container"
         style={{
-          "background-color": "orange",
+          backgroundColor: "orange",
           color: "black",
           width: "100%",
           padding: "10px 20px",
-          "text-align": "center",
-          "border-top": "4px solid white",
+          textAlign: "center",
+          borderTop: "4px solid white",
           bottom: "0px",
-          "z-index": "999999",
+          zIndex: "999999",
         }}
       >
         <p
           style={{
-            "font-size": "12px",
-            "line-height": "16px",
-            "margin-bottom": "0px",
-            "text-align": "left",
+            fontSize: "12px",
+            lineHeight: "16px",
+            marginBottom: "0px",
+            textAlign: "left",
           }}
         >
           ATTENTION: This Website is for training and demonstration purposes

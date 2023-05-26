@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GiftIcon } from "@heroicons/react/24/solid";
 
 export default function Cart() {
   const navigate = useNavigate();
-  const cartItem = JSON.parse(localStorage.getItem("cart"));
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")));
+
+  const totalPrice = cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0);
+  useEffect(() => {
+    if(window.utag) {
+      // window.utag.view({
+      //   "page_name" : "Shopping Cart",
+      //   "page_type" : "cart",
+      //   "site_region": "en_us",
+      //   "site_currency": "usd",
+      //   "product_id": cartItem.Product_Id,
+      //   "product_price": cartItem.Product_Price,
+      //   "product_name": cartItem.Product_Name,
+      //   "product_category_id": cartItem.Category_Id,
+      //   "tealium_event": "cart_view"
+      // })
+    }
+  }, []);
+
+  const removeCartItem = (id) => {
+    const newCartItems = cartItems.filter((item) => item.Product_Id !== id);
+    localStorage.setItem('cart', JSON.stringify(newCartItems));
+    setCartItems(newCartItems)
+  }
 
   return (
     <div className="bg-white">
@@ -19,32 +42,39 @@ export default function Cart() {
         </div>
       </div>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="grid grid-cols-3 gap-4 py-10">
-          <div class="col-span-2 flex gap-4 border p-5">
-            <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
-              <img
-                src={cartItem.Product_Thumbnail_Image}
-                alt={""}
-                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-              />
-            </div>
-            <div className="w-full">
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-medium text-gray-900">
-                  {cartItem.Product_Name}
-                </p>
-                <p className="text-xl font-medium text-gray-900">
-                  ${cartItem.Product_Price}
-                </p>
-              </div>
-              <div className="mt-2">
-                <h4 className="text-sm text-gray-900 font-bold text-left">
-                  Size: 12
-                </h4>
-              </div>
-            </div>
+        { cartItems?.length > 0 ? <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-2 xl:gap-x-8">
+          <div className="border gap-4 p-5">
+            { cartItems.map((cartItem) => {
+              return <div className="flex gap-4 p-5 border">
+                <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
+                  <img
+                    src={cartItem.Product_Thumbnail_Image}
+                    alt={""}
+                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                  />
+                </div>
+                <div className="w-full">
+                  <div>
+                    <p className="text-lg font-medium text-gray-900 text-left">
+                      {cartItem.Product_Name}
+                    </p>
+                    <p className="text-xl font-medium text-gray-900 text-left">
+                      ${cartItem.Product_Price}
+                    </p>
+                  </div>
+                  <div className="mt-2">
+                    <h4 className="text-sm text-gray-900 font-bold text-left">
+                      Size: 12
+                    </h4>
+                  </div>
+                  <div className="mt-2 text-left">
+                    <button class="inline-block mt-6 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm" onClick={() => removeCartItem(cartItem.Product_Id)}>Remove</button>
+                  </div>
+                </div>
+              </div>;
+            }) }
           </div>
-          <div class="border p-5">
+          <div className="border p-5">
             <h3 className="text-xl text-gray-900 font-bold text-left">
               Order Now
             </h3>
@@ -64,7 +94,7 @@ export default function Cart() {
             <div className="mt-12">
               <div className="flex items-end justify-between">
                 <span>Sub Total</span>
-                <span className="font-bold">${cartItem.Product_Price}</span>
+                <span className="font-bold">${totalPrice}</span>
               </div>
               <div className="flex items-end justify-between mt-3">
                 <span>Delivery</span>
@@ -73,14 +103,15 @@ export default function Cart() {
               <hr className="my-5" />
               <div className="flex items-end justify-between mt-3">
                 <span className="font-bold">Total</span>
-                <span className="font-bold">${cartItem.Product_Price}</span>
+                <span className="font-bold">${totalPrice}</span>
               </div>
               <button className="inline-block mt-6 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm w-full" onClick={() => navigate('/checkout')}>
                 Checkout
               </button>
             </div>
           </div>
-        </div>
+        </div> : <div className="mt-6 p-6"><h1 className="text-3xl text-gray-900 font-bold text-center">Cart Empty</h1></div> }
+        
       </div>
     </div>
   );

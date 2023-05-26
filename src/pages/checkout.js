@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CONFIG } from "../config";
 
 export default function Checkout() {
   const navigate = useNavigate();
-  const cartItem = JSON.parse(localStorage.getItem("cart"));
+  const cartItems = JSON.parse(localStorage.getItem("cart"));
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -12,16 +12,33 @@ export default function Checkout() {
     cvv: "",
   });
 
+  useEffect(() => {
+    if(window.utag) {
+      window.utag.view({
+        "page_name" : "Checkout",
+        "page_type" : "checkout",
+        "site_region": "en_us",
+        "site_currency": "usd",
+        "tealium_event": "checkout_view"
+      })
+    }
+  }, []);
+
   const url = CONFIG.BASE_URL + CONFIG.CREATE_ORDER;
 
   const handleCheckout = () => {
+    var orderId = new Date().getTime()
     const payload = {
-      order_id: new Date().getTime(),
+      order_id: orderId,
       user_id: input.email,
-      product_id: cartItem?.Product_Id,
-      product_price: cartItem?.Product_Price,
+      products: cartItems.map(item => {
+        return {
+          prod_id: item.Product_Id,
+          prod_price: item.Product_Price
+        }
+      }),
     };
-    localStorage.setItem("order", JSON.stringify(payload));
+    sessionStorage.setItem("order", JSON.stringify({ ...payload, products: cartItems }));
     fetch(url, {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -49,8 +66,8 @@ export default function Checkout() {
         </div>
       </div>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-4xl lg:px-8">
-        <div class="grid grid-cols-2 gap-4 py-10">
-          <div class="border px-5 py-10">
+        <div className="grid grid-cols-2 gap-4 py-10">
+          <div className="border px-5 py-10">
             <h3 className="text-xl text-gray-900 font-bold text-left">
               Your Details
             </h3>
@@ -72,7 +89,7 @@ export default function Checkout() {
               />
             </div>
           </div>
-          <div class="border px-5 py-10">
+          <div className="border px-5 py-10">
             <h3 className="text-xl text-gray-900 font-bold text-left">
               Payment Details
             </h3>
