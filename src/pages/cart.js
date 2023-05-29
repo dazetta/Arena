@@ -30,7 +30,7 @@ export default function Cart() {
         { cartItems?.length > 0 ? <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-2 xl:gap-x-8">
           <div className="border gap-4 p-5">
             { cartItems.map((cartItem) => {
-              return <div className="flex gap-4 p-5 border">
+              return <div className="flex gap-4 p-5 border mt-4">
                 <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
                   <img
                     src={cartItem.Product_Thumbnail_Image}

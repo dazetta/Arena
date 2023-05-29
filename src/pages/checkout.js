@@ -33,8 +33,10 @@ export default function Checkout() {
       body: JSON.stringify(payload),
       mode: "no-cors",
       redirect: "follow",
-    }).then((res) => navigate("/thank-you"));
-    navigate("/thank-you");
+    }).then((res) => {
+      localStorage.removeItem("cart")
+      navigate("/thank-you")
+    });
   };
 
   const inputHandler = (e) => {

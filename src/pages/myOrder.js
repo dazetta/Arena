@@ -51,6 +51,15 @@ export default function MyOrders() {
         <div className="grid grid-cols-1 gap-4 py-10">
           {orders?.length > 0 ? (orders?.map((order, index) => {
             return <div className="border p-5">
+              <div className="flex justify-between">
+                <p className="text-lg text-left font-bold text-gray-900">
+                  Order Id: {order?.Order_Id}
+                </p>
+                <p className="text-lg text-left font-bold text-gray-900">
+                  Order Date:{" "}
+                  {new Date(order?.Order_Date).toLocaleDateString()}
+                </p>
+              </div>
               { JSON.parse(order?.Products).map((item) => {
                 return <div className="flex gap-4 border p-5 mt-5" key={index}>
                   <div className="aspect-w-1 aspect-h-1 w-72 overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-60">
@@ -61,15 +70,6 @@ export default function MyOrders() {
                     />
                   </div>
                   <div className="w-full">
-                    <div className="flex justify-between">
-                      <p className="text-lg text-left font-bold text-gray-900">
-                        Order Id: {order?.Order_Id}
-                      </p>
-                      <p className="text-lg text-left font-bold text-gray-900">
-                        Order Date:{" "}
-                        {new Date(order?.Order_Date).toLocaleDateString()}
-                      </p>
-                    </div>
                     <div className="flex items-center justify-between">
                       <p
                         className="text-lg font-medium text-[#0351aa]"

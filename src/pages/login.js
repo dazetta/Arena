@@ -8,6 +8,7 @@ export default function Login() {
   const submitRef = useRef(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const loginSubmitHandler = (e) => {
     e.preventDefault();
@@ -30,7 +31,7 @@ export default function Login() {
         console.log(data);
         submitRef.current.disabled = false;
         if(data.status === 300) {
-          alert("user doesn't exist");
+          setError('Account not exist, please register');
         } else {
           localStorage.setItem("user", JSON.stringify(payload));
           navigate("/my-account");
@@ -83,7 +84,7 @@ export default function Login() {
                 />
               </div>
             </div>
-
+            {error && <p className="text-center text-sm text-[#971111] font-semibold">{error}</p>}
             <div>
               <button
                 type="submit"
