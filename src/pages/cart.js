@@ -108,7 +108,7 @@ export default function Cart() {
               </button>
             </div>
           </div>
-        </div> : <div className="mt-6 p-6"><h1 className="text-3xl text-gray-900 font-bold text-center">Cart Empty</h1></div> }
+        </div> : <div className="mt-6 p-6"><h1 className="text-3xl text-gray-900 font-bold text-center">Oops! Your cart is empty</h1></div> }
         
       </div>
     </div>
