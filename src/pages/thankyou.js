@@ -1,8 +1,17 @@
 import React, { useEffect } from "react";
 
 export default function Thankyou() {
-  // const cartItems = JSON.parse(localStorage.getItem("cart"));
   const order = JSON.parse(sessionStorage.getItem("order"));
+
+  useEffect(() => {
+    var dataLayer = {
+      "page_name" : "Thank You",
+      "page_type" : "order_success",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "order_id": order?.order_id
+    }
+  }, []);
 
   return (
     <div className="bg-white py-20">

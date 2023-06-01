@@ -21,6 +21,15 @@ export default function Category() {
     (e) => e.Category_Id === selectedCategory?.Category_Id
   );
 
+  useEffect(() => {
+    var dataLayer = {
+      "page_name" : selectedCategory.Category_Name,
+      "page_type" : "category",
+      "site_region": "en_us",
+      "site_currency": "usd"
+    }
+  }, [slug]);
+
   return (
     <div className="bg-white">
       <img

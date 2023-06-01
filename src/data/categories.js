@@ -5,9 +5,9 @@ const categories = [
     Category_Description:
       "Browse our shoes sale range and discover elite-performance running and trail running shoes at great prices.",
     Category_Thumbnail_Image:
-      "https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-48-sale/-RN22_Wk48_Shoes_HERO_2048x600_@2x.jpg/jcr:content/renditions/cq5dam.web.1024.1024@2x.jpeg?v=1669742998040&imgeng=/w_2048",
+      "https://dazetta.co/wp-content/uploads/2023/05/shoes.jpeg",
     Category_Detail_Image:
-      "https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-48-sale/-RN22_Wk48_MainSale_HEADER_5040x750_@3x.jpg/jcr:content/renditions/cq5dam.web.1680.1680@2x.jpeg?v=1669741561142&imgeng=/w_3360",
+      "https://dazetta.co/wp-content/uploads/2023/05/shoes_banner.jpeg",
   },
   {
     Category_Id: "cat2",
@@ -15,9 +15,9 @@ const categories = [
     Category_Description:
       "Browse our clothing sale range and discover elite-performance running clothing at great prices",
     Category_Thumbnail_Image:
-      "https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-48-sale/-RN22_Wk48_Clothing_HERO_2048x600_@2x.jpg/jcr:content/renditions/cq5dam.web.1024.1024@2x.jpeg?v=1669743364501&imgeng=/w_2048",
+      "https://dazetta.co/wp-content/uploads/2023/05/clothing.jpeg",
     Category_Detail_Image:
-      "https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-36-aw22/-RN22_Wk36NewSeason_Clothing_HEADER_5040x750_@3x.jpg/jcr:content/renditions/cq5dam.web.1680.1680@2x.jpeg?v=1662454653278&imgeng=/w_3360",
+      "https://dazetta.co/wp-content/uploads/2023/05/clothing_banner.jpeg",
   },
   {
     Category_Id: "cat3",
@@ -25,9 +25,9 @@ const categories = [
     Category_Description:
       "Are your running headphones on their last legs? Browse our electronics sale range and discover elite-performance technology and gear at great prices. ",
     Category_Thumbnail_Image:
-      "https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-48-sale/-RN22_Wk48_Electronics_HERO_2048x600_@2x.jpg/jcr:content/renditions/cq5dam.web.1024.1024@2x.jpeg?v=1669743239704&imgeng=/w_2048",
+      "https://dazetta.co/wp-content/uploads/2023/05/electronics.jpeg",
     Category_Detail_Image:
-      "https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-48-sale/-RN22_Wk48_MainSale_HEADER_5040x750_@3x.jpg/jcr:content/renditions/cq5dam.web.1680.1680@2x.jpeg?v=1669741561142&imgeng=/w_3360",
+      "https://dazetta.co/wp-content/uploads/2023/05/electonics_banner.jpeg",
   },
   {
     Category_Id: "cat4",
@@ -35,9 +35,9 @@ const categories = [
     Category_Description:
       "Accessorise your runs, taking care of your body as you complete your 5k or marathon",
     Category_Thumbnail_Image:
-      "https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-48-sale/-RN22_Wk48_Accessories_HERO_2048x600_@2x.jpg/jcr:content/renditions/cq5dam.web.1024.1024@2x.jpeg?v=1669743540077&imgeng=/w_2048",
+      "https://dazetta.co/wp-content/uploads/2023/05/accessories.jpeg",
     Category_Detail_Image:
-      "https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-48-sale/-RN22_Wk48_MainSale_HEADER_5040x750_@3x.jpg/jcr:content/renditions/cq5dam.web.1680.1680@2x.jpeg?v=1669741561142&imgeng=/w_3360",
+      "https://dazetta.co/wp-content/uploads/2023/05/shoes_banner.jpeg",
   },
 ];
 

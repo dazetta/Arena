@@ -46,6 +46,15 @@ export default function Checkout() {
     setInput({ ...input, [name]: value });
   };
 
+  useEffect(() => {
+    var dataLayer = {
+      "page_name" : "Checkout",
+      "page_type" : "checkout",
+      "site_region": "en_us",
+      "site_currency": "usd"
+    }
+  }, []);
+
   return (
     <div className="bg-white pb-32">
       <div className="bg-[#0351aa] py-5">

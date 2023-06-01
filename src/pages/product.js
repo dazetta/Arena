@@ -26,6 +26,18 @@ export default function Product() {
     navigate('/cart')
   }
 
+  useEffect(() => {
+    var dataLayer = {
+      "page_name" : selectedProduct.Product_Name,
+      "page_type" : "product",
+      "site_region": "en_us",
+      "site_currency": "usd",
+      "product_price": selectedProduct.Product_Price,
+      "product_id": selectedProduct.Product_Id,
+      "product_category_id": selectedProduct.Category_Id
+    }
+  }, []);
+
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">

@@ -5,7 +5,7 @@ export default function Promotion() {
         <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
           <div>
             <img
-              src="https://image.runnersneed.com/content/dam/runnersneed/web-banners/new-homepage/2022/week-44-xmas/-RN22_Wk44_XmasMain_HEADER_5040x750_@3x.jpg/jcr:content/renditions/cq5dam.web.1680.1680.jpeg?v=1667389314509&imgeng=/w_1680"
+              src="https://dazetta.co/wp-content/uploads/2023/05/christmas_banner.jpeg"
               alt=""
               className="h-full w-full object-cover object-center"
             />

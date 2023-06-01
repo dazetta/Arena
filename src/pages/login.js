@@ -28,7 +28,6 @@ export default function Login() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => { 
-        console.log(data);
         submitRef.current.disabled = false;
         if(data.status === 300) {
           setError('Account not exist, please register');
@@ -38,6 +37,15 @@ export default function Login() {
         }
     });
   };
+
+  useEffect(() => {
+    var dataLayer = {
+      "page_name" : "Customer Login",
+      "page_type" : "login",
+      "site_region": "en_us",
+      "site_currency": "usd"
+    }
+  }, []);
 
   return (
     <div className="py-20">

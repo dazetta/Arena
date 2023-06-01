@@ -5,6 +5,15 @@ export default function MyAccount() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("user"));
 
+  useEffect(() => {
+    var dataLayer = {
+      "page_name" : "Customer Account",
+      "page_type" : "account",
+      "site_region": "en_us",
+      "site_currency": "usd"
+    }
+  }, []);
+
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">
