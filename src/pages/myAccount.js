@@ -1,17 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function MyAccount() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("user"));
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     var dataLayer = {
-      "page_name" : "Customer Account",
-      "page_type" : "account",
-      "site_region": "en_us",
-      "site_currency": "usd"
+      "pageName" : "myAccountDashboard",
+      "pageType" : "MyAccount",
+      "pageSection": "MyAccount",
+      "customerId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web"
     }
+    console.log(dataLayer);
   }, []);
 
   return (

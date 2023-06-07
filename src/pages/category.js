@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
+import { AppDataContext } from "../Context/AppDataContext";
+import { AuthContext } from "../Context/AuthContext";
 import products from "../data/products";
 import categories from "../data/categories";
 import { convertToSlug } from "../utils";
@@ -8,7 +9,8 @@ import { convertToSlug } from "../utils";
 export default function Category() {
   let { slug } = useParams();
   const navigate = useNavigate();
-
+  const { auth } = useContext(AuthContext);
+  // const { categories, products } = useContext(AppDataContext);
   const productNavigate = (name) => {
     return navigate(`/product/${convertToSlug(name)}`);
   };
@@ -23,11 +25,16 @@ export default function Category() {
 
   useEffect(() => {
     var dataLayer = {
-      "page_name" : selectedCategory.Category_Name,
-      "page_type" : "category",
-      "site_region": "en_us",
-      "site_currency": "usd"
+      "pageName" : "category-"+slug,
+      "pageType" : "Category",
+      "pageSection": slug,
+      "customerId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web",
+      "productCategory": slug
     }
+    console.log(dataLayer);
   }, [slug]);
 
   return (

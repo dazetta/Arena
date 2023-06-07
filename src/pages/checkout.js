@@ -48,11 +48,19 @@ export default function Checkout() {
 
   useEffect(() => {
     var dataLayer = {
-      "page_name" : "Checkout",
-      "page_type" : "checkout",
-      "site_region": "en_us",
-      "site_currency": "usd"
+      "pageName" : "checkout",
+      "pageType" : "Checkout",
+      "pageSection": "Checkout",
+      "customerId": "",
+      "loginStatus": "",
+      "currency": "usd",
+      "channel": "web",
+      "productId": cartItems.map(item => item.Product_Id),
+      "productName": cartItems.map(item => item.Product_Name),
+      "productSku": "",
+      "productPrice": cartItems.map(item => item.Product_Price)
     }
+    console.log(dataLayer)
   }, []);
 
   return (

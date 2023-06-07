@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import navigation from "../../data/navigation";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Header() {
+  const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   return (
     <div className="bg-white shadow-sm sticky top-0 z-50">
@@ -53,12 +55,17 @@ export default function Header() {
           </div>
 
           <div className="flex items-center space-x-4">
-            {localStorage.getItem('user') ? <>
+            {auth.loggedIn_status ? <>
               <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => navigate('/my-account')}>
                 Account
               </span>
               <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => { 
                 localStorage.removeItem('user');
+                setAuth({
+                  user_name: '',
+                  user_id: '',
+                  loggedIn_status: false
+                })
                 navigate('/')
               }}>
                 Logout

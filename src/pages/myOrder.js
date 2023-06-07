@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import products from "../data/products";
 import { convertToSlug } from "../utils";
 import { CONFIG } from "../config";
 import Loader from "../components/Loader";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function MyOrders() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("user"));
+  const { auth } = useContext(AuthContext);
 
   const [orders, setOrders] = useState([]);
 
@@ -29,6 +31,16 @@ export default function MyOrders() {
 
   useEffect(() => {
     fetchOrders();
+    var dataLayer = {
+      "pageName" : "myOrders",
+      "pageType" : "MyOrders",
+      "pageSection": "MyAccount",
+      "customerId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web"
+    }
+    console.log(dataLayer);
   }, []);
 
   return (

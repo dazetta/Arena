@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "../Context/AuthContext";
 
+import { AppDataContext } from "../Context/AppDataContext";
 import products from "../data/products";
 import { convertToSlug } from "../utils";
 
 export default function Product() {
   let { slug } = useParams();
   const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
+  // const { categories, products } = useContext(AppDataContext);
 
   const selectedProduct = products?.filter(
     (e) => convertToSlug(e.Product_Name) === slug
@@ -28,14 +32,19 @@ export default function Product() {
 
   useEffect(() => {
     var dataLayer = {
-      "page_name" : selectedProduct.Product_Name,
-      "page_type" : "product",
-      "site_region": "en_us",
-      "site_currency": "usd",
-      "product_price": selectedProduct.Product_Price,
-      "product_id": selectedProduct.Product_Id,
-      "product_category_id": selectedProduct.Category_Id
+      "pageName" : "pdp-" + selectedProduct.Product_Name,
+      "pageType" : "ProductDetails",
+      "pageSection": slug,
+      "customerId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web",
+      "productId": selectedProduct.Product_Id.split(','),
+      "productName": selectedProduct.Product_Name.split(','),
+      "productCategory": selectedProduct.Category_Id,
+      "productPrice": String(selectedProduct.Product_Price).split(',')
     }
+    console.log(dataLayer)
   }, []);
 
   return (

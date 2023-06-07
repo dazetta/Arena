@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { CONFIG } from "../config";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { auth, setAuth } = useContext(AuthContext);
 
   const loginSubmitHandler = (e) => {
     e.preventDefault();
@@ -32,7 +34,12 @@ export default function Login() {
         if(data.status === 300) {
           setError('Account not exist, please register');
         } else {
-          localStorage.setItem("user", JSON.stringify(payload));
+          localStorage.setItem("user", JSON.stringify({ ...payload, loggedIn_status: true }));
+          setAuth({
+            ...payload,
+            user_name: "",
+            loggedIn_status: true
+          })
           navigate("/my-account");
         }
     });
@@ -40,11 +47,15 @@ export default function Login() {
 
   useEffect(() => {
     var dataLayer = {
-      "page_name" : "Customer Login",
-      "page_type" : "login",
-      "site_region": "en_us",
-      "site_currency": "usd"
+      "pageName" : "login",
+      "pageType" : "Login",
+      "pageSection": "MyAccount",
+      "customerId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web"
     }
+    console.log(dataLayer);
   }, []);
 
   return (

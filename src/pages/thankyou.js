@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Thankyou() {
   const order = JSON.parse(sessionStorage.getItem("order"));
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     var dataLayer = {
-      "page_name" : "Thank You",
-      "page_type" : "order_success",
-      "site_region": "en_us",
-      "site_currency": "usd",
-      "order_id": order?.order_id
+      "pageName" : "orderSuccess",
+      "pageType" : "OrderSuccess",
+      "pageSection": "Order",
+      "customerId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web"
     }
+    console.log(dataLayer);
   }, []);
 
   return (

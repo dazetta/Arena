@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { GiftIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Cart() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")));
+  const { auth } = useContext(AuthContext);
 
   const totalPrice = cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0);
 
@@ -16,15 +18,19 @@ export default function Cart() {
 
   useEffect(() => {
     var dataLayer = {
-      "page_name" : "Shopping Cart",
-      "page_type" : "cart",
-      "site_region": "en_us",
-      "site_currency": "usd",
-      "product_id": cartItem.Product_Id,
-      "product_price": cartItem.Product_Price,
-      "product_name": cartItem.Product_Name,
-      "product_category_id": cartItem.Category_Id
-    };
+      "pageName" : "cart",
+      "pageType" : "Cart",
+      "pageSection": "Checkout",
+      "customerId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web",
+      "productId": cartItems.map(item => item.Product_Id),
+      "productName": cartItems.map(item => item.Product_Name),
+      "productSku": "",
+      "productPrice": cartItems.map(item => item.Product_Price)
+    }
+    console.log(dataLayer, cartItems);
   }, []);
 
   return (
