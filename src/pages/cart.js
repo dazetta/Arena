@@ -28,7 +28,9 @@ export default function Cart() {
       "productId": cartItems.map(item => item.Product_Id),
       "productName": cartItems.map(item => item.Product_Name),
       "productSku": "",
-      "productPrice": cartItems.map(item => item.Product_Price)
+      "productPrice": cartItems.map(item => item.Product_Price),
+      "totalItems": cartItems.length,
+      "totalQuantity": cartItems.length
     }
     console.log(dataLayer, cartItems);
   }, []);

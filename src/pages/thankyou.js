@@ -13,7 +13,10 @@ export default function Thankyou() {
       "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
-      "channel": "web"
+      "channel": "web",
+      "orderId": String(order?.order_id).split(','),
+      "totalItems": order?.products.length,
+      "totalQuantity": order?.products.length
     }
     console.log(dataLayer);
   }, []);

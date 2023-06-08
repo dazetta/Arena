@@ -38,10 +38,11 @@ export default function MyOrders() {
       "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
-      "channel": "web"
+      "channel": "web",
+      "orderId": orders.map(order => order.Order_Id)
     }
     console.log(dataLayer);
-  }, []);
+  }, [orders]);
 
   return (
     <div className="bg-white">

@@ -53,7 +53,9 @@ export default function Login() {
       "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
-      "channel": "web"
+      "channel": "web",
+      "loginMethod": "Email",
+      "loginTime": new Date().getTime()
     }
     console.log(dataLayer);
   }, []);
