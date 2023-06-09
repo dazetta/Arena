@@ -5,13 +5,11 @@ const convertToSlug = (text) => {
     .replace(/[^\w-]+/g, "");
 };
 
-export const setCookie = function(name,value,days) {
+export const setCookie = function(name, value) {
   var expires = "";
-  if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (30 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
-  }
+  var date = new Date();
+  date.setTime(date.getTime() + (30 * 60 * 1000));
+  expires = "; expires=" + date.toUTCString();
   document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
 
