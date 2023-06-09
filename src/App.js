@@ -14,6 +14,7 @@ import { useState } from "react";
 import { CONFIG } from "./config/index";
 import { AppDataContext } from "./Context/AppDataContext";
 import localProducts from './data/products';
+import { getCookie } from "./utils";
 
 function App() {
   const [auth, setAuth] = useState({
@@ -26,7 +27,7 @@ function App() {
   const [offers, setOffers] = useState([]);
 
   useState(() => {
-    var userInfo = JSON.parse(window.localStorage.getItem('user'));
+    var userInfo = JSON.parse(getCookie('user'));
     if (userInfo) {
       setAuth({
         user_name: userInfo.user_name,

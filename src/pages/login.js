@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { CONFIG } from "../config";
 import { AuthContext } from "../Context/AuthContext";
+import { setCookie } from "../utils";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export default function Login() {
         if(data.status === 300) {
           setError('Account not exist, please register');
         } else {
-          localStorage.setItem("user", JSON.stringify({ ...payload, loggedIn_status: true }));
+          setCookie('user', JSON.stringify({ ...payload, loggedIn_status: true }))
           setAuth({
             ...payload,
             user_name: "",

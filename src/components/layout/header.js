@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import navigation from "../../data/navigation";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../../Context/AuthContext";
+import { removeCookie } from "../../utils";
 
 export default function Header() {
   const { auth, setAuth } = useContext(AuthContext);
@@ -60,7 +61,7 @@ export default function Header() {
                 Account
               </span>
               <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => { 
-                localStorage.removeItem('user');
+                removeCookie('user');
                 setAuth({
                   user_name: '',
                   user_id: '',

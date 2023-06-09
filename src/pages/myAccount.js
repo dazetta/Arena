@@ -1,10 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import { getCookie } from "../utils";
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const userData = JSON.parse(getCookie("user"));
   const { auth } = useContext(AuthContext);
 
   useEffect(() => {
