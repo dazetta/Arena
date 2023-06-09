@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import products from "../data/products";
 import { convertToSlug } from "../utils";
 import { CONFIG } from "../config";
 import Loader from "../components/Loader";
 import { AuthContext } from "../Context/AuthContext";
+import { AppDataContext } from "../Context/AppDataContext";
 
 export default function MyOrders() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("user"));
   const { auth } = useContext(AuthContext);
+  const { products } = useContext(AppDataContext);
 
   const [orders, setOrders] = useState([]);
 

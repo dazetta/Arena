@@ -13,6 +13,7 @@ import { AuthContext } from "./Context/AuthContext";
 import { useState } from "react";
 import { CONFIG } from "./config/index";
 import { AppDataContext } from "./Context/AppDataContext";
+import localProducts from './data/products';
 
 function App() {
   const [auth, setAuth] = useState({
@@ -33,21 +34,29 @@ function App() {
         loggedIn_status: true
       });
     }
-    const productURL = CONFIG.BASE_URL + CONFIG.GET_PRODUCTS;
-    const categoryURL = CONFIG.BASE_URL + CONFIG.GET_CATEGORIES;
-    fetch(productURL, {
-      method: "GET",
-      redirect: "follow",
-    }).then(response => response.json()).then(data => {
-      setProducts(data);
-    })
 
-    fetch(categoryURL, {
-      method: "GET",
-      redirect: "follow",
-    }).then(response => response.json()).then(data => {
-      setCategories(data);
-    })
+    if(CONFIG.apiFallback) {
+      const productURL = CONFIG.BASE_URL + CONFIG.GET_PRODUCTS;
+      const categoryURL = CONFIG.BASE_URL + CONFIG.GET_CATEGORIES;
+  
+      fetch(productURL, {
+        method: "GET",
+        redirect: "follow",
+      }).then(response => response.json()).then(data => {
+        setProducts(data);
+      })
+  
+      fetch(categoryURL, {
+        method: "GET",
+        redirect: "follow",
+      }).then(response => response.json()).then(data => {
+        setCategories(data);
+      })
+      console.log('ajsdlfjlsdafj')
+    } else {
+      setProducts(localProducts);
+    }
+
 
   }, []);
 

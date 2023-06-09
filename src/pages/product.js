@@ -4,14 +4,13 @@ import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/AuthContext";
 
 import { AppDataContext } from "../Context/AppDataContext";
-import products from "../data/products";
 import { convertToSlug } from "../utils";
 
 export default function Product() {
   let { slug } = useParams();
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
-  // const { categories, products } = useContext(AppDataContext);
+  const { products } = useContext(AppDataContext);
 
   const selectedProduct = products?.filter(
     (e) => convertToSlug(e.Product_Name) === slug

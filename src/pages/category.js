@@ -2,15 +2,15 @@ import React, { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AppDataContext } from "../Context/AppDataContext";
 import { AuthContext } from "../Context/AuthContext";
-import products from "../data/products";
-import categories from "../data/categories";
 import { convertToSlug } from "../utils";
 
 export default function Category() {
   let { slug } = useParams();
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
-  // const { categories, products } = useContext(AppDataContext);
+  const { products } = useContext(AppDataContext);
+  const { categories } = useContext(AppDataContext);
+
   const productNavigate = (name) => {
     return navigate(`/product/${convertToSlug(name)}`);
   };

@@ -1,9 +1,13 @@
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import categories from "../../data/categories";
 import { convertToSlug } from "../../utils";
+import { AppDataContext } from "../../Context/AppDataContext";
 
 export default function Categories() {
   const navigate = useNavigate();
+  const { categories } = useContext(AppDataContext);
+
+  console.log(categories, '.catj')
 
   return (
     <div className="bg-gray-100">

@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import products from "../../data/products";
 import { convertToSlug } from "../../utils";
+import { useContext } from "react";
+import { AppDataContext } from "../../Context/AppDataContext";
 
 export default function Products() {
   const navigate = useNavigate();
   const productNavigate = (name) => {
     return navigate(`product/${convertToSlug(name)}`);
   };
+  const { products } = useContext(AppDataContext);
 
   return (
     <div className="bg-white">

@@ -6,4 +6,5 @@ export const CONFIG = {
   CREATE_ORDER: "?action=post&type=order",
   GET_USER_ORDER: "?action=get&type=user_orders&userid=",
   VALIDATE_USER: "?action=get&type=validate_user&email=",
+  apiFallback: true
 };
