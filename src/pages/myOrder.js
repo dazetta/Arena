@@ -36,12 +36,12 @@ export default function MyOrders() {
       "pageName" : "myOrders",
       "pageType" : "MyOrders",
       "pageSection": "MyAccount",
-      "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
       "orderId": orders.map(order => order.Order_Id)
     }
+    auth.user_id && (dataLayer["customerId"] = auth.user_id);
     console.log(dataLayer);
   }, [orders]);
 

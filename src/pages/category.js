@@ -28,12 +28,12 @@ export default function Category() {
       "pageName" : "category-"+slug,
       "pageType" : "Category",
       "pageSection": slug,
-      "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
       "productCategory": slug
     }
+    auth.user_id && (dataLayer["customerId"] = auth.user_id);
     console.log(dataLayer);
   }, [slug]);
 

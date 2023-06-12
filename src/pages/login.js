@@ -51,13 +51,13 @@ export default function Login() {
       "pageName" : "login",
       "pageType" : "Login",
       "pageSection": "MyAccount",
-      "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
       "loginMethod": "Email",
       "loginTime": new Date().getTime()
     }
+    auth.user_id && (dataLayer["customerId"] = auth.user_id);
     console.log(dataLayer);
   }, []);
 

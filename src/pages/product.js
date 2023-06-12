@@ -31,18 +31,18 @@ export default function Product() {
 
   useEffect(() => {
     var dataLayer = {
-      "pageName" : "pdp-" + selectedProduct.Product_Name,
+      "pageName" : "pdp-" + selectedProduct?.Product_Name,
       "pageType" : "ProductDetails",
       "pageSection": slug,
-      "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "productId": selectedProduct.Product_Id.split(','),
-      "productName": selectedProduct.Product_Name.split(','),
-      "productCategory": selectedProduct.Category_Id,
-      "productPrice": String(selectedProduct.Product_Price).split(',')
+      "productId": selectedProduct?.Product_Id.split(','),
+      "productName": selectedProduct?.Product_Name.split(','),
+      "productCategory": selectedProduct?.Category_Id,
+      "productPrice": String(selectedProduct?.Product_Price).split(',')
     }
+    auth.user_id && (dataLayer["customerId"] = auth.user_id);
     console.log(dataLayer)
   }, []);
 

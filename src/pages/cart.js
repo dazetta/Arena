@@ -21,17 +21,17 @@ export default function Cart() {
       "pageName" : "cart",
       "pageType" : "Cart",
       "pageSection": "Checkout",
-      "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "productId": cartItems.map(item => item.Product_Id),
-      "productName": cartItems.map(item => item.Product_Name),
+      "productId": cartItems?.map(item => item.Product_Id),
+      "productName": cartItems?.map(item => item.Product_Name),
       "productSku": "",
-      "productPrice": cartItems.map(item => item.Product_Price),
-      "totalItems": cartItems.length,
-      "totalQuantity": cartItems.length
+      "productPrice": cartItems?.map(item => item.Product_Price),
+      "totalItems": cartItems?.length,
+      "totalQuantity": cartItems?.length
     }
+    auth.user_id && (dataLayer["customerId"] = auth.user_id);
     console.log(dataLayer, cartItems);
   }, []);
 

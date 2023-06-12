@@ -10,7 +10,6 @@ export default function Thankyou() {
       "pageName" : "orderSuccess",
       "pageType" : "OrderSuccess",
       "pageSection": "Order",
-      "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
@@ -18,6 +17,7 @@ export default function Thankyou() {
       "totalItems": order?.products.length,
       "totalQuantity": order?.products.length
     }
+    auth.user_id && (dataLayer["customerId"] = auth.user_id);
     console.log(dataLayer);
   }, []);
 

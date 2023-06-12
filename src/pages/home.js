@@ -12,11 +12,11 @@ export default function Home() {
       "pageName" : "home",
       "pageType" : "Home",
       "pageSection": "Home",
-      "customerId": auth.user_id,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web"
     }
+    auth.user_id && (dataLayer["customerId"] = auth.user_id);
     console.log(dataLayer, '>>>>>')
   }, []);
   return (

@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CONFIG } from "../config";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Checkout() {
   const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
   const cartItems = JSON.parse(localStorage.getItem("cart"));
   const [input, setInput] = useState({
     name: "",
-    email: "",
+    email: auth.user_id,
     card: "",
     cvv: "",
   });
-
+  
   const url = CONFIG.BASE_URL + CONFIG.CREATE_ORDER;
 
   const handleCheckout = () => {
@@ -19,7 +21,7 @@ export default function Checkout() {
     const payload = {
       order_id: orderId,
       user_id: input.email,
-      products: cartItems.map(item => {
+      products: cartItems?.map(item => {
         return {
           prod_id: item.Product_Id,
           prod_price: item.Product_Price
@@ -51,18 +53,18 @@ export default function Checkout() {
       "pageName" : "checkout",
       "pageType" : "Checkout",
       "pageSection": "Checkout",
-      "customerId": "",
-      "loginStatus": "",
+      "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "productId": cartItems.map(item => item.Product_Id),
-      "productName": cartItems.map(item => item.Product_Name),
+      "productId": cartItems?.map(item => item.Product_Id),
+      "productName": cartItems?.map(item => item.Product_Name),
       "productSku": "",
-      "productPrice": cartItems.map(item => item.Product_Price),
-      "totalItems": cartItems.length,
-      "totalQuantity": cartItems.length,
+      "productPrice": cartItems?.map(item => item.Product_Price),
+      "totalItems": cartItems?.length,
+      "totalQuantity": cartItems?.length,
       "paymentMethod": "Credit Card"
     }
+    auth.user_id && (dataLayer["customerId"] = auth.user_id);
     console.log(dataLayer)
   }, []);
 
@@ -86,6 +88,7 @@ export default function Checkout() {
               <input
                 className="border border-gray-400 mt-2 w-full p-2"
                 name="name"
+                {...(auth.user_id && { value:"***", disabled: true })}
                 onChange={inputHandler}
               />
             </div>
@@ -95,6 +98,7 @@ export default function Checkout() {
                 className="border border-gray-400 mt-2 w-full p-2"
                 name="email"
                 type="email"
+                {...(auth.user_id && { value:auth.user_id, disabled: true })}
                 onChange={inputHandler}
               />
             </div>
@@ -109,6 +113,7 @@ export default function Checkout() {
               <input
                 className="border border-gray-400 mt-2 w-full p-2"
                 name="card"
+                {...(auth.user_id && { value:'**** **** **** ****', disabled: true })}
                 onChange={inputHandler}
               />
             </div>
@@ -117,6 +122,7 @@ export default function Checkout() {
               <input
                 className="border border-gray-400 mt-2 w-full p-2"
                 name="cvv"
+                {...(auth.user_id && { value:'***', disabled: true })}
                 onChange={inputHandler}
               />
             </div>
