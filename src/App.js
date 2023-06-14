@@ -8,6 +8,7 @@ import Checkout from "./pages/checkout";
 import Thankyou from "./pages/thankyou";
 import Login from "./pages/login";
 import MyOrders from "./pages/myOrder";
+import MyOffers from "./pages/myOffers";
 import MyAccount from "./pages/myAccount";
 import { AuthContext } from "./Context/AuthContext";
 import { useState } from "react";
@@ -80,6 +81,7 @@ function App() {
               <Route path="thank-you" element={<Thankyou />} />
               <Route path="my-account" element={<MyAccount />} />
               <Route path="my-orders" element={<MyOrders />} />
+              <Route path="my-offers" element={<MyOffers />} />
               <Route path="thank-you" element={<Thankyou />} />
             </Routes>
           </Layout>

@@ -54,13 +54,6 @@ export default function MyOrders() {
           </h2>
         </div>
       </div>
-      {/* {
-    "Order_Id": 1670536409298,
-    "Order_Date": "2022-12-08T21:53:30.006Z",
-    "User_Id": "test@test.com",
-    "Product_Id": "prod2",
-    "Product_Price": 120 */}
-
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="grid grid-cols-1 gap-4 py-10">
           {orders?.length > 0 ? (orders?.map((order, index) => {

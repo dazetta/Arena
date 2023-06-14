@@ -36,6 +36,7 @@ export default function MyAccount() {
             <h3 className="text-white font-semibold text-md">Links:</h3>
             <ul className="list list-disc pl-5">
               <li className="text-white cursor-pointer" onClick={() => navigate('/my-orders')}>My Orders</li>
+              <li className="text-white cursor-pointer" onClick={() => navigate('/my-offers')}>My Offers</li>
             </ul>
           </div>
           <div className="col-span-3 flex flex-col gap-4 border p-5">
