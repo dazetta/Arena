@@ -16,12 +16,14 @@ import { CONFIG } from "./config/index";
 import { AppDataContext } from "./Context/AppDataContext";
 import localProducts from './data/products';
 import { getCookie } from "./utils";
+import localCategories from './data/categories';
+import Loader from "./components/Loader";
 
 function App() {
   const [auth, setAuth] = useState({
     user_name: '',
     user_id: '',
-    loggedIn_status: false
+    loggedIn_status: 'Non-Logged-In'
   });
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -33,30 +35,40 @@ function App() {
       setAuth({
         user_name: userInfo.user_name,
         user_id: userInfo.user_id,
-        loggedIn_status: true
+        loggedIn_status: 'Logged-In'
       });
     }
 
     if(CONFIG.apiFallback) {
-      const productURL = CONFIG.BASE_URL + CONFIG.GET_PRODUCTS;
-      const categoryURL = CONFIG.BASE_URL + CONFIG.GET_CATEGORIES;
+      // const productURL = CONFIG.BASE_URL + CONFIG.GET_PRODUCTS;
+      // const categoryURL = CONFIG.BASE_URL + CONFIG.GET_CATEGORIES;
   
-      fetch(productURL, {
+      // fetch(productURL, {
+      //   method: "GET",
+      //   redirect: "follow",
+      // }).then(response => response.json()).then(data => {
+      //   setProducts(data);
+      // })
+  
+      // fetch(categoryURL, {
+      //   method: "GET",
+      //   redirect: "follow",
+      // }).then(response => response.json()).then(data => {
+      //   setCategories(data);
+      // })
+
+      const appDataURL = CONFIG.BASE_URL + CONFIG.GET_APP_DATA;
+      fetch(appDataURL, {
         method: "GET",
         redirect: "follow",
       }).then(response => response.json()).then(data => {
-        setProducts(data);
+        setCategories(data.categories)
+        setProducts(data.products)
       })
-  
-      fetch(categoryURL, {
-        method: "GET",
-        redirect: "follow",
-      }).then(response => response.json()).then(data => {
-        setCategories(data);
-      })
-      console.log('ajsdlfjlsdafj')
+
     } else {
       setProducts(localProducts);
+      setCategories(localCategories);
     }
 
 
@@ -65,7 +77,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       <AppDataContext.Provider value={{ products, categories }}>
-        <BrowserRouter>
+        { products.length > 0 ? <BrowserRouter>
           <Layout>
             <Routes>
               <Route path="" element={<Home />} />
@@ -85,7 +97,7 @@ function App() {
               <Route path="thank-you" element={<Thankyou />} />
             </Routes>
           </Layout>
-        </BrowserRouter>
+        </BrowserRouter> : <div className="flex justify-center align-center h-screen"><Loader/></div> }
       </AppDataContext.Provider>
     </AuthContext.Provider>
   );

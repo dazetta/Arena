@@ -33,7 +33,7 @@ export default function Product() {
     var dataLayer = {
       "pageName" : "pdp-" + selectedProduct?.Product_Name,
       "pageType" : "ProductDetails",
-      "pageSection": slug,
+      "pageSection": selectedProduct?.Product_Name,
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",

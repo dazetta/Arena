@@ -56,15 +56,16 @@ export default function Checkout() {
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "productId": cartItems?.map(item => item.Product_Id),
-      "productName": cartItems?.map(item => item.Product_Name),
-      "productSku": "",
-      "productPrice": cartItems?.map(item => item.Product_Price),
-      "totalItems": cartItems?.length,
-      "totalQuantity": cartItems?.length,
       "paymentMethod": "Credit Card"
     }
     auth.user_id && (dataLayer["customerId"] = auth.user_id);
+    if(cartItems?.length > 0) {
+      dataLayer["productId"] = cartItems?.map(item => item.Product_Id);
+      dataLayer["productName"] = cartItems?.map(item => item.Product_Name);
+      dataLayer["productPrice"] = cartItems?.map(item => item.Product_Price);
+      dataLayer["totalItems"] = cartItems?.length;
+      dataLayer["totalQuantity"] = cartItems?.length;
+    }
     console.log(dataLayer)
   }, []);
 

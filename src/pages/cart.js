@@ -24,15 +24,16 @@ export default function Cart() {
       "loginStatus": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "productId": cartItems?.map(item => item.Product_Id),
-      "productName": cartItems?.map(item => item.Product_Name),
-      "productSku": "",
-      "productPrice": cartItems?.map(item => item.Product_Price),
-      "totalItems": cartItems?.length,
-      "totalQuantity": cartItems?.length
     }
     auth.user_id && (dataLayer["customerId"] = auth.user_id);
-    console.log(dataLayer, cartItems);
+    if(cartItems?.length > 0) {
+      dataLayer["productId"] = cartItems?.map(item => item.Product_Id);
+      dataLayer["productName"] = cartItems?.map(item => item.Product_Name);
+      dataLayer["productPrice"] = cartItems?.map(item => item.Product_Price);
+      dataLayer["totalItems"] = cartItems?.length;
+      dataLayer["totalQuantity"] = cartItems?.length;
+    } 
+    console.log(dataLayer)
   }, []);
 
   return (
@@ -42,9 +43,9 @@ export default function Cart() {
           <h2 className="text-2xl text-center font-medium tracking-tight text-white">
             Your Shopping Cart
           </h2>
-          <button className="inline-block rounded-full text-[#0351aa] px-10 py-2 bg-white shadow-sm" onClick={() => navigate('/checkout')}>
+          { cartItems?.length > 0 && <button className="inline-block rounded-full text-[#0351aa] px-10 py-2 bg-white shadow-sm" onClick={() => navigate('/checkout')}>
             Checkout
-          </button>
+          </button> }
         </div>
       </div>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
