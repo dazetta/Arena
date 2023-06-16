@@ -1,4 +1,4 @@
-const products = [
+const localProducts = [
   {
     Product_Id: "prod1",
     Product_Name: "Brooks Womens Adrenaline GTS 22 Wide Shoes",
@@ -73,4 +73,4 @@ const products = [
   },
 ];
 
-export default products;
+export default localProducts;

@@ -8,5 +8,6 @@ export const CONFIG = {
   GET_USER_ORDER: "?action=get&type=user_orders&userid=",
   GET_USER_OFFERS: "?action=get&type=user_offers&userid=",
   VALIDATE_USER: "?action=get&type=validate_user&email=",
-  apiFallback: true
+  appDataFallback: true,
+  offerDataFallback: true
 };

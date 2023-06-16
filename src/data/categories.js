@@ -1,4 +1,4 @@
-const categories = [
+const localCategories = [
   {
     Category_Id: "cat1",
     Category_Name: "Shoes",
@@ -41,4 +41,4 @@ const categories = [
   },
 ];
 
-export default categories;
+export default localCategories;

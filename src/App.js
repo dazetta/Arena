@@ -39,7 +39,7 @@ function App() {
       });
     }
 
-    if(CONFIG.apiFallback) {
+    if(CONFIG.appDataFallback) {
       // const productURL = CONFIG.BASE_URL + CONFIG.GET_PRODUCTS;
       // const categoryURL = CONFIG.BASE_URL + CONFIG.GET_CATEGORIES;
   

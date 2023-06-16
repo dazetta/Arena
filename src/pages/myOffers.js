@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { CONFIG } from "../config";
 import Loader from "../components/Loader";
 import { AuthContext } from "../Context/AuthContext";
+import localOffers from '../data/offer';
 
 export default function MyOffers() {
     const { auth } = useContext(AuthContext);
@@ -11,12 +12,17 @@ export default function MyOffers() {
     const url = CONFIG.BASE_URL + CONFIG.GET_USER_OFFERS + auth?.user_id;
 
     const fetchOrders = () => {
-        fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-            setOffers(data)
+        if(CONFIG.offerDataFallback) {
+            fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                setOffers(data)
+                setLoader(false);
+            });
+        } else {
+            setOffers(localOffers)
             setLoader(false);
-        });
+        }
     };
 
     useEffect(() => {
