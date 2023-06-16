@@ -8,7 +8,6 @@ import { AppDataContext } from "../Context/AppDataContext";
 
 export default function MyOrders() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("user"));
   const { auth } = useContext(AuthContext);
   const { products } = useContext(AppDataContext);
 
@@ -18,7 +17,7 @@ export default function MyOrders() {
     return navigate(`/product/${convertToSlug(name)}`);
   };
 
-  const url = CONFIG.BASE_URL + CONFIG.GET_USER_ORDER + userData?.user_id;
+  const url = CONFIG.BASE_URL + CONFIG.GET_USER_ORDER + auth?.user_id;
 
   const fetchOrders = () => {
     fetch(url)
@@ -30,8 +29,11 @@ export default function MyOrders() {
     return products?.filter((e) => e.Product_Id === id)?.[0];
   };
 
-  useEffect(() => {
+  useState(() => {
     fetchOrders();
+  }, []);
+
+  useEffect(() => {
     var dataLayer = {
       "pageName" : "myOrders",
       "pageType" : "MyOrders",

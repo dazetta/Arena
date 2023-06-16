@@ -56,7 +56,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center space-x-4">
-            {auth.loggedIn_status ? <>
+            {auth.user_id ? <>
               <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => navigate('/my-account')}>
                 Account
               </span>
@@ -65,7 +65,7 @@ export default function Header() {
                 setAuth({
                   user_name: '',
                   user_id: '',
-                  loggedIn_status: false
+                  loggedIn_status: 'Non-Logged-In'
                 })
                 navigate('/')
               }}>

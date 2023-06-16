@@ -1,11 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
-import { getCookie } from "../utils";
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const userData = JSON.parse(getCookie("user"));
   const { auth } = useContext(AuthContext);
 
   useEffect(() => {
@@ -42,7 +40,7 @@ export default function MyAccount() {
           <div className="col-span-3 flex flex-col gap-4 border p-5">
             <div className="aspect-w-1 aspect-h-1 w-28 overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none">
               <img
-                src="https://i.pravatar.cc/100"
+                src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
                 alt={""}
                 className="h-full w-full object-cover rounded-full object-center lg:h-full lg:w-full"
               />
@@ -54,7 +52,7 @@ export default function MyAccount() {
 
               <div className="flex items-center justify-between">
                 <p className="text-lg font-medium text-[#0351aa]">
-                  User Id: {userData?.user_id}
+                  User Id: {auth?.user_id}
                 </p>
               </div>
             </div>

@@ -35,11 +35,11 @@ export default function Login() {
         if(data.status === 300) {
           setError('Account not exist, please register');
         } else {
-          setCookie('user', JSON.stringify({ ...payload, loggedIn_status: true }))
+          setCookie('user', JSON.stringify({ ...payload, loggedIn_status: 'Logged-in' }))
           setAuth({
             ...payload,
             user_name: "",
-            loggedIn_status: true
+            loggedIn_status: 'Logged-in'
           })
           navigate("/my-account");
         }
