@@ -43,7 +43,7 @@ export default function Product() {
       "productPrice": String(selectedProduct?.Product_Price).split(',')
     }
     auth.user_id && (dataLayer["customerId"] = auth.user_id);
-    console.log(dataLayer)
+    // window.utag.view(dataLayer);
   }, []);
 
   return (

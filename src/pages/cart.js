@@ -33,7 +33,7 @@ export default function Cart() {
       dataLayer["totalItems"] = cartItems?.length;
       dataLayer["totalQuantity"] = cartItems?.length;
     } 
-    console.log(dataLayer)
+    // window.utag.view(dataLayer);
   }, []);
 
   return (

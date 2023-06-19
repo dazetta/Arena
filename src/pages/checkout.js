@@ -66,7 +66,7 @@ export default function Checkout() {
       dataLayer["totalItems"] = cartItems?.length;
       dataLayer["totalQuantity"] = cartItems?.length;
     }
-    console.log(dataLayer)
+    // window.utag.view(dataLayer);
   }, []);
 
   return (

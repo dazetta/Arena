@@ -19,7 +19,8 @@ export default function Login() {
       user_id: email,
     };
     submitRef.current.disabled = true;
-    const url = CONFIG.BASE_URL + CONFIG.VALIDATE_USER + email;
+    setError('');
+    const url = CONFIG.BASE_URL + CONFIG.VALIDATE_USER + "&email=" + email + "&password=" + password;
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("cache-control", "no-cache");
@@ -33,7 +34,7 @@ export default function Login() {
       .then((data) => { 
         submitRef.current.disabled = false;
         if(data.status === 300) {
-          setError('Account not exist, please register');
+          setError('Account not exist, please check');
         } else {
           setCookie('user', JSON.stringify({ ...payload, loggedIn_status: 'Logged-in' }))
           setAuth({
@@ -58,7 +59,7 @@ export default function Login() {
       "loginTime": new Date().getTime()
     }
     auth.user_id && (dataLayer["customerId"] = auth.user_id);
-    console.log(dataLayer);
+    // window.utag.view(dataLayer);
   }, []);
 
   return (

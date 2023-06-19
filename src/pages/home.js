@@ -17,8 +17,9 @@ export default function Home() {
       "channel": "web"
     }
     auth.user_id && (dataLayer["customerId"] = auth.user_id);
-    console.log(dataLayer, '>>>>>')
+    // window.utag.view(dataLayer);
   }, []);
+
   return (
     <div>
       <Hero />
