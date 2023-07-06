@@ -9,7 +9,7 @@ export default function Header() {
   const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   return (
-    <div className="bg-white shadow-sm sticky top-0 z-50">
+    <div className="bg-white shadow-sm sticky top-0 z-50 header">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 md:py-4">
         <div className="flex items-center justify-between md:justify-start">
           <button
@@ -44,7 +44,7 @@ export default function Header() {
               <a
                 key={index}
                 href={item.Nav_Link}
-                className="px-2 py-2 rounded-lg text-black hover:text-[#0351aa]"
+                className="px-2 py-2 rounded-lg text-black hover:text-[#0351aa] menu-link"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate(item.Nav_Link);
