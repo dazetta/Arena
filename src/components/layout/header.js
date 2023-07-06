@@ -65,7 +65,7 @@ export default function Header() {
                 setAuth({
                   user_name: '',
                   user_id: '',
-                  loggedIn_status: 'Non-Logged-In'
+                  loggedIn_status: 'Logged-Out'
                 })
                 navigate('/')
               }}>

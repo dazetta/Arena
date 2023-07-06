@@ -35,15 +35,15 @@ export default function MyOrders() {
 
   useEffect(() => {
     var dataLayer = {
-      "pageName" : "myOrders",
-      "pageType" : "MyOrders",
-      "pageSection": "MyAccount",
-      "loginStatus": auth.loggedIn_status,
+      "page_name" : "myOrders",
+      "page_type" : "MyOrders",
+      "page_section": "MyAccount",
+      "login_status": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "orderId": orders.map(order => order.Order_Id)
+      "order_id": orders.map(order => order.Order_Id)
     }
-    auth.user_id && (dataLayer["customerId"] = auth.user_id);
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     // window.utag.view(dataLayer);
   }, [orders]);
 

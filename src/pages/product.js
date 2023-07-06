@@ -10,7 +10,7 @@ export default function Product() {
   let { slug } = useParams();
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
-  const { products } = useContext(AppDataContext);
+  const { products, categories } = useContext(AppDataContext);
 
   const selectedProduct = products?.filter(
     (e) => convertToSlug(e.Product_Name) === slug
@@ -30,19 +30,20 @@ export default function Product() {
   }
 
   useEffect(() => {
+    console.log(categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name, '>>>')
     var dataLayer = {
-      "pageName" : "pdp-" + selectedProduct?.Product_Name,
-      "pageType" : "ProductDetails",
-      "pageSection": selectedProduct?.Product_Name,
-      "loginStatus": auth.loggedIn_status,
+      "page_name" : "pdp-" + selectedProduct?.Product_Name,
+      "page_type" : "ProductDetails",
+      "page_section": selectedProduct?.Product_Name,
+      "login_status": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "productId": selectedProduct?.Product_Id.split(','),
-      "productName": selectedProduct?.Product_Name.split(','),
-      "productCategory": selectedProduct?.Category_Id,
-      "productPrice": String(selectedProduct?.Product_Price).split(',')
+      "product_id": selectedProduct?.Product_Id.split(','),
+      "product_name": selectedProduct?.Product_Name.split(','),
+      "product_category": categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name,
+      "product_price": String(selectedProduct?.Product_Price).split(',')
     }
-    auth.user_id && (dataLayer["customerId"] = auth.user_id);
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     // window.utag.view(dataLayer);
   }, []);
 

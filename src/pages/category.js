@@ -25,15 +25,15 @@ export default function Category() {
 
   useEffect(() => {
     var dataLayer = {
-      "pageName" : "category-"+slug,
-      "pageType" : "Category",
-      "pageSection": slug,
-      "loginStatus": auth.loggedIn_status,
+      "page_name" : "category-"+slug,
+      "page_type" : "Category",
+      "page_section": slug,
+      "login_status": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "productCategory": slug
+      "product_category": slug
     }
-    auth.user_id && (dataLayer["customerId"] = auth.user_id);
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     // window.utag.view(dataLayer);
   }, [slug]);
 

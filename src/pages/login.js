@@ -34,7 +34,7 @@ export default function Login() {
       .then((data) => { 
         submitRef.current.disabled = false;
         if(data.status === 300) {
-          setError('Account not exist, please check');
+          setError('Account does not exist');
         } else {
           setCookie('user', JSON.stringify({ ...payload, loggedIn_status: 'Logged-in' }))
           setAuth({
@@ -49,16 +49,16 @@ export default function Login() {
 
   useEffect(() => {
     var dataLayer = {
-      "pageName" : "login",
-      "pageType" : "Login",
-      "pageSection": "MyAccount",
-      "loginStatus": auth.loggedIn_status,
+      "page_name" : "login",
+      "page_type" : "Login",
+      "page_section": "MyAccount",
+      "login_status": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "loginMethod": "Email",
-      "loginTime": new Date().getTime()
+      "login_method": "Email",
+      "login_time": new Date().getTime()
     }
-    auth.user_id && (dataLayer["customerId"] = auth.user_id);
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     // window.utag.view(dataLayer);
   }, []);
 

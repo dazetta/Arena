@@ -17,9 +17,9 @@ export default function Checkout() {
   const url = CONFIG.BASE_URL + CONFIG.CREATE_ORDER;
 
   const handleCheckout = () => {
-    var orderId = new Date().getTime()
+    var order_id = new Date().getTime()
     const payload = {
-      order_id: orderId,
+      order_id: order_id,
       user_id: input.email,
       products: cartItems?.map(item => {
         return {
@@ -50,21 +50,21 @@ export default function Checkout() {
 
   useEffect(() => {
     var dataLayer = {
-      "pageName" : "checkout",
-      "pageType" : "Checkout",
-      "pageSection": "Checkout",
-      "loginStatus": auth.loggedIn_status,
+      "page_name" : "checkout",
+      "page_type" : "Checkout",
+      "page_section": "Checkout",
+      "login_status": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web",
-      "paymentMethod": "Credit Card"
+      "payment_method": "Credit Card"
     }
-    auth.user_id && (dataLayer["customerId"] = auth.user_id);
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     if(cartItems?.length > 0) {
-      dataLayer["productId"] = cartItems?.map(item => item.Product_Id);
-      dataLayer["productName"] = cartItems?.map(item => item.Product_Name);
-      dataLayer["productPrice"] = cartItems?.map(item => item.Product_Price);
-      dataLayer["totalItems"] = cartItems?.length;
-      dataLayer["totalQuantity"] = cartItems?.length;
+      dataLayer["product_id"] = cartItems?.map(item => item.Product_Id);
+      dataLayer["product_name"] = cartItems?.map(item => item.Product_Name);
+      dataLayer["product_price"] = cartItems?.map(item => item.Product_Price);
+      dataLayer["total_items"] = cartItems?.length;
+      dataLayer["total_quantity"] = cartItems?.length;
     }
     // window.utag.view(dataLayer);
   }, []);

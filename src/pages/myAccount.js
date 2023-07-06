@@ -8,14 +8,14 @@ export default function MyAccount() {
 
   useEffect(() => {
     var dataLayer = {
-      "pageName" : "myAccountDashboard",
-      "pageType" : "MyAccount",
-      "pageSection": "MyAccount",
-      "loginStatus": auth.loggedIn_status,
+      "page_name" : "myAccountDashboard",
+      "page_type" : "MyAccount",
+      "page_section": "MyAccount",
+      "login_status": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web"
     }
-    auth.user_id && (dataLayer["customerId"] = auth.user_id);
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     // window.utag.view(dataLayer);
   }, []);
 

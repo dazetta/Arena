@@ -23,7 +23,7 @@ function App() {
   const [auth, setAuth] = useState({
     user_name: '',
     user_id: '',
-    loggedIn_status: 'Non-Logged-In'
+    loggedIn_status: 'Logged-Out'
   });
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);

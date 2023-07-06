@@ -9,14 +9,14 @@ export default function Home() {
   const { auth } = useContext(AuthContext);
   useEffect(() => {
     var dataLayer = {
-      "pageName" : "home",
-      "pageType" : "Home",
-      "pageSection": "Home",
-      "loginStatus": auth.loggedIn_status,
+      "page_name" : "Arena Ecommerce",
+      "page_type" : "Home",
+      "page_section": "Home",
+      "login_status": auth.loggedIn_status,
       "currency": "usd",
       "channel": "web"
     }
-    auth.user_id && (dataLayer["customerId"] = auth.user_id);
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     // window.utag.view(dataLayer);
   }, []);
 

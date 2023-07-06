@@ -31,15 +31,15 @@ export default function MyOffers() {
     
     useEffect(() => {
         var dataLayer = {
-            "pageName" : "myOffers",
-            "pageType" : "MyOffers",
-            "pageSection": "MyAccount",
-            "loginStatus": auth.loggedIn_status,
+            "page_name" : "myOffers",
+            "page_type" : "MyOffers",
+            "page_section": "MyAccount",
+            "login_status": auth.loggedIn_status,
             "currency": "usd",
             "channel": "web",
-            "offerCode": offers.map(offer => offer.offer_code)
+            "offer_code": offers.map(offer => offer.offer_code)
         }
-        auth.user_id && (dataLayer["customerId"] = auth.user_id);
+        auth.user_id && (dataLayer["customer_id"] = auth.user_id);
         // window.utag.view(dataLayer);
     }, [offers]);
 
