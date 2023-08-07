@@ -18,6 +18,8 @@ import localProducts from './data/products';
 import { getCookie } from "./utils";
 import localCategories from './data/categories';
 import Loader from "./components/Loader";
+import Register from "./pages/register";
+import RegisterSuccess from "./pages/register-success";
 
 function App() {
   const [auth, setAuth] = useState({
@@ -82,6 +84,8 @@ function App() {
             <Routes>
               <Route path="" element={<Home />} />
               <Route path="login" element={<Login />} />
+              <Route path="/auth/register" element={<Register />} />
+              <Route path="/register-successful" element={<RegisterSuccess />} />
               <Route path="product">
                 <Route path=":slug" element={<Product />} />
               </Route>
