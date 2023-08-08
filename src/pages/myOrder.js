@@ -10,6 +10,7 @@ export default function MyOrders() {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
   const { products } = useContext(AppDataContext);
+  const [loader, setLoader] = useState(true);
 
   const [orders, setOrders] = useState([]);
 
@@ -22,7 +23,10 @@ export default function MyOrders() {
   const fetchOrders = () => {
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setOrders(data));
+      .then((data) => {
+        setOrders(data);
+        setLoader(false);
+      });
   };
 
   const getProduct = (id) => {
@@ -58,7 +62,7 @@ export default function MyOrders() {
       </div>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="grid grid-cols-1 gap-4 py-10">
-          {orders?.length > 0 ? (orders?.map((order, index) => {
+          { loader ? <Loader /> : <> {orders?.length > 0 ? (orders?.map((order, index) => {
             return <div className="border p-5">
               <div className="flex justify-between">
                 <p className="text-lg text-left font-bold text-gray-900">
@@ -99,8 +103,8 @@ export default function MyOrders() {
                 </div>
               }) }
             </div>
-          })) : <Loader />}
-
+          })) : <h1 class="text-3xl text-gray-900 font-bold text-center">Oops! You don't have any Orders</h1>}
+          </> }
         </div>
       </div>
     </div>

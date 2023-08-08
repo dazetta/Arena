@@ -95,7 +95,7 @@ export default function Checkout() {
               <input
                 className="border border-gray-400 mt-2 w-full p-2"
                 name="name"
-                {...(auth.user_id && { value:"***", disabled: true })}
+                {...(auth.user_id && { value:auth.user_name, disabled: true })}
                 onChange={inputHandler}
               />
             </div>

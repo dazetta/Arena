@@ -1,6 +1,6 @@
 export const CONFIG = {
   BASE_URL:
-    "https://script.google.com/macros/s/AKfycbzSmUvk--VLE6d5os_torYcgilQ7d7x_R0b3mYrtdbNLa9F-4bqiV4FT02W597VVK8a/exec",
+    "https://script.google.com/macros/s/AKfycbxk3rtya95W_esOYbs2GElkdWCaJ4rXmaxvKmPFG4dUd5dyWSwOW3pMfWXtUgTkSKtM/exec",
   GET_PRODUCTS: "?action=get&type=products",
   GET_CATEGORIES: "?action=get&type=categories",
   CREATE_ORDER: "?action=post&type=order",

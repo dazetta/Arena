@@ -47,7 +47,7 @@ export default function MyAccount() {
             </div>
             <div className="w-full">
               <p className="text-lg text-left font-bold text-gray-900">
-                Welcome User!
+                Welcome {auth?.user_name}!
               </p>
 
               <div className="flex items-center justify-between">

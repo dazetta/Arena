@@ -21,17 +21,13 @@ export default function Login() {
     submitRef.current.disabled = true;
     setError('');
     const url = CONFIG.BASE_URL + CONFIG.VALIDATE_USER + "&email=" + email + "&password=" + password;
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("cache-control", "no-cache");
     var requestOptions = {
       method: 'GET',
-      headers: myHeaders,
       redirect: 'follow'
     };
-    fetch(url)
+    fetch(url, requestOptions)
       .then((res) => res.json())
-      .then((data) => { 
+      .then((data) => {
         submitRef.current.disabled = false;
         if(data.status === 300) {
           setError('Account does not exist');
@@ -39,7 +35,7 @@ export default function Login() {
           setCookie('user', JSON.stringify({ ...payload, loggedIn_status: 'Logged-in' }))
           setAuth({
             ...payload,
-            user_name: "",
+            user_name: data.user_data.user_name,
             loggedIn_status: 'Logged-in'
           })
           navigate("/my-account");
