@@ -102,7 +102,7 @@ export default function MyOrders() {
                 </div>
               }) }
             </div>
-          })) : <h1 class="text-3xl text-gray-900 font-bold text-center">Oops! You don't have any Orders</h1>}
+          })) : <h1 className="text-3xl text-gray-900 font-bold text-center">Oops! You don't have any Orders</h1>}
           </> }
         </div>
       </div>

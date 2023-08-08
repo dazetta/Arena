@@ -70,7 +70,7 @@ export default function MyOffers() {
                         </div>
                     </div>
                 </div>
-                })) : <h1 class="text-3xl text-gray-900 font-bold text-center">Oops! You don't have any offers</h1> }
+                })) : <h1 className="text-3xl text-gray-900 font-bold text-center">Oops! You don't have any offers</h1> }
             </>}
         </div>
         </div>

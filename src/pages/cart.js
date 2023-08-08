@@ -74,7 +74,7 @@ export default function Cart() {
                     </h4>
                   </div>
                   <div className="mt-2 text-left">
-                    <button class="inline-block mt-6 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm" onClick={() => removeCartItem(cartItem.Product_Id)}>Remove</button>
+                    <button className="inline-block mt-6 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm" onClick={() => removeCartItem(cartItem.Product_Id)}>Remove</button>
                   </div>
                 </div>
               </div>;
