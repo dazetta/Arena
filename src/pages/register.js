@@ -1,12 +1,27 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CONFIG } from "../config";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Register() {
     const navigate = useNavigate();
     const [error, setError] = useState(false);
+    const { auth, setAuth } = useContext(AuthContext);
+
+    useEffect(() => {
+        var dataLayer = {
+          "page_name" : "register",
+          "page_type" : "Register",
+          "page_section": "Register",
+          "login_status": auth.loggedIn_status,
+          "currency": "usd",
+          "channel": "web",
+        }
+        auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+        // window.utag.view(dataLayer);
+    }, []);
 
     const validationSchema = () => {
         return Yup.object().shape({
