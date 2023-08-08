@@ -35,22 +35,6 @@ export default function Cart() {
     } 
   }, []);
 
-  useEffect(() => {
-    if(window.utag) {
-      window.utag.view({
-        "page_name" : "Shopping Cart",
-        "page_type" : "cart",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "product_id": cartItem.Product_Id,
-        "product_price": cartItem.Product_Price,
-        "product_name": cartItem.Product_Name,
-        "product_category_id": cartItem.Category_Id,
-        "tealium_event": "cart_view"
-      })
-    }
-  }, []);
-
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">
