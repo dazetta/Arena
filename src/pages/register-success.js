@@ -16,7 +16,6 @@ export default function RegisterSuccess() {
           "channel": "web",
         }
         auth.user_id && (dataLayer["customer_id"] = auth.user_id);
-        // window.utag.view(dataLayer);
     }, []);
 
     return <div class="flex items-center justify-center h-screen">

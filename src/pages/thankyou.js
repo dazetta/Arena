@@ -21,7 +21,6 @@ export default function Thankyou() {
       "product_price": order?.products.map(order => order.Product_Price)
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
-    // window.utag.view(dataLayer);
   }, []);
 
   return (

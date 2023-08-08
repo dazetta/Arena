@@ -34,7 +34,6 @@ export default function Category() {
       "product_category": slug
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
-    // window.utag.view(dataLayer);
   }, [slug]);
 
   return (

@@ -55,7 +55,6 @@ export default function Login() {
       "login_time": new Date().getTime()
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
-    // window.utag.view(dataLayer);
   }, []);
 
   return (
