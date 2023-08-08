@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/solid";
+import { AuthContext } from "../Context/AuthContext";
 
-import products from "../data/products";
+import { AppDataContext } from "../Context/AppDataContext";
 import { convertToSlug } from "../utils";
 
 export default function Product() {
   let { slug } = useParams();
   const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
+  const { products, categories } = useContext(AppDataContext);
 
   useEffect(() => {
     if(window.utag) {
@@ -29,9 +32,34 @@ export default function Product() {
   )?.[0];
 
   const handleAddToCart = () => {
-    localStorage.setItem('cart', JSON.stringify(selectedProduct))
+    let existingItem = JSON.parse(localStorage.getItem('cart'));
+    if(existingItem) {
+      existingItem.push(selectedProduct);
+      localStorage.setItem('cart', JSON.stringify(existingItem));
+    } else {
+      var cartItems = [];
+      cartItems.push(selectedProduct);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
     navigate('/cart')
   }
+
+  useEffect(() => {
+    console.log(categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name, '>>>')
+    var dataLayer = {
+      "page_name" : "pdp-" + selectedProduct?.Product_Name,
+      "page_type" : "ProductDetails",
+      "page_section": selectedProduct?.Product_Name,
+      "login_status": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web",
+      "product_id": selectedProduct?.Product_Id.split(','),
+      "product_name": selectedProduct?.Product_Name.split(','),
+      "product_category": categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name,
+      "product_price": String(selectedProduct?.Product_Price).split(',')
+    }
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+  }, []);
 
   return (
     <div className="bg-white">

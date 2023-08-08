@@ -1,9 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function MyAccount() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const { auth } = useContext(AuthContext);
+
+  useEffect(() => {
+    var dataLayer = {
+      "page_name" : "myAccountDashboard",
+      "page_type" : "MyAccount",
+      "page_section": "MyAccount",
+      "login_status": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web"
+    }
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+  }, []);
 
   useEffect(() => {
     if(window.utag) {
@@ -32,24 +45,25 @@ export default function MyAccount() {
             <h3 className="text-white font-semibold text-md">Links:</h3>
             <ul className="list list-disc pl-5">
               <li className="text-white cursor-pointer" onClick={() => navigate('/my-orders')}>My Orders</li>
+              <li className="text-white cursor-pointer" onClick={() => navigate('/my-offers')}>My Offers</li>
             </ul>
           </div>
           <div className="col-span-3 flex flex-col gap-4 border p-5">
             <div className="aspect-w-1 aspect-h-1 w-28 overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none">
               <img
-                src="https://i.pravatar.cc/100"
+                src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
                 alt={""}
                 className="h-full w-full object-cover rounded-full object-center lg:h-full lg:w-full"
               />
             </div>
             <div className="w-full">
               <p className="text-lg text-left font-bold text-gray-900">
-                Welcome User!
+                Welcome {auth?.user_name}!
               </p>
 
               <div className="flex items-center justify-between">
                 <p className="text-lg font-medium text-[#0351aa]">
-                  User Id: {userData?.user_id}
+                  User Id: {auth?.user_id}
                 </p>
               </div>
             </div>

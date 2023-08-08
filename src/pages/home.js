@@ -1,21 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Hero from "../components/hero";
 import Categories from "../components/category";
 import Promotion from "../components/promotion";
 import Products from "../components/products";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Home() {
+  const { auth } = useContext(AuthContext);
   useEffect(() => {
-    if(window.utag) {
-      window.utag.view({
-        "page_name" : "Arena Demo App",
-        "page_type" : "home",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "home_view"
-      })
+    var dataLayer = {
+      "page_name" : "Arena Ecommerce",
+      "page_type" : "Home",
+      "page_section": "Home",
+      "login_status": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web"
     }
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
+
   return (
     <div>
       <Hero />

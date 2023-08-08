@@ -1,41 +1,65 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
+=======
+import { useState, useEffect, useRef, useContext } from "react";
+>>>>>>> main
 import { useNavigate } from "react-router-dom";
 import { LockClosedIcon } from "@heroicons/react/20/solid";
+import { CONFIG } from "../config";
+import { AuthContext } from "../Context/AuthContext";
+import { setCookie } from "../utils";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [input, setInput] = useState({
-    email: "",
-    password: "",
-  });
+  const submitRef = useRef(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { auth, setAuth } = useContext(AuthContext);
+
+  const loginSubmitHandler = (e) => {
+    e.preventDefault();
+    const payload = {
+      user_id: email,
+    };
+    submitRef.current.disabled = true;
+    setError('');
+    const url = CONFIG.BASE_URL + CONFIG.VALIDATE_USER + "&email=" + email + "&password=" + password;
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    fetch(url, requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        submitRef.current.disabled = false;
+        if(data.status === 300) {
+          setError('Account does not exist');
+        } else {
+          setCookie('user', JSON.stringify({ ...payload, loggedIn_status: 'Logged-in' }))
+          setAuth({
+            ...payload,
+            user_name: data.user_data.user_name,
+            loggedIn_status: 'Logged-in'
+          })
+          navigate("/my-account");
+        }
+    });
+  };
 
   useEffect(() => {
-    if(window.utag) {
-      window.utag.view({
-        "page_name" : "Customer Login",
-        "page_type" : "login",
-        "site_region": "en_us",
-        "site_currency": "usd",
-        "tealium_event": "login_view"
-      })
+    var dataLayer = {
+      "page_name" : "login",
+      "page_type" : "Login",
+      "page_section": "MyAccount",
+      "login_status": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web",
+      "login_method": "Email",
+      "login_time": new Date().getTime()
     }
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
-
-  const inputHandler = (e) => {
-    const value = e.target.value;
-    const name = e.target.name;
-
-    setInput({ ...input, [name]: value });
-  };
-
-  const handleLogin = () => {
-    const payload = {
-      user_id: input.email,
-    };
-    localStorage.setItem("user", JSON.stringify(payload));
-
-    navigate("/my-account");
-  };
 
   return (
     <div className="py-20">
@@ -46,7 +70,7 @@ export default function Login() {
               DaZetta - Arena
             </div>
           </div>
-          <form className="mt-8 space-y-6">
+          <form className="mt-8 space-y-6" onSubmit={loginSubmitHandler}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
@@ -60,7 +84,9 @@ export default function Login() {
                   autoComplete={false}
                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Email address"
-                  onClick={inputHandler}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
               <div>
@@ -74,16 +100,18 @@ export default function Login() {
                   autoComplete="current-password"
                   className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Password"
-                  onClick={inputHandler}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
             </div>
-
+            {error && <p className="text-center text-sm text-[#971111] font-semibold">{error}</p>}
             <div>
               <button
                 type="submit"
+                ref={submitRef}
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#0351aa] py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                onClick={handleLogin}
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon
