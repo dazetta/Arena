@@ -8,6 +8,7 @@ import { AuthContext } from "../Context/AuthContext";
 export default function Register() {
     const navigate = useNavigate();
     const [error, setError] = useState(false);
+    const [errorText, setErrorText] = useState('');
     const { auth, setAuth } = useContext(AuthContext);
 
     useEffect(() => {
@@ -50,7 +51,7 @@ export default function Register() {
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
             {error && <div className="bg-red-100 border w-1/2 my-2 mx-auto border-red-400 text-center text-red-700 px-4 py-3 rounded relative" role="alert">
-                <span className="block sm:inline">Email already exist, please enter valid email</span>
+                <span className="block sm:inline">{errorText}</span>
             </div>}
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto">
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -82,8 +83,12 @@ export default function Register() {
                                     .then(result => {
                                         if (result.status == 200) {
                                             navigate('/register-successful');
+                                        } else if(result.status == 301) {
+                                            setError(true);
+                                            setErrorText(CONFIG.exceptionError);
                                         } else {
                                             setError(true);
+                                            setErrorText('Email already exist, please enter valid email');
                                         }
                                     })
                                     .catch(error => console.log('error', error));
