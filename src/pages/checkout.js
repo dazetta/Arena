@@ -74,6 +74,20 @@ export default function Checkout() {
     }
   }, []);
 
+  if(window.alloy){
+    window.alloy("sendEvent", {
+      "renderDecisions": true,
+      decisionScopes: ["__view__"],
+      "xdm": {
+        "web": {
+          "webPageDetails": {
+            "viewName": "checkout"
+          }
+        }
+      }
+    })
+  }
+
   return (
     <div className="bg-white pb-32">
       <div className="bg-[#0351aa] py-5">

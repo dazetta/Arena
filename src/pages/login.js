@@ -59,6 +59,27 @@ export default function Login() {
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
 
+  if(window.alloy){
+    window.alloy("sendEvent", {
+      "renderDecisions": true,
+      decisionScopes: ["__view__"],
+      "xdm": {
+        "web": {
+          "webPageDetails": {
+            "viewName": "login"
+          }
+        }
+      },
+      data: {
+        __adobe: {
+          target: {
+            "profile.username": "randomemail@gmail.com"
+          }
+        }
+      }
+    })
+  }
+
   return (
     <div className="py-20">
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

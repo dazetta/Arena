@@ -46,6 +46,20 @@ export default function Product() {
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
 
+  if(window.alloy){
+    window.alloy("sendEvent", {
+      "renderDecisions": true,
+      decisionScopes: ["__view__"],
+      "xdm": {
+        "web": {
+          "webPageDetails": {
+            "viewName": "product"
+          }
+        }
+      }
+    })
+  }
+
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">

@@ -23,6 +23,20 @@ export default function Register() {
         auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     }, []);
 
+    if(window.alloy){
+        window.alloy("sendEvent", {
+          "renderDecisions": true,
+          decisionScopes: ["__view__"],
+          "xdm": {
+            "web": {
+              "webPageDetails": {
+                "viewName": "register"
+              }
+            }
+          }
+        })
+    }
+
     const validationSchema = () => {
         return Yup.object().shape({
             fname: Yup.string().required('Name is required').min(3, 'Name must be at least 6 characters'),

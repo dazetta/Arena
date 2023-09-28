@@ -19,6 +19,21 @@ export default function Home() {
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
 
+  if(window.alloy) {
+    window.alloy("sendEvent", {
+      "renderDecisions": true,
+      decisionScopes: ["__view__"],
+      "xdm": {
+        "web": {
+          "webPageDetails": {
+            "viewName": "home",
+            "Param": "check"
+          }
+        }
+      }
+    })
+  }
+
   return (
     <div>
       <Hero />

@@ -18,6 +18,20 @@ export default function RegisterSuccess() {
         auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     }, []);
 
+    if(window.alloy){
+        window.alloy("sendEvent", {
+          "renderDecisions": true,
+          decisionScopes: ["__view__"],
+          "xdm": {
+            "web": {
+              "webPageDetails": {
+                "viewName": "register-success"
+              }
+            }
+          }
+        })
+    }
+
     return <div className="flex items-center justify-center h-screen">
         <div>
             <div className="flex flex-col items-center space-y-4">

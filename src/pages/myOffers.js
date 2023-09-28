@@ -42,6 +42,20 @@ export default function MyOffers() {
         auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     }, [offers]);
 
+    if(window.alloy){
+        window.alloy("sendEvent", {
+          "renderDecisions": true,
+          decisionScopes: ["__view__"],
+          "xdm": {
+            "web": {
+              "webPageDetails": {
+                "viewName": "myoffers"
+              }
+            }
+          }
+        })
+    }
+
     return <div className="bg-white">
         <div className="bg-[#0351aa] py-5">
         <div className="mx-auto text-center max-w-2xl px-4 flex justify-between items-center sm:px-6 lg:max-w-7xl lg:px-8">

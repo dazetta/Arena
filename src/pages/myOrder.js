@@ -50,6 +50,20 @@ export default function MyOrders() {
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, [orders]);
 
+  if(window.alloy){
+    window.alloy("sendEvent", {
+      "renderDecisions": true,
+      decisionScopes: ["__view__"],
+      "xdm": {
+        "web": {
+          "webPageDetails": {
+            "viewName": "myorder"
+          }
+        }
+      }
+    })
+  }
+
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">

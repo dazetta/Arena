@@ -36,6 +36,20 @@ export default function Category() {
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, [slug]);
 
+  if(window.alloy){
+    window.alloy("sendEvent", {
+      "renderDecisions": true,
+      decisionScopes: ["__view__"],
+      "xdm": {
+        "web": {
+          "webPageDetails": {
+            "viewName": "category"
+          }
+        }
+      }
+    })
+  }
+
   return (
     <div className="bg-white">
       <img
