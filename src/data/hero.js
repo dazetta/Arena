@@ -1,6 +1,6 @@
 const heroSection = {
   Background_Image:
-    "https://dazetta.co/wp-content/uploads/2023/05/hero-banner.jpg",
+    "https://i.postimg.cc/yddfKVmC/andrew-tanglao-3-I2vzcm-Ep-LU-unsplash.jpg",
   Hero_Heading: "DaZetta - Arena",
   Hero_Text:
     "Stride in Style: Elevate Your Run with Our Cutting-Edge Running Gear!",
