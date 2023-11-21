@@ -69,6 +69,7 @@ export default function Checkout() {
       dataLayer["product_id"] = cartItems?.map(item => item.Product_Id);
       dataLayer["product_name"] = cartItems?.map(item => item.Product_Name);
       dataLayer["product_price"] = cartItems?.map(item => item.Product_Price);
+      dataLayer["product_category"] = cartItems?.map(item => item.Category_Id);
       dataLayer["total_items"] = cartItems?.length;
       dataLayer["total_quantity"] = cartItems?.length;
     }
