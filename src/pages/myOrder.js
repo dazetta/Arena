@@ -48,6 +48,9 @@ export default function MyOrders() {
       "order_id": orders.map(order => order.Order_Id)
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+    if(window.utag) {
+      window.utag.view(dataLayer);
+    }
   }, [orders]);
 
   return (

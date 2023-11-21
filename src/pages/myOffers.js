@@ -40,6 +40,9 @@ export default function MyOffers() {
             "offer_code": offers.map(offer => offer.offer_code)
         }
         auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+        if(window.utag) {
+            window.utag.view(dataLayer);
+        }
     }, [offers]);
 
     return <div className="bg-white">
