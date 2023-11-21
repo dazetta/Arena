@@ -24,6 +24,8 @@ export default function Thankyou() {
       "product_category": order?.products.map(order => categories.filter((category) => order.Category_Id == order?.Category_Id)[0].Category_Name) 
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+    order?.user_email && (dataLayer["customer_id"] = order?.user_email);
+
     if(window.utag) {
       window.utag.view(dataLayer);
     }

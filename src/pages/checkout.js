@@ -32,6 +32,7 @@ export default function Checkout() {
     if(!auth.user_id) {
       payload.password = input.password;
       payload.user_name = input.name;
+      payload.user_email = input.email;
     }
 
     sessionStorage.setItem("order", JSON.stringify({ ...payload, products: cartItems }));
