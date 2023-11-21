@@ -4,7 +4,6 @@ import { AuthContext } from "../Context/AuthContext";
 export default function Thankyou() {
   const order = JSON.parse(sessionStorage.getItem("order"));
   const { auth } = useContext(AuthContext);
-
   useEffect(() => {
     var dataLayer = {
       "page_name" : "orderSuccess",

@@ -30,7 +30,6 @@ export default function Product() {
   }
 
   useEffect(() => {
-    console.log(categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name, '>>>')
     var dataLayer = {
       "page_name" : "pdp-" + selectedProduct?.Product_Name,
       "page_type" : "ProductDetails",
