@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
-import products from "../data/products";
-import categories from "../data/categories";
+import { AppDataContext } from "../Context/AppDataContext";
+import { AuthContext } from "../Context/AuthContext";
 import { convertToSlug } from "../utils";
 
 export default function Category() {
   let { slug } = useParams();
   const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
+  const { products } = useContext(AppDataContext);
+  const { categories } = useContext(AppDataContext);
 
   const productNavigate = (name) => {
     return navigate(`/product/${convertToSlug(name)}`);
@@ -22,16 +24,16 @@ export default function Category() {
   );
 
   useEffect(() => {
-    var dataObj = {
-      "page_name" : selectedCategory.Category_Name,
-      "page_type" : "category",
-      "site_region": "en_us",
-      "site_currency": "usd",
-      "tealium_event": "category_view"
-    };
-    if(window.utag) {
-      window.utag.view(dataObj)
+    var dataLayer = {
+      "page_name" : "category-"+slug,
+      "page_type" : "Category",
+      "page_section": slug,
+      "login_status": auth.loggedIn_status,
+      "currency": "usd",
+      "channel": "web",
+      "product_category": slug
     }
+    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, [slug]);
 
   return (
