@@ -26,7 +26,7 @@ export default function Thankyou() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     order?.user_email && (dataLayer["customer_id"] = order?.user_email);
-
+    // this is just a test comment
     if(window.utag) {
       window.utag.view(dataLayer);
     }
