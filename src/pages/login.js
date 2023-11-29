@@ -68,7 +68,7 @@ export default function Login() {
         <div className="w-full max-w-md space-y-8">
           <div>
             <div className="font-bold text-center text-[#0351aa] text-2xl cursor-pointer">
-              DaZetta - Arena
+              Dexata - Arena
             </div>
           </div>
           <form className="mt-8 space-y-6" onSubmit={loginSubmitHandler}>
