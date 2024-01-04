@@ -4,8 +4,8 @@ export default function Hero() {
   return (
     <div>
       <main>
-        <div className="relative px-6 lg:px-8">
-          <img src={heroSection.Background_Image} className="absolute left-0 top-0 z-[-1] w-full h-full object-cover"/>
+        <div className="relative px-6 lg:px-8 hero-section">
+          <img src={heroSection.Background_Image} className="absolute left-0 top-0 z-[-1] w-full h-full object-cover" />
           <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
             <h1 className="text-4xl font-bold tracking-tight text-[#0351aa] sm:text-center sm:text-6xl">
               {heroSection?.Hero_Heading}
