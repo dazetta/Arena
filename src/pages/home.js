@@ -4,7 +4,7 @@ import Categories from "../components/category";
 import Promotion from "../components/promotion";
 import Products from "../components/products";
 import { AuthContext } from "../Context/AuthContext";
-
+/*
 export default function Home() {
   const { auth } = useContext(AuthContext);
   useEffect(() => {
@@ -18,7 +18,28 @@ export default function Home() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
+*/
+export default function Home() {
+  const { auth } = useContext(AuthContext);
+  useEffect(() => {
+    window.adobeDataLayer.push({
+      "event": "landed",
+      "eventInfo": {
+          "eventName": "landed"
+      },
+      "custData": {
+          "loginStatus": "guest"
+      },
+      "page": {
+          "pageName": "Home",
+          "pageType": "Home" 
+      }
+  });
+  }, []);
 
+
+
+/*
   if(window.alloy) {
     window.alloy("sendEvent", {
       "renderDecisions": true,
@@ -34,7 +55,7 @@ export default function Home() {
     })
   }
 
-  
+  */
   return (
     <div>
       <Hero />
