@@ -28,7 +28,7 @@ export default function Product() {
     }
     navigate('/cart')
   }
-
+/*
   useEffect(() => {
     console.log(categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name, '>>>')
     var dataLayer = {
@@ -45,7 +45,36 @@ export default function Product() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
+*/
 
+useEffect(() => {
+  console.log(categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name, '>>>')
+  window.adobeDataLayer.push({
+    "event": "landed",
+    "eventInfo": {
+        "eventName": "landed"
+    },
+    "custData": {
+        "custId": auth.user_id,
+        "loginStatus": auth.loggedIn_status
+    },
+    "page": {
+        "pageName": "pdp-" + selectedProduct?.Product_Name,
+        "pageType": "ProductDetails",
+        "pincodeStatus": "<deliverable/not deliverable>",
+        "viewName": "product"
+    },
+    "product": [
+        {
+            "productName": selectedProduct?.Product_Name.split(','),
+            "productCategory": categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name,
+            "productId": selectedProduct?.Product_Id.split(','),
+            "productPrice": String(selectedProduct?.Product_Price).split(',')
+        }
+    ]
+});
+  }, []);
+/*
   if(window.alloy){
     window.alloy("sendEvent", {
       "renderDecisions": true,
@@ -59,7 +88,7 @@ export default function Product() {
       }
     })
   }
-
+*/
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">

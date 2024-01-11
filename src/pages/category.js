@@ -22,7 +22,7 @@ export default function Category() {
   const categoryProducts = products.filter(
     (e) => e.Category_Id === selectedCategory?.Category_Id
   );
-
+/*
   useEffect(() => {
     var dataLayer = {
       "page_name" : "category-"+slug,
@@ -35,7 +35,29 @@ export default function Category() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, [slug]);
+*/
+    useEffect(() => {
+      window.adobeDataLayer.push({
+        "event": "landed",
+        "eventInfo": {
+            "eventName": "landed"
+        },
+        "custData": {
+          "login_status": auth.loggedIn_status
+        },
+        "page": {
+            "pageName": "category-"+slug,
+            "pageType": "Category", 
+            "page_section": slug,
+            "currency": "usd",
+            "channel": "web",
+            "product_category": slug,
+            "viewName": "category"
+        }
+    });
+    }, []);
 
+  /*
   if(window.alloy){
     window.alloy("sendEvent", {
       "renderDecisions": true,
@@ -49,7 +71,7 @@ export default function Category() {
       }
     })
   }
-
+*/
   return (
     <div className="bg-white">
       <img

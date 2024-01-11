@@ -44,7 +44,7 @@ export default function Login() {
         }
     });
   };
-
+/*
   useEffect(() => {
     var dataLayer = {
       "page_name" : "login",
@@ -58,7 +58,28 @@ export default function Login() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
+*/
 
+useEffect(() => {
+window.adobeDataLayer.push({
+  "event": "landed",
+  "eventInfo": {
+      "eventName": "landed"
+  },
+  "custData": {
+      "custId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "login_time": new Date().getTime()
+  },
+  "page": {
+      "pageName": "login",
+      "pageType": "Login",
+      "viewName": "login"
+  }
+});
+}, []);
+
+  /*
   if(window.alloy){
     window.alloy("sendEvent", {
       "renderDecisions": true,
@@ -79,7 +100,7 @@ export default function Login() {
       }
     })
   }
-
+*/
   return (
     <div className="py-20">
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

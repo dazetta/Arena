@@ -53,7 +53,7 @@ export default function Checkout() {
 
     setInput({ ...input, [name]: value });
   };
-
+/*
   useEffect(() => {
     var dataLayer = {
       "page_name" : "checkout",
@@ -73,7 +73,40 @@ export default function Checkout() {
       dataLayer["total_quantity"] = cartItems?.length;
     }
   }, []);
+*/
 
+
+useEffect(() => {
+  window.adobeDataLayer.push({
+    "event": "landed",
+    "eventInfo": {
+        "eventName": "landed"
+    },
+    "custData": {
+      "custId": auth.user_id,
+      "loginStatus": auth.loggedIn_status
+    },
+    "page": {
+        "pageName": "checkout",
+        "pageType": "Checkout",
+        "viewName": "checkout"
+    },
+    "product": [
+        {
+            "productName": cartItems?.map(item => item.Product_Name),
+            "productId": cartItems?.map(item => item.Product_Id),
+            "productPrice": cartItems?.map(item => item.Product_Price),
+            "totalItems": cartItems?.length
+        }
+    ],
+    "orderSummary": {
+        "totalProductPrice": cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0),
+        "totalOrderPrice": cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0)
+    }
+  });
+  }, []);
+
+  /*
   if(window.alloy){
     window.alloy("sendEvent", {
       "renderDecisions": true,
@@ -87,7 +120,7 @@ export default function Checkout() {
       }
     })
   }
-
+*/
   return (
     <div className="bg-white pb-32">
       <div className="bg-[#0351aa] py-5">

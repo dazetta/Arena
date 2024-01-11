@@ -10,7 +10,7 @@ export default function Register() {
     const [error, setError] = useState(false);
     const [errorText, setErrorText] = useState('');
     const { auth, setAuth } = useContext(AuthContext);
-
+/*
     useEffect(() => {
         var dataLayer = {
           "page_name" : "register",
@@ -22,7 +22,26 @@ export default function Register() {
         }
         auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     }, []);
+*/
+useEffect(() => {
+    window.adobeDataLayer.push({
+      "event": "landed",
+      "eventInfo": {
+          "eventName": "landed"
+      },
+      "custData": {
+          "custId": auth.user_id,
+          "loginStatus":auth.loggedIn_status
+      },
+      "page": {
+          "pageName": "register",
+          "pageType": "Register",
+          "viewName": "register"
+      }
+    });
+    }, []);  
 
+    /*
     if(window.alloy){
         window.alloy("sendEvent", {
           "renderDecisions": true,
@@ -36,7 +55,7 @@ export default function Register() {
           }
         })
     }
-
+*/
     const validationSchema = () => {
         return Yup.object().shape({
             fname: Yup.string().required('Name is required').min(3, 'Name must be at least 6 characters'),

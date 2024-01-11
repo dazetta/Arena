@@ -4,7 +4,7 @@ import { AuthContext } from "../Context/AuthContext";
 export default function Thankyou() {
   const order = JSON.parse(sessionStorage.getItem("order"));
   const { auth } = useContext(AuthContext);
-
+/*
   useEffect(() => {
     var dataLayer = {
       "page_name" : "orderSuccess",
@@ -22,7 +22,34 @@ export default function Thankyou() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
-  
+*/
+useEffect(() => {
+  window.adobeDataLayer.push({
+    "event": "landed",
+    "eventInfo": {
+        "eventName": "landed"
+    },
+    "custData": {
+        "custId": auth.user_id,
+        "loginStatus":auth.loggedIn_status
+    },
+    "product": [
+      {
+          "productName": order?.products.map(order => order.Product_Name),
+          "productId": order?.products.map(order => order.Product_Id),
+          "productPrice": order?.products.map(order => order.Product_Price),
+          "totalItems": order?.products.length
+      }
+  ],
+    "page": {
+        "pageName": "orderSuccess",
+        "pageType": "OrderSuccess",
+        "viewName": "thankyou"
+    }
+  });
+  }, []);
+
+/*  
   if(window.alloy){
     window.alloy("sendEvent", {
       "renderDecisions": true,
@@ -36,7 +63,7 @@ export default function Thankyou() {
       }
     })
   }
-
+*/
   return (
     <div className="bg-white py-20">
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">

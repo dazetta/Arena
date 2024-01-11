@@ -5,7 +5,7 @@ import { AuthContext } from "../Context/AuthContext";
 export default function MyAccount() {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
-
+/*
   useEffect(() => {
     var dataLayer = {
       "page_name" : "myAccountDashboard",
@@ -17,7 +17,24 @@ export default function MyAccount() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, []);
-
+*/
+useEffect(() => {
+window.adobeDataLayer.push({
+  "event": "landed",
+  "eventInfo": {
+      "eventName": "landed"
+  },
+  "custData": {
+      "custId": auth.user_id,
+      "loginStatus":auth.loggedIn_status
+  },
+  "page": {
+      "pageName": "myAccountDashboard",
+      "pageType": "MyAccount"
+  }
+});
+}, []);
+  /*
   if(window.alloy){
     window.alloy("sendEvent", {
       "renderDecisions": true,
@@ -31,6 +48,7 @@ export default function MyAccount() {
       }
     })
   }
+  */
 
   return (
     <div className="bg-white">

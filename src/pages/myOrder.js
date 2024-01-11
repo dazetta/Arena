@@ -36,7 +36,7 @@ export default function MyOrders() {
   useState(() => {
     fetchOrders();
   }, []);
-
+/*
   useEffect(() => {
     var dataLayer = {
       "page_name" : "myOrders",
@@ -49,7 +49,26 @@ export default function MyOrders() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
   }, [orders]);
-
+*/
+useEffect(() => {
+window.adobeDataLayer.push({
+  "event": "landed",
+  "eventInfo": {
+      "eventName": "landed"
+  },
+  "custData": {
+      "custId": auth.user_id,
+      "loginStatus": auth.loggedIn_status,
+      "order_id": orders.map(order => order.Order_Id)
+  },
+  "page": {
+      "pageName": "myOrders",
+      "pageType": "MyOrders",
+      "viewName": "myorder"
+  }
+});
+}, [orders]);
+/*  
   if(window.alloy){
     window.alloy("sendEvent", {
       "renderDecisions": true,
@@ -63,7 +82,7 @@ export default function MyOrders() {
       }
     })
   }
-
+*/
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">

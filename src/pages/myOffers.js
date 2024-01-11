@@ -28,7 +28,7 @@ export default function MyOffers() {
     useEffect(() => {
         fetchOrders();
     }, []);
-    
+    /*
     useEffect(() => {
         var dataLayer = {
             "page_name" : "myOffers",
@@ -41,7 +41,26 @@ export default function MyOffers() {
         }
         auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     }, [offers]);
-
+*/
+useEffect(() => {
+window.adobeDataLayer.push({
+    "event": "landed",
+    "eventInfo": {
+        "eventName": "landed"
+    },
+    "custData": {
+        "custId": auth.user_id,
+        "loginStatus": auth.loggedIn_status,
+        "offer_code": offers.map(offer => offer.offer_code)
+    },
+    "page": {
+        "pageName": "myOffers",
+        "pageType": "MyOffers",
+        "viewName": "myoffers"
+    }
+});
+}, [offers]);
+/*
     if(window.alloy){
         window.alloy("sendEvent", {
           "renderDecisions": true,
@@ -55,7 +74,7 @@ export default function MyOffers() {
           }
         })
     }
-
+*/
     return <div className="bg-white">
         <div className="bg-[#0351aa] py-5">
         <div className="mx-auto text-center max-w-2xl px-4 flex justify-between items-center sm:px-6 lg:max-w-7xl lg:px-8">

@@ -28,11 +28,15 @@ export default function Home() {
           "eventName": "landed"
       },
       "custData": {
-          "loginStatus": "guest"
+        "login_status": auth.loggedIn_status
       },
       "page": {
-          "pageName": "Home",
-          "pageType": "Home" 
+          "pageName": "Arena Ecommerce",
+          "pageType": "Home",
+          "page_section": "Home",
+          "currency": "usd",
+          "channel": "web",
+          "viewName": "home"
       }
   });
   }, []);
