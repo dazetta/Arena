@@ -45,6 +45,13 @@ useEffect(() => {
         "pageName": "orderSuccess",
         "pageType": "OrderSuccess",
         "viewName": "thankyou"
+    },
+    "productordered": {
+      "productName": order?.products.map(order => order.Product_Name)[0],
+      "orderedproductId": order?.products.map(order => order.Product_Id)[0],
+      "productPrice": order?.products.map(order => order.Product_Price)[0],
+      "custId": auth.user_id,
+      "totalItems": order?.products.length
     }
   });
   }, []);

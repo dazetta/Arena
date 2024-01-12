@@ -62,17 +62,20 @@ useEffect(() => {
         "pageName": "pdp-" + selectedProduct?.Product_Name,
         "pageType": "ProductDetails",
         "pincodeStatus": "<deliverable/not deliverable>",
-        "viewName": "product",
-        "entity.id": selectedProduct?.Product_Id
+        "viewName": "product"
     },
-    "product": [
-        {
+    "product":{
             "productName": selectedProduct?.Product_Name,
             "productCategory": categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name,
             "productId": selectedProduct?.Product_Id,
             "productPrice": String(selectedProduct?.Product_Price)
-        }
-    ]
+        },
+    "entity": {
+      "Name": selectedProduct?.Product_Name,
+      "Category": categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name,
+      "Id": selectedProduct?.Product_Id,
+      "Price": String(selectedProduct?.Product_Price)
+    }
 });
   }, []);
 /*
