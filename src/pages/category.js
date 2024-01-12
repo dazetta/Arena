@@ -55,7 +55,7 @@ export default function Category() {
             "viewName": "category"
         }
     });
-    }, []);
+    }, [slug]);
 
   /*
   if(window.alloy){
