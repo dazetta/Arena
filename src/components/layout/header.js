@@ -36,7 +36,7 @@ export default function Header() {
             className="font-bold text-[#0351aa] text-2xl cursor-pointer"
             onClick={() => navigate('/')}
           >
-            DaZetta - Arena
+            Dexata - Arena
           </span>
 
           <div className="hidden md:flex space-x-3 flex-1 lg:ml-8">
