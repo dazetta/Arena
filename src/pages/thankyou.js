@@ -38,6 +38,7 @@ useEffect(() => {
           "productName": order?.products.map(order => order.Product_Name),
           "productId": order?.products.map(order => order.Product_Id),
           "productPrice": order?.products.map(order => order.Product_Price),
+          "order_id": String(order?.order_id).split(','),
           "totalItems": order?.products.length
       }
   ],
@@ -51,6 +52,7 @@ useEffect(() => {
       "orderedproductId": order?.products.map(order => order.Product_Id)[0],
       "productPrice": order?.products.map(order => order.Product_Price)[0],
       "custId": auth.user_id,
+      "order_id": String(order?.order_id),
       "totalItems": order?.products.length
     }
   });
