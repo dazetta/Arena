@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
 import Category from "./pages/category";
 import Home from "./pages/home";
@@ -76,10 +76,14 @@ function App() {
 
   }, []);
 
+  // Swiching from BrowserRouter to HashRouter as GitHub pages doesn't support BrowserRouter.
+  // https://stackoverflow.com/questions/71984401/react-router-not-working-with-github-pages
+  // https://reactrouter.com/en/main/router-components/hash-router
+
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       <AppDataContext.Provider value={{ products, categories }}>
-        { products.length > 0 ? <BrowserRouter>
+        { products.length > 0 ? <HashRouter>
           <Layout>
             <Routes>
               <Route path="" element={<Home />} />
@@ -101,7 +105,7 @@ function App() {
               <Route path="thank-you" element={<Thankyou />} />
             </Routes>
           </Layout>
-        </BrowserRouter> : <div className="flex justify-center align-center h-screen"><Loader/></div> }
+        </HashRouter> : <div className="flex justify-center align-center h-screen"><Loader/></div> }
       </AppDataContext.Provider>
     </AuthContext.Provider>
   );
