@@ -86,23 +86,23 @@ function App() {
         { products.length > 0 ? <HashRouter>
           <Layout>
             <Routes>
-              <Route path="" element={<Home />} />
-              <Route path="login" element={<Login />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/auth/register" element={<Register />} />
               <Route path="/register-successful" element={<RegisterSuccess />} />
-              <Route path="product">
+              <Route path="/product">
                 <Route path=":slug" element={<Product />} />
               </Route>
-              <Route path="category">
+              <Route path="/category">
                 <Route path=":slug" element={<Category />} />
               </Route>
-              <Route path="cart" element={<Cart />} />
-              <Route path="checkout" element={<Checkout />} />
-              <Route path="thank-you" element={<Thankyou />} />
-              <Route path="my-account" element={<MyAccount />} />
-              <Route path="my-orders" element={<MyOrders />} />
-              <Route path="my-offers" element={<MyOffers />} />
-              <Route path="thank-you" element={<Thankyou />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/thank-you" element={<Thankyou />} />
+              <Route path="/my-account" element={<MyAccount />} />
+              <Route path="/my-orders" element={<MyOrders />} />
+              <Route path="/my-offers" element={<MyOffers />} />
+              <Route path="/thank-you" element={<Thankyou />} />
             </Routes>
           </Layout>
         </HashRouter> : <div className="flex justify-center align-center h-screen"><Loader/></div> }

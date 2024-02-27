@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/solid";
+// import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/AuthContext";
 
 import { AppDataContext } from "../Context/AppDataContext";
@@ -70,9 +70,9 @@ export default function Product() {
               ${selectedProduct.Product_Price}
             </p>
             <div className="mt-4 flex gap-1">
-              {[1, 2, 3, 4, 5].map((e, i) => (
+              {/* {[1, 2, 3, 4, 5].map((e, i) => (
                 <StarIcon className="text-[#0351aa] w-5 h-5" />
-              ))}
+              ))} */}
             </div>
             <div className="mt-5">
               <h4 className="text-sm text-gray-900 font-bold">Size:</h4>
@@ -87,7 +87,7 @@ export default function Product() {
             <div className="mt-4">
               <button className="flex items-center gap-3 rounded-full bg-[#0351aa] px-10 py-2 text-white shadow-sm atc-btn" onClick={handleAddToCart}>
                 Add to Cart
-                <ShoppingCartIcon className="w-5 h-5" />
+                {/* <ShoppingCartIcon className="w-5 h-5" /> */}
               </button>
             </div>
           </div>

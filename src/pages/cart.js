@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { GiftIcon } from "@heroicons/react/24/solid";
+// import { GiftIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/AuthContext";
 
 export default function Cart() {
@@ -85,7 +85,7 @@ export default function Cart() {
               Order Now
             </h3>
             <div className="flex gap-2 mt-5">
-              <GiftIcon className="text-[#0351aa] w-6 h-6" />
+              {/* <GiftIcon className="text-[#0351aa] w-6 h-6" /> */}
               <p className="text-md text-gray-900 text-left">
                 Do you have a gift voucher or promotional code?
               </p>

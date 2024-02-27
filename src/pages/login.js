@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { LockClosedIcon } from "@heroicons/react/20/solid";
+// import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { CONFIG } from "../config";
 import { AuthContext } from "../Context/AuthContext";
 import { setCookie } from "../utils";
@@ -112,10 +112,10 @@ export default function Login() {
                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#0351aa] py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <LockClosedIcon
+                  {/* <LockClosedIcon
                     className="h-5 w-5 text-[#0351aa] group-hover:text-indigo-400"
                     aria-hidden="true"
-                  />
+                  /> */}
                 </span>
                 Sign in
               </button>
