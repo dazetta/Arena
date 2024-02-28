@@ -31,7 +31,7 @@ export default function Login() {
         submitRef.current.disabled = false;
         if(data.status === 300) {
           setError('Account does not exist');
-        } else if(data.status == 301) {
+        } else if(data.status === 301) {
           setError(CONFIG.exceptionError);
         } else {
           setCookie('user', JSON.stringify({ ...payload, loggedIn_status: 'Logged-in' }))

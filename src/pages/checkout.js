@@ -43,7 +43,8 @@ export default function Checkout() {
       mode: "no-cors",
       redirect: "follow",
     }).then((res) => {
-      localStorage.removeItem("cart")
+      localStorage.removeItem("cart");
+      window.dispatchEvent(new Event("onCartUpdate"));
       navigate("/thank-you")
     });
   };

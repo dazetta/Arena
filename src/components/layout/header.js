@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import navigation from "../../data/navigation";
 import { FaCartShopping } from "react-icons/fa6";
@@ -13,23 +13,37 @@ export default function Header() {
   const { auth, setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  
+  useEffect(() => {
+    const handleCartUpdate = () => {
+      localStorage.getItem('cart') && setCartItemsCount(JSON.parse(localStorage.getItem('cart')).length);
+    };
+    window.addEventListener('onCartUpdate', handleCartUpdate);
+    return () => {
+      window.removeEventListener('onCartUpdate', handleCartUpdate);
+    };
+  }, []);
 
   return (
     <>
-      <header className="bg-white sticky top-0 z-50">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between lg:justify-start p-6 lg:px-8">
+      <header className="bg-white sticky top-0 z-50 shadow">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between lg:justify-start px-4 py-2.5 font-montserrat">
           <div className="mr-8">
-            <Link to="/" className="w-28 block">
+            <Link to="/" className="w-24 block">
               <img src={logo} alt="logo" />
             </Link>
           </div>
           <div className="flex space-x-4 lg:hidden">
-            <FaCartShopping className="mt-0 text-primary h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
+            <div className="relative">
+              <FaCartShopping className="mt-0 text-primary h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
+              { (cartItemsCount !== 0) && <span className="w-5 h-5 rounded-full bg-secondary flex justify-center items-center text-[10px] font-semibold text-white absolute right-[-14px] bottom-[-10px]">{cartItemsCount}</span> }
+            </div>
             <RxHamburgerMenu className="w-6 h-6" onClick={() => {
               setOpenMenu(true);
             }} />
           </div>
-          <div className="hidden lg:flex lg:gap-x-12 font-montserrat">
+          <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item, index) => (
               <Link
                 key={index}
@@ -65,7 +79,10 @@ export default function Header() {
               </Link>
             </>
             }
-            <FaCartShopping className="mt-0 text-primary h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
+            <div className="relative">
+              <FaCartShopping className="mt-0 text-primary h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
+              { (cartItemsCount !== 0) && <span className="w-5 h-5 rounded-full bg-secondary flex justify-center items-center text-[10px] font-semibold text-white absolute right-[-14px] bottom-[-10px]">{cartItemsCount}</span> }
+            </div>
           </div>
         </nav>
         { openMenu && <div>

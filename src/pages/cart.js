@@ -13,7 +13,8 @@ export default function Cart() {
   const removeCartItem = (id) => {
     const newCartItems = cartItems.filter((item) => item.Product_Id !== id);
     localStorage.setItem('cart', JSON.stringify(newCartItems));
-    setCartItems(newCartItems)
+    window.dispatchEvent(new Event("onCartUpdate"));
+    setCartItems(newCartItems);
   }
 
   useEffect(() => {

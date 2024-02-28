@@ -17,11 +17,11 @@ export default function Products() {
         <h2 className="font-montserrat leading-normal text-center text-secondary text-4xl font-bold">Best Sellers</h2>
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 home-best-sellers">
           {products.map((product, index) => (
-            (product.Product_Label == 'best_seller') && <a class="w-full max-w-sm bg-white border border-gray-10 rounded-lg shadow font-montserrat relative" href="#" onClick={(e) => {
+            (product.Product_Label === 'Best Seller') && <a class="w-full max-w-sm bg-white border border-gray-10 rounded-lg shadow font-montserrat relative" href="#" onClick={(e) => {
               e.preventDefault();
               productNavigate(product.Product_Name);
             }}>
-              <span class="py-1.5 px-2 rounded-full bg-primary text-white font-semibold text-xs inline-block absolute top-2 right-2">Best Seller</span>
+              <span class="py-1.5 px-2 rounded-full bg-primary text-white font-semibold text-xs inline-block absolute top-2 right-2">{ product.Product_Label }</span>
               <div className="mb-4">
                 <img class="rounded-t-lg" src={product.Product_Thumbnail_Image} alt="product image" />
               </div>
