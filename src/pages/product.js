@@ -27,7 +27,6 @@ export default function Product() {
       cartItems.push(selectedProduct);
       localStorage.setItem('cart', JSON.stringify(cartItems));
     }
-    window.dispatchEvent(new Event("onCartUpdate"));
     navigate('/cart');
   }
 

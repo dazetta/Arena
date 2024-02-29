@@ -8,26 +8,17 @@ import { Link } from "react-router-dom";
 import { MdOutlineClose } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import logo from '../../assets/logo.png';
+import { AppDataContext } from "../../Context/AppDataContext";
 
 export default function Header() {
   const { auth, setAuth } = useContext(AuthContext);
+  const { cartItems } = useContext(AppDataContext);
   const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
-  const [cartItemsCount, setCartItemsCount] = useState(0);
-  
-  useEffect(() => {
-    const handleCartUpdate = () => {
-      localStorage.getItem('cart') && setCartItemsCount(JSON.parse(localStorage.getItem('cart')).length);
-    };
-    window.addEventListener('onCartUpdate', handleCartUpdate);
-    return () => {
-      window.removeEventListener('onCartUpdate', handleCartUpdate);
-    };
-  }, []);
 
   return (
     <>
-      <header className="bg-white sticky top-0 z-50 shadow">
+      <header className="bg-white sticky top-0 z-[999] shadow">
         <nav className="mx-auto flex max-w-7xl items-center justify-between lg:justify-start px-4 py-2.5 font-montserrat">
           <div className="mr-8">
             <Link to="/" className="w-24 block">
@@ -37,7 +28,7 @@ export default function Header() {
           <div className="flex space-x-4 lg:hidden">
             <div className="relative">
               <FaCartShopping className="mt-0 text-primary h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
-              { (cartItemsCount !== 0) && <span className="w-5 h-5 rounded-full bg-secondary flex justify-center items-center text-[10px] font-semibold text-white absolute right-[-14px] bottom-[-10px]">{cartItemsCount}</span> }
+              { (cartItems.length !== 0) && <span className="w-5 h-5 rounded-full bg-secondary flex justify-center items-center text-[10px] font-semibold text-white absolute right-[-14px] bottom-[-10px]">{cartItems.length}</span> }
             </div>
             <RxHamburgerMenu className="w-6 h-6" onClick={() => {
               setOpenMenu(true);
@@ -81,7 +72,7 @@ export default function Header() {
             }
             <div className="relative">
               <FaCartShopping className="mt-0 text-primary h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
-              { (cartItemsCount !== 0) && <span className="w-5 h-5 rounded-full bg-secondary flex justify-center items-center text-[10px] font-semibold text-white absolute right-[-14px] bottom-[-10px]">{cartItemsCount}</span> }
+              { (cartItems.length !== 0) && <span className="w-5 h-5 rounded-full bg-secondary flex justify-center items-center text-[10px] font-semibold text-white absolute right-[-14px] bottom-[-10px]">{cartItems.length}</span> }
             </div>
           </div>
         </nav>

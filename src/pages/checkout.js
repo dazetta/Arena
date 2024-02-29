@@ -2,10 +2,12 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CONFIG } from "../config";
 import { AuthContext } from "../Context/AuthContext";
+import { AppDataContext } from "../Context/AppDataContext";
 
 export default function Checkout() {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
+  const { setCartItems } = useContext(AppDataContext);
   const cartItems = JSON.parse(localStorage.getItem("cart"));
   const [input, setInput] = useState({
     name: "",
@@ -44,7 +46,7 @@ export default function Checkout() {
       redirect: "follow",
     }).then((res) => {
       localStorage.removeItem("cart");
-      window.dispatchEvent(new Event("onCartUpdate"));
+      setCartItems([]);
       navigate("/thank-you")
     });
   };

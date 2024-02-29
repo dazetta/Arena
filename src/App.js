@@ -28,6 +28,9 @@ function App() {
     loggedIn_status: 'Logged-Out'
   });
   const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    return JSON.parse(localStorage.getItem('cart')) || [];
+  });
   const [categories, setCategories] = useState([]);
   const [offers, setOffers] = useState([]);
 
@@ -82,7 +85,7 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
-      <AppDataContext.Provider value={{ products, categories }}>
+      <AppDataContext.Provider value={{ products, categories, cartItems, setCartItems }}>
         { products.length > 0 ? <HashRouter>
           <Layout>
             <Routes>

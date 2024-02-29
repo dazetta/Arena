@@ -2,18 +2,18 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 // import { GiftIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../Context/AuthContext";
+import { AppDataContext } from "../Context/AppDataContext";
 
 export default function Cart() {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")));
   const { auth } = useContext(AuthContext);
+  const { cartItems, setCartItems } = useContext(AppDataContext);
 
   const totalPrice = cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0);
 
   const removeCartItem = (id) => {
     const newCartItems = cartItems.filter((item) => item.Product_Id !== id);
     localStorage.setItem('cart', JSON.stringify(newCartItems));
-    window.dispatchEvent(new Event("onCartUpdate"));
     setCartItems(newCartItems);
   }
 
@@ -34,6 +34,9 @@ export default function Cart() {
       dataLayer["total_items"] = cartItems?.length;
       dataLayer["total_quantity"] = cartItems?.length;
     } 
+    setCartItems(() => {
+      return JSON.parse(localStorage.getItem("cart")) || [];
+    });
   }, []);
 
   return (
