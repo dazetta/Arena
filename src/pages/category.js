@@ -45,21 +45,21 @@ export default function Category() {
         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
       />
       <div className="mx-auto max-w-2xl pb-16 px-4 sm:pb-12 sm:px-6 lg:max-w-7xl lg:px-8 font-montserrat">
-        <h2 class="font-montserrat leading-normal text-center text-secondary text-4xl font-bold mb-2">{selectedCategory.Category_Name}</h2>
+        <h2 className="font-montserrat leading-normal text-center text-secondary text-4xl font-bold mb-2">{selectedCategory.Category_Name}</h2>
         <p className="text-center mb-8 max-w-2xl m-auto">{selectedCategory?.Category_Description}</p>
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {categoryProducts.map((product, index) => (
-            <a class="w-full max-w-sm bg-white border border-gray-10 rounded-lg shadow relative" href="#" onClick={(e) => {
+            <a className="w-full max-w-sm bg-white border border-gray-10 rounded-lg shadow relative" href="#" onClick={(e) => {
               e.preventDefault();
               productNavigate(product.Product_Name);
             }}>
-              { product.Product_Label && <span class="py-1.5 px-2 rounded-full bg-primary text-white font-semibold text-xs inline-block absolute top-2 right-2">{ product.Product_Label }</span> }
+              { product.Product_Label && <span className="py-1.5 px-2 rounded-full bg-primary text-white font-semibold text-xs inline-block absolute top-2 right-2">{ product.Product_Label }</span> }
               <div className="mb-4">
-                <img class="rounded-t-lg" src={product.Product_Thumbnail_Image} alt="product image" />
+                <img className="rounded-t-lg" src={product.Product_Thumbnail_Image} alt="product image" />
               </div>
-              <div class="px-3 pb-3 relative space-y-2">
-                <h5 class="text-lg font-semibold tracking-tight text-black min-h-[60px] block">{product.Product_Name}</h5>
-                <span class="text-xl font-semibold text-black block">${product.Product_Price}</span>
+              <div className="px-3 pb-3 relative space-y-2">
+                <h5 className="text-lg font-semibold tracking-tight text-black min-h-[60px] block">{product.Product_Name}</h5>
+                <span className="text-xl font-semibold text-black block">${product.Product_Price}</span>
                 <SecondaryButton className="text-sm">Buy Now</SecondaryButton>
               </div>
             </a>

@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-// import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { CONFIG } from "../config";
 import { AuthContext } from "../Context/AuthContext";
 import { setCookie } from "../utils";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import ErrorAlert from "../components/Alert/ErrorAlert";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,6 +15,23 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { auth, setAuth } = useContext(AuthContext);
+
+  const loginSchema = () => {
+    return Yup.object().shape({
+      email: Yup.string()
+        .required('Email is required')
+        .email('Enter a valid email'),
+      password: Yup.string()
+        .required('Password is required')
+    });
+  }
+
+  const initialValues = {
+    email: '',
+    password: '',
+  };
+
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
   const loginSubmitHandler = (e) => {
     e.preventDefault();
@@ -63,64 +83,88 @@ export default function Login() {
     <div className="py-20">
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
-          <div>
-            <div className="font-bold text-center text-[#0351aa] text-2xl cursor-pointer">
-              DaZetta - Arena
-            </div>
-          </div>
-          <form className="mt-8 space-y-6" onSubmit={loginSubmitHandler}>
-            <input type="hidden" name="remember" defaultValue="true" />
-            <div className="-space-y-px rounded-md shadow-sm">
-              <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete={false}
-                  className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="sr-only">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-            {error && <p className="text-center text-sm text-[#971111] font-semibold">{error}</p>}
-            <div>
-              <button
-                type="submit"
-                ref={submitRef}
-                className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#0351aa] py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  {/* <LockClosedIcon
-                    className="h-5 w-5 text-[#0351aa] group-hover:text-indigo-400"
-                    aria-hidden="true"
-                  /> */}
-                </span>
-                Sign in
-              </button>
-            </div>
-          </form>
+          <h2 className="font-montserrat leading-normal text-center text-secondary text-4xl font-bold mb-2">Log in to Your Account</h2>
+          { error && <ErrorAlert disappearTime="2000">{error}</ErrorAlert> }
+          <Formik
+            initialValues={initialValues}
+            validationSchema={loginSchema}
+            onSubmit={async (values, { setSubmitting } ) => {
+                await sleep(500);
+                const payload = {
+                  user_id: values.email,
+                };
+                setError('');
+                const url = CONFIG.BASE_URL + CONFIG.VALIDATE_USER + "&email=" + values.email + "&password=" + values.password;
+                var requestOptions = {
+                  method: 'GET',
+                  redirect: 'follow'
+                };
+                fetch(url, requestOptions)
+                  .then((res) => res.json())
+                  .then((data) => {
+                    if(data.status === 300) {
+                      setError('Account does not exist');
+                      setSubmitting(false);
+                    } else if(data.status === 301) {
+                      setError(CONFIG.exceptionError);
+                      setSubmitting(false);
+                    } else {
+                      setCookie('user', JSON.stringify({ ...payload, loggedIn_status: 'Logged-in' }))
+                      setAuth({
+                        ...payload,
+                        user_name: data.user_data.user_name,
+                        loggedIn_status: 'Logged-in'
+                      })
+                      setSubmitting(false);
+                      navigate("/my-account");
+                    }
+                });
+            }}
+          >
+            {({ errors, touched, isSubmitting  }) => (
+                <Form className="space-y-4 md:space-y-6">
+                    <div className="form-group">
+                        <Field
+                          name="email"
+                          type="email"
+                          className={
+                            'bg-gray-50 border border-gray-10 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:outline-none' + (errors.email && touched.email ? ' is-invalid' : '')
+                          }
+                          placeholder="Enter your email"
+                        />
+                        <ErrorMessage
+                          name="email"
+                          component="div"
+                          className="mt-1 text-sm text-error"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <Field
+                            name="password"
+                            type="password"
+                            className={
+                              'bg-gray-50 border border-gray-10 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:outline-none' + (errors.password && touched.password ? ' is-invalid' : '')
+                            }
+                            placeholder="Enter password"
+                        />
+                        <ErrorMessage
+                            name="password"
+                            component="div"
+                            className="mt-1 text-sm text-error"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <PrimaryButton type="submit" className="w-full" disabled={isSubmitting}>Create account</PrimaryButton>
+                    </div>
+                    <p className="text-sm font-light text-gray-500">
+                        Don't have a account? <a href="#" className="font-medium text-primary-600 hover:underline" onClick={(e) => {
+                          e.preventDefault();
+                          navigate('/auth/register')
+                        }} >Register</a>
+                    </p>
+                </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>

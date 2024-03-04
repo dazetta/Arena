@@ -63,7 +63,7 @@ export default function Product() {
             />
           </div>
           <div className="space-y-4">
-            <h1 class="text-xl font-bold tracking-tight text-secondary sm:text-4xl leading-normal">{selectedProduct.Product_Name}</h1>
+            <h1 className="text-xl font-bold tracking-tight text-secondary sm:text-4xl leading-normal">{selectedProduct.Product_Name}</h1>
             <p className="text-2xl font-medium text-gray-900">
               Price: ${selectedProduct.Product_Price}
             </p>
@@ -73,7 +73,7 @@ export default function Product() {
               ))} */}
             </div>
             <div className="">
-              <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Size:</label>
+              <label for="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Size:</label>
               <select className="bg-gray-50 border border-gray text-black text-sm rounded-lg block w-16 p-2.5">
                 <option>12</option>
                 <option>13</option>
@@ -81,7 +81,7 @@ export default function Product() {
                 <option>15</option>
               </select>
             </div>
-            <p class="text-black">{selectedProduct.Product_Description}</p>
+            <p className="text-black">{selectedProduct.Product_Description}</p>
             <PrimaryButton onClick={handleAddToCart}>Add to Cart</PrimaryButton>
           </div>
         </div>

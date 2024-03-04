@@ -34,7 +34,7 @@ export default function Header() {
               setOpenMenu(true);
             }} />
           </div>
-          <div className="hidden lg:flex lg:gap-x-12">
+          <div className="hidden lg:flex lg:gap-x-8">
             {navigation.map((item, index) => (
               <Link
                 key={index}
@@ -45,7 +45,7 @@ export default function Header() {
               </Link>
             ))}
           </div>
-          <div className="font-montserrat hidden lg:flex lg:flex-1 lg:justify-end space-x-4">
+          <div className="font-montserrat hidden lg:flex lg:flex-1 lg:justify-end gap-x-6">
             {auth.user_id ? <>
               <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/my-account">
                 Account
@@ -65,7 +65,7 @@ export default function Header() {
               <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/auth/register">
                 Register
               </Link>
-              <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/login">
+              <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/auth/login">
                 Login
               </Link>
             </>
@@ -122,7 +122,7 @@ export default function Header() {
                     <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/auth/register">
                       Register
                     </Link>
-                    <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/login">
+                    <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/auth/login">
                       Login
                     </Link>
                   </>

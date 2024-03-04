@@ -12,7 +12,7 @@ export default function Hero() {
             <h1 className="text-4xl font-bold tracking-tight text-secondary sm:text-6xl text-left">
               {heroSection?.Hero_Heading}
             </h1>
-            <p className="mt-6 text-lg leading-8 text-black text-left">
+            <p className="mt-6 text-lg leading-8 text-white text-left">
               {heroSection?.Hero_Text}
             </p>
             <div className="mt-8 flex gap-x-4 text-left">

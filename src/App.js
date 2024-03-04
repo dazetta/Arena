@@ -88,9 +88,10 @@ function App() {
       <AppDataContext.Provider value={{ products, categories, cartItems, setCartItems }}>
         { products.length > 0 ? <HashRouter>
           <Layout>
+            <div id="error-alert"></div>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/auth/login" element={<Login />} />
               <Route path="/auth/register" element={<Register />} />
               <Route path="/register-successful" element={<RegisterSuccess />} />
               <Route path="/product">
