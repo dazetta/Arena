@@ -45,31 +45,18 @@ function App() {
     }
 
     if(CONFIG.appDataFallback) {
-      // const productURL = CONFIG.BASE_URL + CONFIG.GET_PRODUCTS;
-      // const categoryURL = CONFIG.BASE_URL + CONFIG.GET_CATEGORIES;
-  
-      // fetch(productURL, {
-      //   method: "GET",
-      //   redirect: "follow",
-      // }).then(response => response.json()).then(data => {
-      //   setProducts(data);
-      // })
-  
-      // fetch(categoryURL, {
-      //   method: "GET",
-      //   redirect: "follow",
-      // }).then(response => response.json()).then(data => {
-      //   setCategories(data);
-      // })
-
-      const appDataURL = CONFIG.BASE_URL + CONFIG.GET_APP_DATA;
-      fetch(appDataURL, {
-        method: "GET",
-        redirect: "follow",
-      }).then(response => response.json()).then(data => {
-        setCategories(data.categories)
-        setProducts(data.products)
-      })
+      try {
+        const appDataURL = CONFIG.BASE_URL + CONFIG.GET_APP_DATA;
+        fetch(appDataURL, {
+          method: "GET",
+          redirect: "follow",
+        }).then(response => response.json()).then(data => {
+          setCategories(data.categories)
+          setProducts(data.products)
+        })
+      } catch(err) {
+        // console.log(err);
+      }
 
     } else {
       setProducts(localProducts);

@@ -49,7 +49,7 @@ export default function Category() {
         <p className="text-center mb-8 max-w-2xl m-auto">{selectedCategory?.Category_Description}</p>
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {categoryProducts.map((product, index) => (
-            <a className="w-full max-w-sm bg-white border border-gray-10 rounded-lg shadow relative" href="#" onClick={(e) => {
+            <a className="w-full max-w-sm bg-white border border-gray-10 rounded-lg shadow relative" key={index} href="#" onClick={(e) => {
               e.preventDefault();
               productNavigate(product.Product_Name);
             }}>

@@ -19,6 +19,11 @@ export default function Header() {
   return (
     <>
       <header className="bg-white sticky top-0 z-[999] shadow">
+        <div className="bg-primary">
+          <div className="mx-auto flex max-w-7xl p-2 text-white">
+            <p className="leading-normal text-center w-full">Get 25% Off sitewide on all product. Use Code: <span className="font-semibold">GET25OFF</span></p>
+          </div>
+        </div>
         <nav className="mx-auto flex max-w-7xl items-center justify-between lg:justify-start px-4 py-2.5 font-montserrat">
           <div className="mr-8">
             <Link to="/" className="w-24 block">
@@ -50,7 +55,8 @@ export default function Header() {
               <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/my-account">
                 Account
               </Link>
-              <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" onClick={() => {
+              <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/" onClick={(e) => {
+                e.preventDefault(); 
                 removeCookie('user');
                 setAuth({
                   user_name: '',
@@ -107,14 +113,15 @@ export default function Header() {
                     <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/my-account">
                       Account
                     </Link>
-                    <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" onClick={() => {
+                    <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/" onClick={(e) => {
+                      e.preventDefault();
                       removeCookie('user');
                       setAuth({
                         user_name: '',
                         user_id: '',
                         loggedIn_status: 'Logged-Out'
                       })
-                      navigate('/')
+                      navigate('/');
                     }}>
                       Logout
                     </Link>

@@ -43,23 +43,23 @@ export default function Cart() {
 
   return (
     <div className="mx-auto max-w-2xl pb-16 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8 font-montserrat">
-      <h2 class="font-montserrat leading-normal text-center text-secondary text-4xl font-bold mb-2">Checkout</h2>
+      <h2 className="font-montserrat leading-normal text-center text-secondary text-4xl font-bold mb-2">Checkout</h2>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         {cartItems?.length > 0 ? <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-2 xl:gap-x-8">
           <div className="border border-gray-10 rounded space-y-4 p-5">
             {cartItems.map((cartItem) => {
               return <div className="flex gap-4 p-5 border border-gray-10 rounded">
-                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src={cartItem.Product_Thumbnail_Image} alt="" />
-                <div class="flex flex-col p-4 items-start leading-normal text-left space-y-4">
-                  <h5 class="text-xl font-semibold tracking-tight text-black">{cartItem.Product_Name}</h5>
-                  <p class="text-black">Price: <span className="font-semibold">${cartItem.Product_Price}</span></p>
+                <img className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src={cartItem.Product_Thumbnail_Image} alt="" />
+                <div className="flex flex-col p-4 items-start leading-normal text-left space-y-4">
+                  <h5 className="text-xl font-semibold tracking-tight text-black">{cartItem.Product_Name}</h5>
+                  <p className="text-black">Price: <span className="font-semibold">${cartItem.Product_Price}</span></p>
                   <SecondaryButton onClick={() => removeCartItem(cartItem.Product_Id)}>Remove</SecondaryButton>
                 </div>
               </div>;
             })}
           </div>
           <div className="border border-gray-10 rounded p-5 space-y-4">
-            <h2 class="font-montserrat leading-normal text-secondary text-2xl font-semibold text-left">Order Now</h2>
+            <h2 className="font-montserrat leading-normal text-secondary text-2xl font-semibold text-left">Order Now</h2>
             <div className="flex gap-2 items-center">
               <FaGift />
               <p className="text-md text-black text-left">
