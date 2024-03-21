@@ -27,7 +27,7 @@ export default function Header() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between lg:justify-start px-4 py-2.5 font-montserrat">
           <div className="mr-8">
             <Link to="/" className="w-24 block">
-              <img src={logo} alt="logo" />
+              <img src="https://dexata.co/wp-content/uploads/2024/03/arena-ecommerce-logo.png" alt="logo" />
             </Link>
           </div>
           <div className="flex space-x-4 lg:hidden">
