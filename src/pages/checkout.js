@@ -2,10 +2,13 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CONFIG } from "../config";
 import { AuthContext } from "../Context/AuthContext";
+import { AppDataContext } from "../Context/AppDataContext";
+import PrimaryButton from "../components/Buttons/PrimaryButton";
 
 export default function Checkout() {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
+  const { setCartItems } = useContext(AppDataContext);
   const cartItems = JSON.parse(localStorage.getItem("cart"));
   const [input, setInput] = useState({
     name: "",
@@ -13,6 +16,36 @@ export default function Checkout() {
     card: "",
     cvv: "",
   });
+  const [disableCheckout, setDisableCheckout] = useState(true);
+
+  const validateInputFields = () => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    for (let key in input) {
+      if((key === 'email' && !emailPattern.test(input[key])) || input[key].length < 3) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  useEffect(() => {
+    if(auth.user_id) {
+      setInput({
+        name: auth.user_name,
+        email: auth.user_id,
+        card: "**** **** **** ****",
+        cvv: "***",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if(validateInputFields()) {
+      setDisableCheckout(false);
+    } else {
+      setDisableCheckout(true);
+    }
+  }, [input]);
   
   const url = CONFIG.BASE_URL + CONFIG.CREATE_ORDER;
 
@@ -43,7 +76,8 @@ export default function Checkout() {
       mode: "no-cors",
       redirect: "follow",
     }).then((res) => {
-      localStorage.removeItem("cart")
+      localStorage.removeItem("cart");
+      setCartItems([]);
       navigate("/thank-you")
     });
   };
@@ -74,93 +108,78 @@ export default function Checkout() {
       dataLayer["total_items"] = cartItems?.length;
       dataLayer["total_quantity"] = cartItems?.length;
     }
-    if(window.utag) {
-      window.utag.view(dataLayer);
-    }
   }, []);
 
   return (
-    <div className="bg-white pb-32">
-      <div className="bg-[#0351aa] py-5">
-        <div className="mx-auto text-center max-w-2xl px-4 flex justify-between items-center sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl text-center font-medium tracking-tight text-white">
-            Checkout
-          </h2>
-        </div>
-      </div>
+    <div className="mx-auto max-w-2xl pb-16 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8 font-montserrat">
+      <h2 className="font-montserrat leading-normal text-center text-secondary text-4xl font-bold mb-2">Checkout</h2>
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-4xl lg:px-8">
         <div className="grid grid-cols-2 gap-4 py-10">
-          <div className="border px-5 py-10">
-            <h3 className="text-xl text-gray-900 font-bold text-left">
+          <div className="border border-gray-10 rounded px-5 py-10">
+            <h3 className="text-xl text-secondary font-bold text-left">
               Your Details
             </h3>
             <div className="flex flex-col items-start mt-6">
-              <label className=" font-semibold">Your Name</label>
+              <label className="font-semibold mb-2">Your Name</label>
               <input
-                className="border border-gray-400 mt-2 w-full p-2"
+                className="bg-gray-50 border border-gray-10 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:outline-none"
                 name="name"
                 {...(auth.user_id && { value:auth.user_name, disabled: true })}
                 onChange={inputHandler}
+                placeholder="Enter your name"
               />
             </div>
             <div className="flex flex-col items-start mt-6">
-              <label className=" font-semibold">Your Email</label>
+              <label className="font-semibold mb-2">Your Email</label>
               <input
-                className="border border-gray-400 mt-2 w-full p-2"
+                className="bg-gray-50 border border-gray-10 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:outline-none"
                 name="email"
                 type="email"
                 {...(auth.user_id && { value:auth.user_id, disabled: true })}
                 onChange={inputHandler}
+                placeholder="Enter your email"
               />
             </div>
             {
               !auth.user_id && <div className="flex flex-col items-start mt-6">
-              <label className=" font-semibold">Your Password</label>
+              <label className="font-semibold mb-2">Your Password</label>
               <input
-                className="border border-gray-400 mt-2 w-full p-2"
+                className="bg-gray-50 border border-gray-10 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:outline-none"
                 name="password"
                 type="password"
                 onChange={inputHandler}
+                placeholder="Enter your password"
               />
             </div>
             }
           </div>
-          <div className="border px-5 py-10">
-            <h3 className="text-xl text-gray-900 font-bold text-left">
+          <div className="border border-gray-10 rounded px-5 py-10">
+            <h3 className="text-xl text-secondary font-bold text-left">
               Payment Details
             </h3>
-
             <div className="flex flex-col items-start mt-6">
-              <label className=" font-semibold">Card Number</label>
+              <label className="font-semibold mb-2">Card Number</label>
               <input
-                className="border border-gray-400 mt-2 w-full p-2"
+                className="bg-gray-50 border border-gray-10 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:outline-none"
                 name="card"
                 {...(auth.user_id && { value:'**** **** **** ****', disabled: true })}
                 onChange={inputHandler}
+                placeholder="Enter your card number"
               />
             </div>
             <div className="flex flex-col items-start mt-6">
-              <label className=" font-semibold">CVV</label>
+              <label className="font-semibold mb-2">CVV</label>
               <input
-                className="border border-gray-400 mt-2 w-full p-2"
+                className="bg-gray-50 border border-gray-10 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:outline-none"
                 name="cvv"
                 {...(auth.user_id && { value:'***', disabled: true })}
                 onChange={inputHandler}
+                placeholder="Enter your CVV"
               />
             </div>
           </div>
         </div>
-        <div>
-          <button
-            className={`inline-block mt-5 rounded-full bg-[#0351aa] px-10 py-2 text-white opac shadow-sm w-60 ${
-              input.email === "" ? "opacity-30" : ""
-            }`}
-            onClick={handleCheckout}
-            disabled={input.email === ""}
-          >
-            Checkout
-          </button>
-        </div>
+        <PrimaryButton className={`text-lg`} onClick={handleCheckout} disabled={disableCheckout}>Checkout</PrimaryButton>
       </div>
     </div>
   );
