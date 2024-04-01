@@ -39,6 +39,9 @@ export default function Cart() {
     setCartItems(() => {
       return JSON.parse(localStorage.getItem("cart")) || [];
     });
+    if(window.utag) {
+      window.utag.view(dataLayer);
+    }
   }, []);
 
   return (

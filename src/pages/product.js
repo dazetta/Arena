@@ -44,6 +44,9 @@ export default function Product() {
       "product_price": String(selectedProduct?.Product_Price).split(',')
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+    if(window.utag) {
+      window.utag.view(dataLayer);
+    }
   }, []);
 
   return (

@@ -26,6 +26,9 @@ export default function Thankyou() {
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     order?.user_email && (dataLayer["customer_id"] = order?.user_email);
+    if(window.utag) {
+      window.utag.view(dataLayer);
+    }
   }, []);
 
   return (

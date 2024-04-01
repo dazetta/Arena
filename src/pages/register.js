@@ -22,6 +22,9 @@ export default function Register() {
             "channel": "web",
         }
         auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+        if(window.utag) {
+            window.utag.view(dataLayer);
+          }
     }, []);
 
     const validationSchema = () => {
