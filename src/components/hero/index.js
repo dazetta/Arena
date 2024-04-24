@@ -1,5 +1,5 @@
 import heroSection from "../../data/hero";
-import PrimaryButton from "../Buttons/PrimaryButton";
+import PrimaryLink from "../Links/PrimaryLink";
 import heroImage from '../../assets/Arena-web-banner.png';
 
 export default function Hero() {
@@ -16,9 +16,7 @@ export default function Hero() {
               {heroSection?.Hero_Text}
             </p>
             <div className="mt-8 flex gap-x-4 text-left">
-              <PrimaryButton className="text-lg" onClick={() => {
-
-              }}>{heroSection?.Hero_Button_Text}</PrimaryButton>
+              <PrimaryLink className="text-lg" link="/category/shoes">{heroSection?.Hero_Button_Text}</PrimaryLink>
             </div>
           </div>
         </div>
