@@ -51,14 +51,12 @@ window.adobeDataLayer.push({
       "pageType": "Cart",
       "viewName": "cart"
   },
-  "product": [
-      {
+  "product":  {
           "productName": cartItems?.map(item => item.Product_Name),
           "productId": cartItems?.map(item => item.Product_Id),
           "productPrice": cartItems?.map(item => item.Product_Price),
           "totalItems": cartItems?.length
-      }
-  ],
+      },
   "orderSummary": {
       "totalProductPrice": cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0),
       "totalOrderPrice": cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0)
