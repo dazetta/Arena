@@ -18,7 +18,8 @@ export default function Thankyou() {
       "total_quantity": order?.products.length,
       "product_id": order?.products.map(order => order.Product_Id),
       "product_name": order?.products.map(order => order.Product_Name),
-      "product_price": order?.products.map(order => order.Product_Price)
+      "product_price": order?.products.map(order => order.Product_Price),
+      "at_property": "c43182c9-f2e4-b078-c499-14cc9f882923"
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
     if(window.utag) {
