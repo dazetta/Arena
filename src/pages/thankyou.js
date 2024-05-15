@@ -8,26 +8,40 @@ export default function Thankyou() {
   const { categories } = useContext(AppDataContext);
 
   useEffect(() => {
-    var dataLayer = {
-      "page_name" : "orderSuccess",
-      "page_type" : "OrderSuccess",
-      "page_section": "Order",
-      "login_status": auth.loggedIn_status,
-      "currency": "usd",
-      "channel": "web",
-      "order_id": String(order?.order_id).split(','),
-      "total_items": order?.products.length,
-      "total_quantity": order?.products.length,
-      "product_id": order?.products.map(order => order.Product_Id),
-      "product_name": order?.products.map(order => order.Product_Name),
-      "product_price": order?.products.map(order => order.Product_Price),
-      "product_quantity": order?.products.map(function(){return 1}),
-      "product_category": order?.products.map(order => categories.filter((category) => category.Category_Id == order?.Category_Id)[0].Category_Name) 
-    }
-    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
-    order?.user_email && (dataLayer["customer_id"] = order?.user_email);
-  }, []);
-
+    window.adobeDataLayer.push({
+      "event": "landed",
+      "eventInfo": {
+          "eventName": "landed"
+      },
+      "custData": {
+          "custId": auth.user_id,
+          "loginStatus":auth.loggedIn_status
+      },
+      "product": [
+        {
+            "productName": order?.products.map(order => order.Product_Name),
+            "productId": order?.products.map(order => order.Product_Id),
+            "productPrice": order?.products.map(order => order.Product_Price),
+            "order_id": String(order?.order_id).split(','),
+            "totalItems": order?.products.length
+        }
+    ],
+      "page": {
+          "pageName": "orderSuccess",
+          "pageType": "OrderSuccess",
+          "viewName": "thankyou"
+      },
+      "productordered": {
+        "productName": order?.products.map(order => order.Product_Name)[0],
+        "orderedproductId": order?.products.map(order => order.Product_Id)[0],
+        "productPrice": order?.products.map(order => order.Product_Price)[0],
+        "custId": auth.user_id,
+        "order_id": String(order?.order_id),
+        "totalItems": order?.products.length
+      }
+    });
+    }, []);
+  
   return (
     <div className="bg-white py-20">
       <div className="mx-auto text-center max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">

@@ -31,8 +31,6 @@ export default function Login() {
         submitRef.current.disabled = false;
         if(data.status === 300) {
           setError('Account does not exist');
-        } else if(data.status == 301) {
-          setError(CONFIG.exceptionError);
         } else {
           setCookie('user', JSON.stringify({ ...payload, loggedIn_status: 'Logged-in' }))
           setAuth({
@@ -57,6 +55,9 @@ export default function Login() {
       "login_time": new Date().getTime()
     }
     auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+    if(window.utag) {
+      window.utag.view(dataLayer);
+    }
   }, []);
 
   return (

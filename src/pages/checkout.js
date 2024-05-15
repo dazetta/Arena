@@ -32,7 +32,6 @@ export default function Checkout() {
     if(!auth.user_id) {
       payload.password = input.password;
       payload.user_name = input.name;
-      payload.user_email = input.email;
     }
 
     sessionStorage.setItem("order", JSON.stringify({ ...payload, products: cartItems }));
@@ -70,9 +69,11 @@ export default function Checkout() {
       dataLayer["product_id"] = cartItems?.map(item => item.Product_Id);
       dataLayer["product_name"] = cartItems?.map(item => item.Product_Name);
       dataLayer["product_price"] = cartItems?.map(item => item.Product_Price);
-      dataLayer["product_category"] = cartItems?.map(item => item.Category_Id);
       dataLayer["total_items"] = cartItems?.length;
       dataLayer["total_quantity"] = cartItems?.length;
+    }
+    if(window.utag) {
+      window.utag.view(dataLayer);
     }
   }, []);
 

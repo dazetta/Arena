@@ -8,15 +8,23 @@ import { AuthContext } from "../Context/AuthContext";
 export default function Home() {
   const { auth } = useContext(AuthContext);
   useEffect(() => {
-    var dataLayer = {
-      "page_name" : "Arena Ecommerce",
-      "page_type" : "Home",
-      "page_section": "Home",
-      "login_status": auth.loggedIn_status,
-      "currency": "usd",
-      "channel": "web"
-    }
-    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
+    window.adobeDataLayer.push({
+      "event": "landed",
+      "eventInfo": {
+          "eventName": "landed"
+      },
+      "custData": {
+        "login_status": auth.loggedIn_status
+      },
+      "page": {
+          "pageName": "Arena Ecommerce",
+          "pageType": "Home",
+          "page_section": "Home",
+          "currency": "usd",
+          "channel": "web",
+          "viewName": "home"
+      }
+  });
   }, []);
 
   return (

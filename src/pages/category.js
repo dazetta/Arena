@@ -24,17 +24,24 @@ export default function Category() {
   );
 
   useEffect(() => {
-    var dataLayer = {
-      "page_name" : "category-"+slug,
-      "page_type" : "Category",
-      "page_section": slug,
-      "login_status": auth.loggedIn_status,
-      "currency": "usd",
-      "channel": "web",
-      "product_category": slug
-    }
-    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
-  }, [slug]);
+    window.adobeDataLayer.push({
+      "event": "landed",
+      "eventInfo": {
+          "eventName": "landed"
+      },
+      "custData": {
+        "custId": auth.user_id,
+        "loginStatus": auth.loggedIn_status
+      },
+      "page": {
+          "pageName": "category-"+slug,
+          "pageType": "Category",
+          "viewName": "Category"
+      }
+    });
+    }, [slug]);
+    
+
 
   return (
     <div className="bg-white">

@@ -31,21 +31,36 @@ export default function Product() {
 
   useEffect(() => {
     console.log(categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name, '>>>')
-    var dataLayer = {
-      "page_name" : "pdp-" + selectedProduct?.Product_Name,
-      "page_type" : "ProductDetails",
-      "page_section": selectedProduct?.Product_Name,
-      "login_status": auth.loggedIn_status,
-      "currency": "usd",
-      "channel": "web",
-      "product_id": selectedProduct?.Product_Id.split(','),
-      "product_name": selectedProduct?.Product_Name.split(','),
-      "product_category": categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name,
-      "product_price": String(selectedProduct?.Product_Price).split(',')
-    }
-    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
-  }, []);
-
+    window.adobeDataLayer.push({
+      "event": "landed",
+      "eventInfo": {
+          "eventName": "landed"
+      },
+      "custData": {
+          "custId": auth.user_id,
+          "loginStatus": auth.loggedIn_status
+      },
+      "page": {
+          "pageName": "pdp-" + selectedProduct?.Product_Name,
+          "pageType": "ProductDetails",
+          "pincodeStatus": "<deliverable/not deliverable>",
+          "viewName": "product"
+      },
+      "product":{
+              "productName": selectedProduct?.Product_Name,
+              "productCategory": categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name,
+              "productId": selectedProduct?.Product_Id,
+              "productPrice": String(selectedProduct?.Product_Price)
+          },
+      "entity": {
+        "Name": selectedProduct?.Product_Name,
+        "Category": categories.filter((category) => category.Category_Id == selectedProduct?.Category_Id)[0].Category_Name,
+        "Id": selectedProduct?.Product_Id,
+        "Price": String(selectedProduct?.Product_Price)
+      }
+  });
+    }, []);
+  
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">

@@ -17,24 +17,33 @@ export default function Cart() {
   }
 
   useEffect(() => {
-    var dataLayer = {
-      "page_name" : "cart",
-      "page_type" : "Cart",
-      "page_section": "Checkout",
-      "login_status": auth.loggedIn_status,
-      "currency": "usd",
-      "channel": "web",
-    }
-    auth.user_id && (dataLayer["customer_id"] = auth.user_id);
-    if(cartItems?.length > 0) {
-      dataLayer["product_id"] = cartItems?.map(item => item.Product_Id);
-      dataLayer["product_name"] = cartItems?.map(item => item.Product_Name);
-      dataLayer["product_price"] = cartItems?.map(item => item.Product_Price);
-      dataLayer["total_items"] = cartItems?.length;
-      dataLayer["total_quantity"] = cartItems?.length;
-    } 
-  }, []);
-
+    window.adobeDataLayer.push({
+      "event": "landed",
+      "eventInfo": {
+          "eventName": "landed"
+      },
+      "custData": {
+        "custId": auth.user_id,
+        "loginStatus": auth.loggedIn_status
+      },
+      "page": {
+          "pageName": "cart",
+          "pageType": "Cart",
+          "viewName": "cart"
+      },
+      "product":  {
+              "productName": cartItems?.map(item => item.Product_Name),
+              "productId": cartItems?.map(item => item.Product_Id),
+              "productPrice": cartItems?.map(item => item.Product_Price),
+              "totalItems": cartItems?.length
+          },
+      "orderSummary": {
+          "totalProductPrice": cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0),
+          "totalOrderPrice": cartItems?.map((item) => item.Product_Price).reduce(function (a, b) {return a + b;}, 0)
+      }
+    });
+    }, []);
+    
   return (
     <div className="bg-white">
       <div className="bg-[#0351aa] py-5">
