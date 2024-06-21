@@ -1,6 +1,6 @@
 export const CONFIG = {
   BASE_URL:
-    "https://script.google.com/macros/s/AKfycbxk3rtya95W_esOYbs2GElkdWCaJ4rXmaxvKmPFG4dUd5dyWSwOW3pMfWXtUgTkSKtM/exec",
+    "https://script.google.com/macros/s/AKfycbxvLWqFmUIKZEo1B_Sz4liDL5s76QEUQZxcJfVigdoU44B00YVeNyA71i8aKkUregB7/exec",
   GET_PRODUCTS: "?action=get&type=products",
   GET_CATEGORIES: "?action=get&type=categories",
   CREATE_ORDER: "?action=post&type=order",
@@ -10,5 +10,6 @@ export const CONFIG = {
   VALIDATE_USER: "?action=get&type=validate_user",
   REGISTER_USER: "?action=post&type=register",
   appDataFallback: true,
-  offerDataFallback: true
+  offerDataFallback: true,
+  exceptionError: "Error, please try again later."
 };

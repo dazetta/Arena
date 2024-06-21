@@ -1,66 +1,62 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import navigation from "../../data/navigation";
-import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { FaCartShopping } from "react-icons/fa6";
 import { AuthContext } from "../../Context/AuthContext";
 import { removeCookie } from "../../utils";
+import { Link } from "react-router-dom";
+import { MdOutlineClose } from "react-icons/md";
+import { RxHamburgerMenu } from "react-icons/rx";
+import logo from '../../assets/logo.png';
+import { AppDataContext } from "../../Context/AppDataContext";
 
 export default function Header() {
   const { auth, setAuth } = useContext(AuthContext);
+  const { cartItems } = useContext(AppDataContext);
   const navigate = useNavigate();
+  const [openMenu, setOpenMenu] = useState(false);
+
   return (
-    <div className="bg-white shadow-sm sticky top-0 z-50 header">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 md:py-4">
-        <div className="flex items-center justify-between md:justify-start">
-          <button
-            type="button"
-            className="md:hidden w-10 h-10 rounded-lg -ml-2 flex justify-center items-center"
-          >
-            <svg
-              className="text-gray-500 w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-
-          <span
-            className="font-bold text-[#0351aa] text-2xl cursor-pointer"
-            onClick={() => navigate('/')}
-          >
-            Dexata - Arena
-          </span>
-
-          <div className="hidden md:flex space-x-3 flex-1 lg:ml-8">
+    <>
+      <header className="bg-white sticky top-0 z-[999] shadow">
+        <div className="bg-primary">
+          <div className="mx-auto flex max-w-7xl p-2 text-white">
+            <p className="leading-normal text-center w-full">Get 25% Off sitewide on all product. Use Code: <span className="font-semibold">GET25OFF</span></p>
+          </div>
+        </div>
+        <nav className="mx-auto flex max-w-7xl items-center justify-between lg:justify-start px-4 py-2.5 font-montserrat">
+          <div className="mr-8">
+            <Link to="/" className="w-24 block">
+              <img src="https://dexata.co/wp-content/uploads/2024/03/arena-ecommerce-logo.png" alt="logo" />
+            </Link>
+          </div>
+          <div className="flex space-x-4 lg:hidden">
+            <div className="relative">
+              <FaCartShopping className="mt-0 text-primary h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
+              { (cartItems.length !== 0) && <span className="w-5 h-5 rounded-full bg-secondary flex justify-center items-center text-[10px] font-semibold text-white absolute right-[-14px] bottom-[-10px]">{cartItems.length}</span> }
+            </div>
+            <RxHamburgerMenu className="w-6 h-6" onClick={() => {
+              setOpenMenu(true);
+            }} />
+          </div>
+          <div className="hidden lg:flex lg:gap-x-8">
             {navigation.map((item, index) => (
-              <a
+              <Link
                 key={index}
-                href={item.Nav_Link}
-                className="px-2 py-2 rounded-lg text-black hover:text-[#0351aa] menu-link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate(item.Nav_Link);
-                }}
+                to={item.Nav_Link}
+                className="text-md font-semibold leading-6 text-gray-900 hover:text-primary"
               >
                 {item.Nav_Text}
-              </a>
+              </Link>
             ))}
           </div>
-
-          <div className="flex items-center space-x-4">
+          <div className="font-montserrat hidden lg:flex lg:flex-1 lg:justify-end gap-x-6">
             {auth.user_id ? <>
-              <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => navigate('/my-account')}>
+              <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/my-account">
                 Account
-              </span>
-              <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => { 
+              </Link>
+              <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/" onClick={(e) => {
+                e.preventDefault(); 
                 removeCookie('user');
                 setAuth({
                   user_name: '',
@@ -70,20 +66,80 @@ export default function Header() {
                 navigate('/')
               }}>
                 Logout
-              </span>
+              </Link>
             </> : <>
-            <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => navigate('/auth/register')}>
-              Register
-            </span>
-            <span className="mt-4 text-center text-[#0351aa] font-semibold underline cursor-pointer" onClick={() => navigate('/login')}>
-              Login
-            </span>
+              <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/auth/register">
+                Register
+              </Link>
+              <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/auth/login">
+                Login
+              </Link>
             </>
             }
-            <ShoppingCartIcon className="mt-4 text-[#0351aa] h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
+            <div className="relative">
+              <FaCartShopping className="mt-0 text-primary h-6 w-6 cursor-pointer" onClick={() => navigate('/cart')} />
+              { (cartItems.length !== 0) && <span className="w-5 h-5 rounded-full bg-secondary flex justify-center items-center text-[10px] font-semibold text-white absolute right-[-14px] bottom-[-10px]">{cartItems.length}</span> }
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </nav>
+        { openMenu && <div>
+          <div className="fixed inset-0 z-10"></div>
+          <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div className="flex items-center justify-between">
+              <Link to="/" className="text-md font-bold leading-6 text-gray-900 text-secondary text-2xl">
+                Dexata - Arena
+              </Link>
+              <div className="flex">
+                <MdOutlineClose className="h-6 w-6" onClick={() => {
+                  setOpenMenu(false);
+                }} />
+              </div>
+            </div>
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray">
+                <div className="space-y-4 py-6 flex flex-col font-montserrat">
+                  {navigation.map((item, index) => (
+                    <Link
+                      key={index}
+                      to={item.Nav_Link}
+                      className="text-md font-semibold leading-6 text-gray-900 hover:text-primary"
+                    >
+                      {item.Nav_Text}
+                    </Link>
+                  ))}
+                </div>
+                <div className="font-montserrat space-y-4 flex flex-col py-6">
+                  {auth.user_id ? <>
+                    <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/my-account">
+                      Account
+                    </Link>
+                    <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/" onClick={(e) => {
+                      e.preventDefault();
+                      removeCookie('user');
+                      setAuth({
+                        user_name: '',
+                        user_id: '',
+                        loggedIn_status: 'Logged-Out'
+                      })
+                      navigate('/');
+                    }}>
+                      Logout
+                    </Link>
+                  </> : <>
+                    <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/auth/register">
+                      Register
+                    </Link>
+                    <Link className="text-md font-semibold leading-6 text-gray-900 hover:text-primary" to="/auth/login">
+                      Login
+                    </Link>
+                  </>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> }
+      </header>
+    </>
   );
 }
