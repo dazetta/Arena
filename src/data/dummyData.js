@@ -38,6 +38,27 @@ const searchData = {
             "productDesp": "Feel the rhythm of your workout with these premium headphones, delivering superior sound quality and ergonomic design. With advanced features and long-lasting comfort, they keep you in the zone for peak performance.",
             "productLink": "/product/arena-pulsewave-premium-sports-headphones"
         }
+    ],
+
+   "clothing": [
+        {
+            "productImageLink": "https://dexata.co/wp-content/uploads/2024/02/10.png",
+            "productTitle": "Arena AeroFlow Performance Tee",
+            "productDesp": "Elevate your run with the AeroFlow Performance Tee. Its lightweight, moisture-wicking fabric keeps you cool and dry. Mesh panels enhance breathability, while the athletic fit ensures freedom of movement.",
+            "productLink": "product/arena-aeroflow-performance-tee"
+        },
+        {
+            "productImageLink": "https://dexata.co/wp-content/uploads/2024/02/11.png",
+            "productTitle": "Arena SwiftVent Breathable Tee",
+            "productDesp": "Stay cool and comfortable in the SwiftVent Breathable Tee. Designed with advanced ventilation technology, it maximizes airflow during intense workouts. Move with ease and confidence mile after mile.",
+            "productLink": "/product/arena-swiftvent-breathable-tee"
+        },
+        {
+            "productImageLink": "https://dexata.co/wp-content/uploads/2024/02/15.png",
+            "productTitle": "Arena DynamicMotion Reflective Tee",
+            "productDesp": "Stand out on your runs with the DynamicMotion Reflective Tee. Its reflective accents enhance visibility in low-light conditions, while the dynamic fabric provides optimal stretch and comfort for unrestricted movement.",
+            "productLink": "/product/arena-dynamicmotion-reflective-tee"
+        }
     ]
 }
 
