@@ -86,7 +86,6 @@ const Search = () => {
                     ) : (
                         <div className="text-center w-full">
                             <h1 className="text-3xl text-gray-900 font-semibold text-center">No search results found</h1>
-                            <img width="270" src="https://www.avisa.care//assets/img/No_Product_Found.png" alt="no product found" />
                         </div>
                     )}
                 </div>
