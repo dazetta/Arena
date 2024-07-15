@@ -39,6 +39,26 @@ const localCategories = [
     Category_Detail_Image:
       "https://dazetta.co/wp-content/uploads/2023/05/shoes_banner.jpeg",
   },
+  {
+    Category_Id: "cat5",
+    Category_Name: "Nutrition",
+    Category_Description:
+      "Accessorise your runs, taking care of your body as you complete your 5k or marathon",
+    Category_Thumbnail_Image:
+      "https://dazetta.co/wp-content/uploads/2023/05/accessories.jpeg",
+    Category_Detail_Image:
+      "https://dazetta.co/wp-content/uploads/2023/05/shoes_banner.jpeg",
+  },
+  {
+    Category_Id: "cat6",
+    Category_Name: "Clearance",
+    Category_Description:
+      "Accessorise your runs, taking care of your body as you complete your 5k or marathon",
+    Category_Thumbnail_Image:
+      "https://dazetta.co/wp-content/uploads/2023/05/accessories.jpeg",
+    Category_Detail_Image:
+      "https://dazetta.co/wp-content/uploads/2023/05/shoes_banner.jpeg",
+  },
 ];
 
 export default localCategories;

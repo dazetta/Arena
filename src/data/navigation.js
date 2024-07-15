@@ -15,6 +15,14 @@ const navigation = [
     Nav_Link: "/category/accessories",
     Nav_Text: "Accessories",
   },
+  {
+    Nav_Link: "/category/nutrition",
+    Nav_Text: "Nutrition",
+  },
+  {
+    Nav_Link: "/category/clearance",
+    Nav_Text: "Clearance",
+  }
 ];
 
 export default navigation;
