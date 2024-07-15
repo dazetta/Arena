@@ -69,21 +69,7 @@ window.adobeDataLayer.push({
   }
 });
 }, []);
-  /*
-  if(window.alloy){
-    window.alloy("sendEvent", {
-      "renderDecisions": true,
-      decisionScopes: ["__view__"],
-      "xdm": {
-        "web": {
-          "webPageDetails": {
-            "viewName": "cart"
-          }
-        }
-      }
-    })
-  }
-*/
+ 
   return (
     <div className="mx-auto max-w-2xl pb-16 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8 font-montserrat">
       <h2 className="font-montserrat leading-normal text-center text-secondary text-4xl font-bold mb-2">Checkout</h2>
