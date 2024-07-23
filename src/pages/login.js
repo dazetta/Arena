@@ -196,7 +196,7 @@ window.adobeDataLayer.push({
                         />
                     </div>
                     <div className="form-group">
-                        <PrimaryButton type="submit" className="w-full" disabled={isSubmitting}>Create account</PrimaryButton>
+                        <PrimaryButton type="submit" className="w-full" disabled={isSubmitting}>Log In</PrimaryButton>
                     </div>
                     <p className="text-sm font-light text-gray-500">
                         Don't have a account? <a href="#" className="font-medium text-primary-600 hover:underline" onClick={(e) => {
