@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { convertToSlug } from "../../utils";
 import { useContext } from "react";
 import { AppDataContext } from "../../Context/AppDataContext";
+import SecondaryButton from "../Buttons/SecondaryButton";
 
 export default function Products() {
   const navigate = useNavigate();
@@ -13,42 +14,23 @@ export default function Products() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl text-center font-bold tracking-tight text-[#0351aa]">
-          Products
-        </h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8 home-products">
+        <h2 className="font-montserrat leading-normal text-center text-secondary text-4xl font-bold">Best Sellers</h2>
+        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 home-best-sellers">
           {products.map((product, index) => (
-            <div key={index}>
-              <div
-                key={index}
-                className="group relative"
-                onClick={() => productNavigate(product.Product_Name)}
-              >
-                <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                  <img
-                    src={product.Product_Thumbnail_Image}
-                    alt={""}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm font-medium text-gray-900">
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {product.Product_Name}
-                    </h3>
-                  </div>
-                  <p className="text-sm font-medium text-gray-900">
-                    ${product.Product_Price}
-                  </p>
-                </div>
+            (product.Product_Label === 'Best Seller') && <a className="w-full max-w-sm bg-white border border-gray-10 rounded-lg shadow font-montserrat relative" key={index} href="#" onClick={(e) => {
+              e.preventDefault();
+              productNavigate(product.Product_Name);
+            }}>
+              <span className="py-1.5 px-2 rounded-full bg-primary text-white font-semibold text-xs inline-block absolute top-2 right-2">{ product.Product_Label }</span>
+              <div className="mb-4">
+                <img className="rounded-t-lg" src={product.Product_Thumbnail_Image} alt="product image" />
               </div>
-              <h3 className="mt-4 text-center text-sm text-[#0351aa] font-semibold underline" onClick={() => productNavigate(product.Product_Name)}>
-                View
-              </h3>
-            </div>
+              <div className="px-3 pb-3 relative space-y-2">
+                <h5 className="text-lg font-semibold tracking-tight text-black min-h-[60px] block">{product.Product_Name}</h5>
+                <span className="text-xl font-semibold text-black block">${product.Product_Price}</span>
+                <SecondaryButton className="text-sm">Buy Now</SecondaryButton>
+              </div>
+            </a>
           ))}
         </div>
       </div>

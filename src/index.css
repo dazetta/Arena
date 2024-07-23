@@ -1,3 +1,14 @@
 @tailwind base;
+@layer base {
+  html {
+    @apply font-montserrat;
+  }
+}
 @tailwind components;
 @tailwind utilities;
+
+@media (min-width: 1100px) {
+    .hero-section img {
+      object-position: left;
+    }
+}
