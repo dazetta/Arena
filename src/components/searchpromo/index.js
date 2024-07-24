@@ -1,20 +1,23 @@
+import React from 'react';
+
 export default function Promotion() {
+  const url = "#/category/mobile"; // Change this URL to the desired destination
   return (
-    <div className="relative overflow-hidden bg-white text-center">
+    <div className="relative overflow-hidden bg-white text-center" style={{ position: 'relative' }}>
       <div className="py-10">
-        <a href="/#/category/shoes" className="inline-block m-auto relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl sm:static" style={{ position: 'relative' }}>
+          <a href={url} style={{ display: 'block', width: '100%', height: '100%' }}>
             <img
               src="https://dexata.co/wp-content/uploads/2024/06/arena-ecommerce-secondary-banner.png"
-              alt=""
-              className="h-full w-full object-cover object-center"
+              alt="Best Prices Banner"
+              style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
             />
-
-                        <div style={{
+            <div style={{
               position: 'absolute',
               top: '10%',    // Adjusted top padding for aesthetics
               left: '6%',   // Adjusted left padding for aesthetics
               maxWidth: 'calc(100% - 20px)',  // Prevents text from extending outside the image width
-              padding: '2% 10px 0 15%',  // Additional padding to ensure text has space around it
+              padding: '0 10px',  // Additional padding to ensure text has space around it
             }}>
               <span style={{ color: 'white', fontSize: '3rem', fontWeight: 'bold' }} id="banner-text">
                 Best Prices
@@ -28,7 +31,8 @@ export default function Promotion() {
             </div>
 
             </div>
-        </a>
+          </a>
+        </div>
       </div>
     </div>
   );

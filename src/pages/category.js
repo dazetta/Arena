@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AppDataContext } from "../Context/AppDataContext";
 import { AuthContext } from "../Context/AuthContext";
 import { convertToSlug } from "../utils";
+import SecondaryButton from "../components/Buttons/SecondaryButton";
 
 export default function Category() {
   let { slug } = useParams();
@@ -44,23 +45,33 @@ export default function Category() {
 
 
   return (
-    <div className="bg-white">
+    <div className="space-y-8">
       <img
         src={selectedCategory.Category_Detail_Image}
         alt={""}
         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
       />
-      <div className="bg-[#0351aa] py-5">
-        <h2 className="text-2xl text-center font-bold tracking-tight text-white">
-          {selectedCategory.Category_Name}
-        </h2>
-      </div>
-      <div className="mx-auto text-center max-w-2xl px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
-          <p>{selectedCategory?.Category_Description}</p>
-      </div>
-      <div className="mx-auto max-w-2xl pb-16 px-4 sm:pb-12 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+      <div className="mx-auto max-w-2xl pb-16 px-4 sm:pb-12 sm:px-6 lg:max-w-7xl lg:px-8 font-montserrat">
+        <h2 className="font-montserrat leading-normal text-center text-secondary text-4xl font-bold mb-2">{selectedCategory.Category_Name}</h2>
+        <p className="text-center mb-8 max-w-2xl m-auto">{selectedCategory?.Category_Description}</p>
+        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {categoryProducts.map((product, index) => (
+            <a className="w-full max-w-sm bg-white border border-gray-10 rounded-lg shadow relative" key={index} href="#" onClick={(e) => {
+              e.preventDefault();
+              productNavigate(product.Product_Name);
+            }}>
+              { product.Product_Label && <span className="py-1.5 px-2 rounded-full bg-primary text-white font-semibold text-xs inline-block absolute top-2 right-2">{ product.Product_Label }</span> }
+              <div className="mb-4">
+                <img className="rounded-t-lg" src={product.Product_Thumbnail_Image} alt="product image" />
+              </div>
+              <div className="px-3 pb-3 relative space-y-2">
+                <h5 className="text-lg font-semibold tracking-tight text-black min-h-[60px] block">{product.Product_Name}</h5>
+                <span className="text-xl font-semibold text-black block">${product.Product_Price}</span>
+                <SecondaryButton className="text-sm">Buy Now</SecondaryButton>
+              </div>
+            </a>
+          ))}
+          {/* {categoryProducts.map((product, index) => (
             <div key={index}>
               <div
                 key={index}
@@ -94,7 +105,7 @@ export default function Category() {
                 View
               </h3>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>
