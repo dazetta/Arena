@@ -1,0 +1,54 @@
+.search-form-banner {
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+
+.form-container {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    margin: 0 auto;
+    width: 200%;
+    height: 100%;
+    background-image: url("https://dexata.co/wp-content/uploads/2024/05/search-banner-image.png");
+    background-size: cover; /* Ensure the background covers the container */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    background-position: center center; /* Center the background image */
+}
+
+.search-form {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-input {
+    border-radius: 25px; /* More curved border radius */
+    padding-left: 20px;
+    padding-right: 40px; /* Ensure space for the icon inside the input */
+    width: 102%; /* Full width */
+    margin-left:-5px;
+}
+
+.search-btn {
+    position: absolute;
+    right: 10px; /* Position the icon inside the input */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.search-image {
+    width: 100%;
+    height: 100%;
+}
