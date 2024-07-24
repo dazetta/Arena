@@ -34,6 +34,7 @@ function App() {
   });
   const [categories, setCategories] = useState([]);
   const [offers, setOffers] = useState([]);
+  const [searchResults, setSearchResults] = useState({}); // New state for search results
 
   useEffect(() => {
     var userInfo = JSON.parse(getCookie('user'));
@@ -52,18 +53,17 @@ function App() {
           method: "GET",
           redirect: "follow",
         }).then(response => response.json()).then(data => {
-          setCategories(data.categories)
-          setProducts(data.products)
+          setCategories(data.categories);
+          setProducts(data.products);
+          setSearchResults(data.search);
         })
       } catch (err) {
-        // console.log(err);
+        console.error(err);
       }
-
     } else {
       setProducts(localProducts);
       setCategories(localCategories);
     }
-
 
   }, []);
 
@@ -73,7 +73,7 @@ function App() {
   
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
-      <AppDataContext.Provider value={{ products, categories, cartItems, setCartItems }}>
+      <AppDataContext.Provider value={{ products, categories, cartItems, setCartItems, searchResults }}>
         {products.length > 0 ? (
           <HashRouter>
             <Layout>
