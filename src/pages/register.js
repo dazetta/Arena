@@ -86,7 +86,7 @@ export default function Register() {
                                             navigate('/register-successful');
                                         } else if (result.status == 301) {
                                             setError(true);
-                                            setErrorText(CONFIG.exceptionError);
+                                            //setErrorText(CONFIG.exceptionError);
                                         } else {
                                             setError(true);
                                         }
